@@ -65,7 +65,7 @@ logger = setup_logging()
 # ==============================
 
 # ✅ Define the project name (used in file paths)
-project_name = input("Enter the project name: ")
+project_name = input("Please enter the project name: ")
 
 # ✅ List of files and directories to be created in the project structure
 list_of_files = [
