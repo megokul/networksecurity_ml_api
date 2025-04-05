@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import logging
 
+
 # ==============================
 # 🔹 LOGGING SETUP
 # ==============================
@@ -15,6 +16,7 @@ log_filepath = os.path.join(log_dir, 'directorygen_logs.log')
 # ✅ Define the format for log messages
 log_format = '[%(asctime)s] - %(levelname)s - %(module)s - %(message)s'
 
+
 def setup_logging():
     """
     Sets up a custom logger:
@@ -23,7 +25,7 @@ def setup_logging():
     - Uses append mode (`"a"`) so logs persist across multiple runs.
     - Ensures handlers are not added multiple times.
     - Logger name: `directory_builder` (used for all logging in this script).
-    
+
     Returns:
         logging.Logger: Custom logger instance.
     """
@@ -55,10 +57,6 @@ def setup_logging():
 
     return logger  # ✅ Return the configured logger
 
-# ✅ Initialize the logger
-logger = setup_logging()
-
-
 
 # ==============================
 # 🔹 PROJECT SETUP
@@ -70,7 +68,7 @@ project_name = input("Please enter the project name: ")
 # ✅ List of files and directories to be created in the project structure
 list_of_files = [
     # 🔹 GitHub workflows (for CI/CD setup)
-    ".github/workflows/.gitkeep",  
+    ".github/workflows/.gitkeep",
     
     # 🔹 Source Code Structure
     f"src/{project_name}/__init__.py",  # Main package initializer
@@ -136,6 +134,10 @@ def create_file_structure(file_list):
             logger.info(f"Creating empty file: '{filepath}'")  # ✅ Log file creation
         else:
             logger.info(f"'{filepath}' already exists")  # ✅ Log if the file already exists
+
+
+# ✅ Initialize the logger
+logger = setup_logging()
 
 # ✅ Run the file creation function
 create_file_structure(list_of_files)
