@@ -1,4 +1,11 @@
-"""Connect to MongoDB using credentials from .env file."""
+"""Connect to MongoDB using credentials from .env file.
+
+This script:
+- Loads environment variables from a .env file
+- Connects to MongoDB Atlas using pymongo and Server API v1
+- Sends a ping command to verify the connection
+"""
+
 
 import os
 
