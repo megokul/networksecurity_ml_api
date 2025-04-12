@@ -1,0 +1,27 @@
+
+artifacts_root: artifacts
+
+mongodb:
+  root_dir: artifacts/mongodb
+  input_data_path: network_data/input_csv/phisingData.csv
+  json_data_filename: input_data_json.json
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  staging_data_dir: artifacts/data_ingestion/staging_data
+  ingested_data_filename : ingested_data.csv
+
+data_validation:
+  root_dir:
+
+data_transformation:
+  root_dir:
+
+model_trainer:
+  root_dir:
+
+model_evaluation:
+  root_dir:
+
+model_prediction:
+  root_dir:

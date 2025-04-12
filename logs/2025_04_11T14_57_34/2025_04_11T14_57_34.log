@@ -1,0 +1,2 @@
+[2025-04-11 15:57:34,395] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-11 15:57:34,395] - INFO - test - Created directory at: 'artifacts'

@@ -1,0 +1,7 @@
+[2025-04-12 13:12:43,161] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-12 13:12:43,161] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
+[2025-04-12 13:12:43,161] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
+[2025-04-12 13:12:43,161] - INFO - common - Created directory at: 'artifacts'
+[2025-04-12 13:12:43,161] - INFO - common - Created directory at: 'artifacts/mongodb'
+[2025-04-12 13:12:43,587] - INFO - common - CSV converted and saved to: 'artifacts/mongodb/input_data_json.json'
+[2025-04-12 13:12:56,990] - ERROR - exception - Error occurred in file [E:\MyProjects\networksecurity\src\networksecurity\dbhandler\mongo_handler.py], line [37], message: ['MongoDBHandler' object has no attribute 'records']

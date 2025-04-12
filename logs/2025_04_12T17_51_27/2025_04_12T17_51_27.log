@@ -1,0 +1,10 @@
+[2025-04-12 18:51:28,071] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-12 18:51:28,071] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
+[2025-04-12 18:51:28,071] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
+[2025-04-12 18:51:28,071] - INFO - common - Created directory at: 'artifacts'
+[2025-04-12 18:51:28,071] - INFO - common - Created directory at: 'artifacts/data_ingestion'
+[2025-04-12 18:51:28,071] - INFO - data_ingestion - Connecting to MongoDB...
+[2025-04-12 18:51:28,265] - INFO - data_ingestion - Reading data from MongoDB: network_security_db/phishing_records
+[2025-04-12 18:51:44,126] - INFO - data_ingestion - Loaded 187935 records from MongoDB.
+[2025-04-12 18:51:44,126] - INFO - common - Created directory at: 'artifacts\data_ingestion\staging_data'
+[2025-04-12 18:51:44,763] - INFO - data_ingestion - Data saved to: artifacts/data_ingestion/staging_data/ingested_data.csv

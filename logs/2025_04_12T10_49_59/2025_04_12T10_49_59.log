@@ -1,0 +1,6 @@
+[2025-04-12 11:49:59,723] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-12 11:49:59,723] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
+[2025-04-12 11:49:59,726] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
+[2025-04-12 11:49:59,726] - INFO - common - Created directory at: 'artifacts'
+[2025-04-12 11:49:59,726] - INFO - common - Created directory at: 'artifacts/mongodb'
+[2025-04-12 11:50:00,126] - INFO - common - CSV converted and saved to: artifacts/mongodb/input_data_json.json

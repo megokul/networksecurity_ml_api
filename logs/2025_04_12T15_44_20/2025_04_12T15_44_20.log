@@ -1,0 +1,14 @@
+[2025-04-12 16:44:20,278] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-12 16:44:20,278] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
+[2025-04-12 16:44:20,279] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
+[2025-04-12 16:44:20,280] - INFO - common - Created directory at: 'artifacts'
+[2025-04-12 16:44:20,280] - INFO - common - Created directory at: 'artifacts/mongodb'
+[2025-04-12 16:44:20,660] - INFO - common - CSV converted and saved to: 'artifacts/mongodb/input_data_json.json'
+[2025-04-12 16:44:21,521] - INFO - mongo_handler - Attempting to connect to MongoDB...
+[2025-04-12 16:44:21,590] - INFO - mongo_handler - MongoDB connection established.
+[2025-04-12 16:44:21,592] - INFO - mongo_handler - Using database: 'network_security_db'
+[2025-04-12 16:44:21,592] - INFO - mongo_handler - Using collection: 'phishing_records'
+[2025-04-12 16:44:21,594] - INFO - mongo_handler - Inserting 11055 record(s) into MongoDB...
+[2025-04-12 16:44:33,902] - INFO - mongo_handler - 11055 record(s) inserted successfully into MongoDB.
+[2025-04-12 16:44:49,701] - INFO - common - Created directory at: 'artifacts/data_ingestion'
+[2025-04-12 16:44:49,701] - ERROR - exception - Error occurred in file [E:\MyProjects\networksecurity\src\networksecurity\components\data_ingestion.py], line [25], message: ['DataIngestion' object has no attribute 'feature_store_file_path']

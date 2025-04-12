@@ -1,0 +1,8 @@
+[2025-04-12 18:33:38,801] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
+[2025-04-12 18:33:38,803] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
+[2025-04-12 18:33:38,803] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
+[2025-04-12 18:33:38,803] - INFO - common - Created directory at: 'artifacts'
+[2025-04-12 18:33:38,803] - INFO - common - Created directory at: 'artifacts/data_ingestion'
+[2025-04-12 18:33:38,803] - INFO - data_ingestion - Connecting to MongoDB...
+[2025-04-12 18:33:39,002] - ERROR - data_ingestion - Failed to load data from MongoDB.
+[2025-04-12 18:33:39,002] - ERROR - exception - Error occurred in file [E:\MyProjects\networksecurity\src\networksecurity\components\data_ingestion.py], line [42], message: [name must be an instance of str]
