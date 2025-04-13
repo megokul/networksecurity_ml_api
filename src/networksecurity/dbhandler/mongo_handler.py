@@ -65,7 +65,7 @@ class MongoDBHandler:
             except Exception as e:
                 logger.error(f"Failed to insert data into MongoDB: {e}")
                 raise NetworkSecurityError(e, logger) from e
-            
+
 
     def export_collection_as_dataframe(self):
         """
@@ -80,7 +80,7 @@ class MongoDBHandler:
             df=pd.DataFrame(list(collection.find()))
             if "_id" in df.columns.to_list():
                 df=df.drop(columns=["_id"],axis=1)
-            
+
             df.replace({"na":np.nan},inplace=True)
             return df
         except Exception as e:

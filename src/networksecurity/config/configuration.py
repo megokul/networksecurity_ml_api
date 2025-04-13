@@ -5,7 +5,7 @@ from src.networksecurity.entity.config_entity import MongoDBConfig, DataIngestio
 from src.networksecurity.utils.common import create_directories, read_yaml, replace_username_password_in_uri
 from dotenv import load_dotenv
 import os
-from urllib.parse import quote_plus
+from datetime import datetime
 
 class ConfigurationManager:
     """Manages reading and structuring configuration data from YAML files.
@@ -20,7 +20,7 @@ class ConfigurationManager:
         self,
         config_filepath=CONFIG_FILE_PATH,
         params_filepath=PARAMS_FILE_PATH,
-        schema_filepath=SCHEMA_FILE_PATH
+        schema_filepath=SCHEMA_FILE_PATH,
     ):
         """
         Initializes the ConfigurationManager by loading YAML files and creating the artifact root directory.
@@ -29,7 +29,10 @@ class ConfigurationManager:
         self.params = read_yaml(params_filepath)
         self.schema = read_yaml(schema_filepath)
 
-        create_directories(self.config.artifacts_root)  # Ensure base artifacts directory exists
+        # Generate a timestamped artifact root
+        self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.artifacts_root = Path(self.config.artifacts_root) / self.timestamp
+        create_directories(self.artifacts_root)
 
     def get_mongodb_config(self) -> MongoDBConfig:
         """Construct and return the configuration required for database ingestion.
@@ -71,18 +74,19 @@ class ConfigurationManager:
 
         return mongodb_config
 
-
     def get_dataingestion_config(self) -> DataIngestionConfig:
+        config = self.config.data_ingestion
 
-        config = self.config.data_ingestion  # Access nested 'database' config block
+        # Build timestamped subdirectories
+        featurestore_dir = self.artifacts_root / "data_ingestion" / "featurestore"
+        ingested_data_dir = self.artifacts_root / "data_ingestion" / "ingested"
 
-        # Ensure DB root directory exists
-        create_directories(config.root_dir)
+        create_directories(featurestore_dir, ingested_data_dir)
 
-        dataingestion_config = DataIngestionConfig(
-            root_dir=config.root_dir,
-            staging_data_dir=config.staging_data_dir,
+        return DataIngestionConfig(
+            root_dir=self.artifacts_root / "data_ingestion",
+            featurestore_dir=featurestore_dir,
+            ingested_data_dir=ingested_data_dir,
             ingested_data_filename=config.ingested_data_filename,
+            input_data_filename=config.input_data_filename,
         )
-
-        return dataingestion_config

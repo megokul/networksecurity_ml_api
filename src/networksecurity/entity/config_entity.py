@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime
 from dataclasses import dataclass
 
 @dataclass
@@ -21,8 +22,12 @@ class MongoDBConfig:
     collection_name: str
 
 
+
 @dataclass
 class DataIngestionConfig:
+
     root_dir: Path
-    staging_data_dir: Path
+    featurestore_dir: Path
+    ingested_data_dir: Path
     ingested_data_filename: str
+    input_data_filename: str

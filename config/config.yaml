@@ -8,8 +8,10 @@ mongodb:
 
 data_ingestion:
   root_dir: artifacts/data_ingestion
-  staging_data_dir: artifacts/data_ingestion/staging_data
+  featurestore_dir: artifacts/data_ingestion/featurestore
+  ingested_data_dir: artifacts/data_ingestion/ingested_data
   ingested_data_filename : ingested_data.csv
+  input_data_filename : input_data.csv
 
 data_validation:
   root_dir:

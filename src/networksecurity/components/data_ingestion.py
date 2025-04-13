@@ -44,22 +44,26 @@ class DataIngestion:
             database = client[database_name]
             collection = database[collection_name]
 
-            logger.info(f"Reading data from MongoDB: {database_name}/{collection_name}")
-            ingested_df = pd.DataFrame(list(collection.find()))
+            logger.info(f"Reading data from MongoDB: '{database_name}/{collection_name}'")
+            input_data_df = pd.DataFrame(list(collection.find()))
 
-            if "_id" in ingested_df.columns:
-                ingested_df.drop(columns=["_id"], inplace=True)
+            featurestore_dir = self.config.featurestore_dir
+            create_directories(featurestore_dir)
+            csv_path = Path(featurestore_dir) / self.config.ingested_data_filename
+            input_data_df.to_csv(csv_path, index=False)
+
+            if "_id" in input_data_df.columns:
+                ingested_df = input_data_df.drop(columns=["_id"])
 
             ingested_df = ingested_df.replace({"na": np.nan})
             logger.info(f"Loaded {len(ingested_df)} records from MongoDB.")
 
-            # Prepare staging path
-            staging_dir = Path(self.config.staging_data_dir)
-            csv_path = staging_dir / self.config.ingested_data_filename
+            ingested_dir = self.config.ingested_data_dir  # renamed from staging_dir
 
-            create_directories(staging_dir)
-            ingested_df.to_csv(csv_path, index=False)
-            logger.info(f"Data saved to: {csv_path.as_posix()}")  # Apply as_posix only for logging
+            create_directories(ingested_dir)
+            cleaned_csv_path = Path(ingested_dir) / self.config.ingested_data_filename
+            input_data_df.to_csv(cleaned_csv_path, index=False)
+            logger.info(f"Cleaned data saved to ingested directory: '{cleaned_csv_path.as_posix()}'")
 
             return ingested_df
 
