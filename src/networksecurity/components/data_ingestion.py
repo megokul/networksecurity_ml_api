@@ -1,6 +1,6 @@
 
 
-from src.networksecurity.entity.config_entity import DataIngestionConfig, MongoDBConfig
+from src.networksecurity.entity.config_entity import DataIngestionConfig, MongoHandlerConfig
 from src.networksecurity.exception.exception import NetworkSecurityError
 import os
 import sys

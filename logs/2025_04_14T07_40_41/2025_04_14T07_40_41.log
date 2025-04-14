@@ -1,0 +1,12 @@
+[2025-04-14 08:40:41,416] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-14 08:40:41,416] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-14 08:40:41,416] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-14 08:40:41,416] - INFO - common - Created directory at: 'artifacts/20250414_084041'
+[2025-04-14 08:40:41,416] - INFO - common - Created directory at: 'artifacts/20250414_084041/data_ingestion/featurestore'
+[2025-04-14 08:40:41,416] - INFO - common - Created directory at: 'artifacts/20250414_084041/data_ingestion/ingested'
+[2025-04-14 08:40:41,416] - INFO - data_ingestion - Connecting to MongoDB...
+[2025-04-14 08:40:41,660] - INFO - data_ingestion - Reading data from MongoDB: 'network_security_db/phishing_records'
+[2025-04-14 08:40:59,767] - INFO - common - Created directory at: 'artifacts/20250414_084041/data_ingestion/featurestore'
+[2025-04-14 08:41:00,530] - INFO - data_ingestion - Loaded 187935 records from MongoDB.
+[2025-04-14 08:41:00,530] - INFO - common - Created directory at: 'artifacts/20250414_084041/data_ingestion/ingested'
+[2025-04-14 08:41:01,157] - INFO - data_ingestion - Data ingested and saved to dir: 'artifacts/20250414_084041/data_ingestion/ingested/ingested_data.csv'

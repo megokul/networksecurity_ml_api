@@ -104,7 +104,7 @@ def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
         with destination_filepath.open("w", encoding="utf-8") as f:
             json.dump(records, f, indent=4)
 
-        logger.info(f"CSV converted and saved to: '{destination_filepath}'")
+        logger.info(f"CSV converted and saved to: '{destination_filepath.as_posix()}'")
         return records
 
     except Exception as e:

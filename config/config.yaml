@@ -3,7 +3,7 @@
 artifacts_root: artifacts
 
 # MongoDB Configuration
-mongodb:
+mongo_handler:
   input_data_path: network_data/input_csv/phisingData.csv
   json_data_filename: input_data_json.json
 
@@ -13,7 +13,8 @@ data_ingestion:
   input_data_filename: input_data.csv
 
 data_validation:
-  root_dir:
+  validated_data_filename: validated_data.csv
+  drift_report_filename: drift_report.csv
 
 data_transformation:
   root_dir:

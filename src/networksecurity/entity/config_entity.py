@@ -3,7 +3,7 @@ from datetime import datetime
 from dataclasses import dataclass
 
 @dataclass
-class MongoDBConfig:
+class MongoHandlerConfig:
     """Configuration schema for handling input data and database directory setup.
 
     Attributes:
@@ -21,6 +21,10 @@ class MongoDBConfig:
     database_name: str
     collection_name: str
 
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.input_data_path = Path(self.input_data_path)
+        self.json_data_dir = Path(self.json_data_dir)
 
 
 @dataclass
@@ -31,3 +35,23 @@ class DataIngestionConfig:
     ingested_data_dir: Path
     ingested_data_filename: str
     input_data_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.featurestore_dir = Path(self.featurestore_dir)
+        self.ingested_data_dir = Path(self.ingested_data_dir)
+
+
+@dataclass
+class DataValidationConfig:
+
+    root_dir: Path
+    validated_data_filename: str
+    validated_data_dir: Path
+    drift_report_filename: str
+    drift_report_dir: Path
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.validated_data_dir = Path(self.validated_data_dir)
+        self.drift_report_dir = Path(self.validated_data_dir)

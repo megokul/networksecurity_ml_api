@@ -1,0 +1,21 @@
+[2025-04-14 09:51:24,719] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-14 09:51:24,719] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-14 09:51:24,719] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-14 09:51:24,719] - INFO - common - Created directory at: 'artifacts/20250414_095124'
+[2025-04-14 09:51:24,719] - INFO - common - Created directory at: 'artifacts/20250414_095124/mongo_handler'
+[2025-04-14 09:51:25,794] - INFO - common - Created directory for JSON output at: 'artifacts\20250414_095124\mongo_handler\JSON_data'
+[2025-04-14 09:51:26,257] - INFO - common - CSV converted and saved to: 'artifacts/20250414_095124/mongo_handler/JSON_data/input_data_json.json'
+[2025-04-14 09:51:26,269] - INFO - mongo_handler - Attempting to connect to MongoDB...
+[2025-04-14 09:51:26,364] - INFO - mongo_handler - MongoDB connection established.
+[2025-04-14 09:51:26,364] - INFO - mongo_handler - Using database: 'network_security_db'
+[2025-04-14 09:51:26,364] - INFO - mongo_handler - Using collection: 'phishing_records'
+[2025-04-14 09:51:26,364] - INFO - mongo_handler - Inserting 11055 record(s) into MongoDB...
+[2025-04-14 09:51:38,646] - INFO - mongo_handler - 11055 record(s) inserted successfully into MongoDB.
+[2025-04-14 09:51:38,656] - INFO - common - Created directory at: 'artifacts/20250414_095124/data_ingestion/featurestore'
+[2025-04-14 09:51:38,656] - INFO - common - Created directory at: 'artifacts/20250414_095124/data_ingestion/ingested'
+[2025-04-14 09:51:38,657] - INFO - data_ingestion - Connecting to MongoDB...
+[2025-04-14 09:51:38,710] - INFO - data_ingestion - Reading data from MongoDB: 'network_security_db/phishing_records'
+[2025-04-14 09:51:55,732] - INFO - common - Created directory at: 'artifacts/20250414_095124/data_ingestion/featurestore'
+[2025-04-14 09:51:56,526] - INFO - data_ingestion - Loaded 210045 records from MongoDB.
+[2025-04-14 09:51:56,526] - INFO - common - Created directory at: 'artifacts/20250414_095124/data_ingestion/ingested'
+[2025-04-14 09:51:57,169] - INFO - data_ingestion - Data ingested and saved to dir: 'artifacts/20250414_095124/data_ingestion/ingested/ingested_data.csv'

@@ -1,0 +1,5 @@
+[2025-04-14 09:41:21,310] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-14 09:41:21,314] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-14 09:41:21,314] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-14 09:41:21,314] - INFO - common - Created directory at: 'artifacts/20250414_094121'
+[2025-04-14 09:41:21,314] - INFO - common - Created directory at: 'artifacts/20250414_094121/mongo_handler'
