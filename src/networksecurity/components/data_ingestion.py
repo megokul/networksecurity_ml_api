@@ -45,27 +45,27 @@ class DataIngestion:
             collection = database[collection_name]
 
             logger.info(f"Reading data from MongoDB: '{database_name}/{collection_name}'")
-            input_data_df = pd.DataFrame(list(collection.find()))
+            raw_data_df = pd.DataFrame(list(collection.find()))
 
             featurestore_dir = self.config.featurestore_dir
             create_directories(featurestore_dir)
-            csv_path = Path(featurestore_dir) / self.config.ingested_data_filename
-            input_data_df.to_csv(csv_path, index=False)
+            csv_path = Path(featurestore_dir) / "raw_data.csv"
+            raw_data_df.to_csv(csv_path, index=False)
 
-            if "_id" in input_data_df.columns:
-                ingested_df = input_data_df.drop(columns=["_id"])
+            if "_id" in raw_data_df.columns:
+                ingested_data_df = raw_data_df.drop(columns=["_id"])
 
-            ingested_df = ingested_df.replace({"na": np.nan})
-            logger.info(f"Loaded {len(ingested_df)} records from MongoDB.")
+            ingested_data_df = ingested_data_df.replace({"na": np.nan})
+            logger.info(f"Loaded {len(ingested_data_df)} records from MongoDB.")
 
             ingested_dir = self.config.ingested_data_dir  # renamed from staging_dir
 
             create_directories(ingested_dir)
-            cleaned_csv_path = Path(ingested_dir) / self.config.ingested_data_filename
-            input_data_df.to_csv(cleaned_csv_path, index=False)
-            logger.info(f"Cleaned data saved to ingested directory: '{cleaned_csv_path.as_posix()}'")
+            ingested_data_path = Path(ingested_dir) / self.config.ingested_data_filename
+            ingested_data_df.to_csv(ingested_data_path, index=False)
+            logger.info(f"Data ingested and saved to dir: '{ingested_data_path.as_posix()}'")
 
-            return ingested_df
+            return ingested_data_df
 
         except Exception as e:
             logger.error("Failed to load data from MongoDB.")

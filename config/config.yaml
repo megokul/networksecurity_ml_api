@@ -1,17 +1,16 @@
 
+# Root folder where all timestamped artifacts will be saved
 artifacts_root: artifacts
 
+# MongoDB Configuration
 mongodb:
-  root_dir: artifacts/mongodb
   input_data_path: network_data/input_csv/phisingData.csv
   json_data_filename: input_data_json.json
 
+# Data Ingestion Configuration
 data_ingestion:
-  root_dir: artifacts/data_ingestion
-  featurestore_dir: artifacts/data_ingestion/featurestore
-  ingested_data_dir: artifacts/data_ingestion/ingested_data
-  ingested_data_filename : ingested_data.csv
-  input_data_filename : input_data.csv
+  ingested_data_filename: ingested_data.csv
+  input_data_filename: input_data.csv
 
 data_validation:
   root_dir:
