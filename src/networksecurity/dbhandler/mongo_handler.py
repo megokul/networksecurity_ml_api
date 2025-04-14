@@ -44,10 +44,8 @@ class MongoDBHandler:
             NetworkSecurityError: If MongoDB insertion fails.
         """
         try:
-
-            des_filepath = self.config.json_data_dir / self.config.json_data_filename
-
-            records = csv_to_json_convertor(source_filepath = csv_filepath, destination_filepath = des_filepath)
+            
+            records = csv_to_json_convertor(source_filepath = csv_filepath, destination_filepath = self.config.json_data_filepath)
 
             # Step 1: Connect to MongoDB
             logger.info("Attempting to connect to MongoDB...")

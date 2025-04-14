@@ -76,9 +76,9 @@ class ConfigurationManager:
         return DataIngestionConfig(
             root_dir=ingestion_root_dir,
             featurestore_dir=featurestore_dir,
+            raw_data_filename=config.raw_data_filename,
             ingested_data_dir=ingested_data_dir,
             ingested_data_filename=config.ingested_data_filename,
-            input_data_filename=config.input_data_filename,
         )
 
     def get_datavalidation_config(self) -> DataValidationConfig:
@@ -86,15 +86,16 @@ class ConfigurationManager:
         config = self.config.data_validation
 
         validation_root = self.artifacts_root / "data_validation"
-        # validated_data_dir = 
+        validated_data_dir = validation_root / "validated"
+        drift_report_dir = validation_root / "drift_report"
 
 
         data_validation_config = DataValidationConfig(
-            root_dir = validation_root,
-            validated_data_filename = config.validated_data_filename,
-            validated_data_dir = "",
-            drift_report_filename = config.drift_report_filename,
-            drift_report_dir = "",
+            root_dir=validation_root,
+            validated_data_filename=config.validated_data_filename,
+            validated_data_dir=validated_data_dir,
+            drift_report_filename=config.drift_report_filename,
+            drift_report_dir=drift_report_dir,
         )
 
         return data_validation_config

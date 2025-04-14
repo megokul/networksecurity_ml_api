@@ -98,7 +98,7 @@ def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
         parent_dir = destination_filepath.parent
         if not parent_dir.exists():
             parent_dir.mkdir(parents=True, exist_ok=True)
-            logger.info(f"Created directory for JSON output at: '{parent_dir}'")
+            logger.info(f"Created directory for JSON output at: '{parent_dir.as_posix()}'")
 
         # Save the JSON file
         with destination_filepath.open("w", encoding="utf-8") as f:

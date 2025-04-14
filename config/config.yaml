@@ -10,7 +10,7 @@ mongo_handler:
 # Data Ingestion Configuration
 data_ingestion:
   ingested_data_filename: ingested_data.csv
-  input_data_filename: input_data.csv
+  raw_data_filename: raw_data.csv
 
 data_validation:
   validated_data_filename: validated_data.csv

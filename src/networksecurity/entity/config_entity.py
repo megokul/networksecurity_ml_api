@@ -26,30 +26,43 @@ class MongoHandlerConfig:
         self.input_data_path = Path(self.input_data_path)
         self.json_data_dir = Path(self.json_data_dir)
 
+    @property
+    def json_data_filepath(self):
+        return self.json_data_dir / self.json_data_filename
+
 
 @dataclass
 class DataIngestionConfig:
 
     root_dir: Path
     featurestore_dir: Path
+    raw_data_filename: str
     ingested_data_dir: Path
     ingested_data_filename: str
-    input_data_filename: str
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
         self.featurestore_dir = Path(self.featurestore_dir)
         self.ingested_data_dir = Path(self.ingested_data_dir)
 
+    @property
+    def raw_data_filepath(self):
+        return self.featurestore_dir / self.raw_data_filename
+
+    @property
+    def ingested_data_filepath(self):
+        return self.ingested_data_dir / self.ingested_data_filename
+
+
 
 @dataclass
 class DataValidationConfig:
 
     root_dir: Path
-    validated_data_filename: str
     validated_data_dir: Path
-    drift_report_filename: str
+    validated_data_filename: str
     drift_report_dir: Path
+    drift_report_filename: str
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
