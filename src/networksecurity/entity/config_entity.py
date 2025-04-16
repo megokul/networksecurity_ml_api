@@ -1,18 +1,9 @@
 from pathlib import Path
-from datetime import datetime
 from dataclasses import dataclass
+
 
 @dataclass
 class MongoHandlerConfig:
-    """Configuration schema for handling input data and database directory setup.
-
-    Attributes:
-        root_dir (Path): Root directory where database-related files will be stored.
-        input_data_path (Path): Path to the raw input data file (e.g., CSV).
-        json_data_filename (str): Name of the JSON file to which data will be converted.
-
-    """
-
     root_dir: Path
     input_data_path: Path
     json_data_filename: str
@@ -33,7 +24,6 @@ class MongoHandlerConfig:
 
 @dataclass
 class DataIngestionConfig:
-
     root_dir: Path
     featurestore_dir: Path
     raw_data_filename: str
@@ -54,17 +44,92 @@ class DataIngestionConfig:
         return self.ingested_data_dir / self.ingested_data_filename
 
 
-
 @dataclass
 class DataValidationConfig:
-
     root_dir: Path
     validated_data_dir: Path
     validated_data_filename: str
     drift_report_dir: Path
     drift_report_filename: str
+    schema: dict
+    params: dict
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
         self.validated_data_dir = Path(self.validated_data_dir)
-        self.drift_report_dir = Path(self.validated_data_dir)
+        self.drift_report_dir = Path(self.drift_report_dir)
+
+    @property
+    def validated_data_filepath(self):
+        return self.validated_data_dir / self.validated_data_filename
+
+    @property
+    def drift_report_filepath(self):
+        return self.drift_report_dir / self.drift_report_filename
+
+
+@dataclass
+class DataTransformationConfig:
+    root_dir: Path
+    transformed_dir: Path
+    transformed_train_filename: str
+    transformed_test_filename: str
+    preprocessor_dir: Path
+    preprocessing_object_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.transformed_dir = Path(self.transformed_dir)
+        self.preprocessor_dir = Path(self.preprocessor_dir)
+
+    @property
+    def transformed_train_filepath(self):
+        return self.transformed_dir / self.transformed_train_filename
+
+    @property
+    def transformed_test_filepath(self):
+        return self.transformed_dir / self.transformed_test_filename
+
+    @property
+    def preprocessor_filepath(self):
+        return self.preprocessor_dir / self.preprocessing_object_filename
+
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    trained_model_filename: str
+    params: dict
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def trained_model_filepath(self):
+        return self.root_dir / self.trained_model_filename
+
+
+@dataclass
+class ModelEvaluationConfig:
+    root_dir: Path
+    evaluation_report_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def evaluation_report_filepath(self):
+        return self.root_dir / self.evaluation_report_filename
+
+
+@dataclass
+class ModelPredictionConfig:
+    root_dir: Path
+    prediction_output_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def prediction_output_filepath(self):
+        return self.root_dir / self.prediction_output_filename

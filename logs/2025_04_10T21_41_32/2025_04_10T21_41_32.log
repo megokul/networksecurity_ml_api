@@ -1,4 +1,0 @@
-[2025-04-10 22:41:32,307] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
-[2025-04-10 22:41:32,307] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
-[2025-04-10 22:41:32,308] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
-[2025-04-10 22:41:32,309] - INFO - common - Created directory at: 'artifacts'

@@ -1,29 +1,38 @@
+# Root directory where all experiment artifacts will be stored
+project:
+  artifacts_root: artifacts
 
-# Root folder where all timestamped artifacts will be saved
-artifacts_root: artifacts
-
-# MongoDB Configuration
+# MongoDB configuration block
 mongo_handler:
   input_data_path: network_data/input_csv/phisingData.csv
-  json_data_filename: input_data_json.json
+  json_data_filename: input_data.json
+  database_name: network_security_db
+  collection_name: phishing_records
 
-# Data Ingestion Configuration
+# Data ingestion configuration
 data_ingestion:
-  ingested_data_filename: ingested_data.csv
   raw_data_filename: raw_data.csv
+  ingested_data_filename: ingested_data.csv
 
+# Data validation configuration
 data_validation:
   validated_data_filename: validated_data.csv
-  drift_report_filename: drift_report.csv
+  drift_report_filename: drift_report.yaml
 
+# Data transformation configuration
 data_transformation:
-  root_dir:
+  transformed_train_filename: train.csv
+  transformed_test_filename: test.csv
+  preprocessing_object_filename: preprocessing.pkl
 
+# Model trainer configuration
 model_trainer:
-  root_dir:
+  trained_model_filename: model.pkl
 
+# Model evaluation configuration
 model_evaluation:
-  root_dir:
+  evaluation_report_filename: evaluation_report.yaml
 
+# Prediction configuration
 model_prediction:
-  root_dir:
+  prediction_output_filename: prediction_output.csv

@@ -1,0 +1,17 @@
+[2025-04-16 18:50:52,270] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-16 18:50:52,272] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-16 18:50:52,272] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-16 18:50:52,272] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z'
+[2025-04-16 18:50:52,272] - INFO - common - Created directory at: 'logs/2025_04_16T17_50_52Z'
+[2025-04-16 18:50:52,272] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z/mongo_handler/JSON_data'
+[2025-04-16 18:50:52,666] - INFO - common - CSV converted and saved to: 'artifacts/2025_04_16T17_50_52Z/mongo_handler/JSON_data/input_data.json'
+[2025-04-16 18:51:03,568] - INFO - mongo_handler - Inserted 11055 records into MongoDB.
+[2025-04-16 18:51:03,576] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z/data_ingestion/featurestore'
+[2025-04-16 18:51:03,577] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z/data_ingestion/ingested'
+[2025-04-16 18:51:03,578] - INFO - data_ingestion - Starting data ingestion from MongoDB.
+[2025-04-16 18:51:55,395] - INFO - mongo_handler - Exported collection from MongoDB as DataFrame.
+[2025-04-16 18:51:55,397] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z/data_ingestion/featurestore'
+[2025-04-16 18:51:57,005] - INFO - data_ingestion - Raw data saved to: artifacts/2025_04_16T17_50_52Z/data_ingestion/featurestore/raw_data.csv
+[2025-04-16 18:51:57,023] - INFO - common - Created directory at: 'artifacts/2025_04_16T17_50_52Z/data_ingestion/ingested'
+[2025-04-16 18:51:58,498] - INFO - data_ingestion - Cleaned data saved to: artifacts/2025_04_16T17_50_52Z/data_ingestion/ingested/ingested_data.csv
+[2025-04-16 18:51:58,498] - INFO - data_ingestion - Data ingestion complete. 442200 rows ingested.

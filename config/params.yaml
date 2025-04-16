@@ -1,1 +1,17 @@
-key: value
+# Parameters for drift detection during data validation
+drift_detection:
+  method: ks_test
+  p_value_threshold: 0.05
+
+# Parameters for data splitting
+data_split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# Parameters for model training
+model_trainer:
+  model_type: RandomForestClassifier
+  n_estimators: 100
+  max_depth: 10
+  random_state: 42

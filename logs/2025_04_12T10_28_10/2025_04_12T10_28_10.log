@@ -1,5 +1,0 @@
-[2025-04-12 11:28:10,850] - INFO - common - YAML loaded successfully from: 'config\config.yaml'
-[2025-04-12 11:28:10,850] - INFO - common - YAML loaded successfully from: 'config\params.yaml'
-[2025-04-12 11:28:10,850] - INFO - common - YAML loaded successfully from: 'config\schema.yaml'
-[2025-04-12 11:28:10,850] - INFO - common - Created directory at: 'artifacts'
-[2025-04-12 11:28:10,850] - INFO - common - Created directory at: 'artifacts/mongodb'

@@ -1,21 +1,43 @@
 from pathlib import Path
-from datetime import datetime
-from dotenv import load_dotenv
 import os
 
-from src.networksecurity.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
-from src.networksecurity.entity.config_entity import MongoHandlerConfig, DataIngestionConfig, DataValidationConfig
+from src.networksecurity.constants.constants import (
+    CONFIG_FILE_PATH,
+    PARAMS_FILE_PATH,
+    SCHEMA_FILE_PATH,
+    MONGO_HANDLER_SUBDIR,
+    MONGO_JSON_SUBDIR,
+    DATA_INGESTION_SUBDIR,
+    FEATURESTORE_SUBDIR,
+    INGESTED_SUBDIR,
+    DATA_VALIDATION_SUBDIR,
+    VALIDATED_SUBDIR,
+    DRIFT_REPORT_SUBDIR,
+    LOGS_ROOT,
+)
+
+from src.networksecurity.entity.config_entity import (
+    MongoHandlerConfig,
+    DataIngestionConfig,
+    DataValidationConfig,
+)
+
 from src.networksecurity.utils.common import (
-    create_directories,
     read_yaml,
+    create_directories,
     replace_username_password_in_uri,
 )
 
+from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
+
 
 class ConfigurationManager:
-    """Manages reading and structuring configuration data from YAML files."""
+    """
+    Central manager for loading config YAMLs and setting up timestamped
+    artifact + log directories using a consistent UTC timestamp.
+    """
 
-    _global_timestamp: str = None  # Shared timestamp for all config objects
+    _global_timestamp: str = None
 
     def __init__(
         self,
@@ -23,79 +45,91 @@ class ConfigurationManager:
         params_filepath: Path = PARAMS_FILE_PATH,
         schema_filepath: Path = SCHEMA_FILE_PATH,
     ) -> None:
-        self.config = read_yaml(config_filepath)
-        self.params = read_yaml(params_filepath)
-        self.schema = read_yaml(schema_filepath)
+        self._load_configs(config_filepath, params_filepath, schema_filepath)
+        self._initialize_paths()
 
-        # Initialize shared timestamp only once
+    def _load_configs(self, config_fp: Path, params_fp: Path, schema_fp: Path) -> None:
+        self.config = read_yaml(config_fp)
+        self.params = read_yaml(params_fp)
+        self.schema = read_yaml(schema_fp)
+
+    def _initialize_paths(self) -> None:
+        """
+        Initializes artifact and log paths using the globally shared UTC timestamp.
+        This ensures that all pipeline components refer to the same consistent run ID.
+        """
         if ConfigurationManager._global_timestamp is None:
-            ConfigurationManager._global_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            ConfigurationManager._global_timestamp = get_shared_utc_timestamp()
 
-        # Create full artifact root with timestamp: artifacts/<timestamp>/
-        base_artifacts = Path(self.config.artifacts_root)
-        self.artifacts_root = base_artifacts / ConfigurationManager._global_timestamp
+        timestamp = ConfigurationManager._global_timestamp
+
+        # Artifact Root
+        base_artifact_root = Path(self.config.project.artifacts_root)
+        self.artifacts_root = base_artifact_root / timestamp
         create_directories(self.artifacts_root)
 
+        # Logs Root
+        self.logs_root = Path(LOGS_ROOT) / timestamp
+        create_directories(self.logs_root)
+
+    def get_logs_dir(self) -> Path:
+        return self.logs_root
+
     def get_mongohandler_config(self) -> MongoHandlerConfig:
+        mongo_cfg = self.config.mongo_handler
 
-        load_dotenv()
+        root_dir = self.artifacts_root / MONGO_HANDLER_SUBDIR
+        json_data_dir = root_dir / MONGO_JSON_SUBDIR
+        create_directories(json_data_dir)
 
-        config = self.config.mongo_handler
-
-        mongohandler_root_dir = self.artifacts_root / "mongo_handler"
-        json_data_dir = mongohandler_root_dir / "JSON_data"
-
-        mongodb_uri_base = os.getenv("MONGODB_URI_BASE")
-        mongodb_username = os.getenv("MONGODB_USERNAME")
-        mongodb_password = os.getenv("MONGODB_PASSWORD")
         mongodb_uri = replace_username_password_in_uri(
-            mongodb_uri_base, mongodb_username, mongodb_password
+            base_uri=os.getenv("MONGODB_URI_BASE"),
+            username=os.getenv("MONGODB_USERNAME"),
+            password=os.getenv("MONGODB_PASSWORD"),
         )
 
-        create_directories(json_data_dir.parent)
-
         return MongoHandlerConfig(
-            root_dir=mongohandler_root_dir,
-            input_data_path=config.input_data_path,
-            json_data_filename=config.json_data_filename,
+            root_dir=root_dir,
+            input_data_path=Path(mongo_cfg.input_data_path),
+            json_data_filename=mongo_cfg.json_data_filename,
             json_data_dir=json_data_dir,
             mongodb_uri=mongodb_uri,
-            database_name=os.getenv("DATABASE_NAME"),
-            collection_name=os.getenv("COLLECTION_NAME"),
+            database_name=mongo_cfg.database_name,
+            collection_name=mongo_cfg.collection_name,
         )
 
     def get_dataingestion_config(self) -> DataIngestionConfig:
-        config = self.config.data_ingestion
+        ingestion_cfg = self.config.data_ingestion
 
-        ingestion_root_dir = self.artifacts_root / "data_ingestion"
-        featurestore_dir = ingestion_root_dir / "featurestore"
-        ingested_data_dir = ingestion_root_dir / "ingested"
-
+        root_dir = self.artifacts_root / DATA_INGESTION_SUBDIR
+        featurestore_dir = root_dir / FEATURESTORE_SUBDIR
+        ingested_data_dir = root_dir / INGESTED_SUBDIR
         create_directories(featurestore_dir, ingested_data_dir)
 
         return DataIngestionConfig(
-            root_dir=ingestion_root_dir,
+            root_dir=root_dir,
             featurestore_dir=featurestore_dir,
-            raw_data_filename=config.raw_data_filename,
+            raw_data_filename=ingestion_cfg.raw_data_filename,
             ingested_data_dir=ingested_data_dir,
-            ingested_data_filename=config.ingested_data_filename,
+            ingested_data_filename=ingestion_cfg.ingested_data_filename,
         )
 
     def get_datavalidation_config(self) -> DataValidationConfig:
+        val_cfg = self.config.data_validation
+        schema = self.schema.columns
+        params = self.params.drift_detection
 
-        config = self.config.data_validation
+        root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
+        validated_data_dir = root_dir / VALIDATED_SUBDIR
+        drift_report_dir = root_dir / DRIFT_REPORT_SUBDIR
+        create_directories(validated_data_dir, drift_report_dir)
 
-        validation_root = self.artifacts_root / "data_validation"
-        validated_data_dir = validation_root / "validated"
-        drift_report_dir = validation_root / "drift_report"
-
-
-        data_validation_config = DataValidationConfig(
-            root_dir=validation_root,
-            validated_data_filename=config.validated_data_filename,
+        return DataValidationConfig(
+            root_dir=root_dir,
             validated_data_dir=validated_data_dir,
-            drift_report_filename=config.drift_report_filename,
+            validated_data_filename=val_cfg.validated_data_filename,
             drift_report_dir=drift_report_dir,
+            drift_report_filename=val_cfg.drift_report_filename,
+            schema=schema,
+            params=params,
         )
-
-        return data_validation_config

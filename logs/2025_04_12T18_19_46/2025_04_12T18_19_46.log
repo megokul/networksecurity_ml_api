@@ -1,4 +1,0 @@
-[2025-04-12 19:19:46,575] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
-[2025-04-12 19:19:46,576] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
-[2025-04-12 19:19:46,576] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
-[2025-04-12 19:19:46,576] - ERROR - exception - Error occurred in file [E:\MyProjects\networksecurity\src\networksecurity\utils\common.py], line [70], message: ['str' object has no attribute 'mkdir']

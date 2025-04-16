@@ -1,68 +1,60 @@
-
-
 from src.networksecurity.entity.config_entity import DataIngestionConfig, MongoHandlerConfig
 from src.networksecurity.exception.exception import NetworkSecurityError
-import os
-import sys
-import numpy as np
-import pandas as pd
-from pymongo import MongoClient
 from src.networksecurity.logging import logger
-from dotenv import load_dotenv
 from src.networksecurity.dbhandler.mongo_handler import MongoDBHandler
-from pathlib import Path
-from src.networksecurity.utils.common import csv_to_json_convertor, create_directories, replace_username_password_in_uri
+from src.networksecurity.utils.common import create_directories
 
-load_dotenv()
+import pandas as pd
+import numpy as np
+
 
 class DataIngestion:
+    def __init__(self, ingestion_config: DataIngestionConfig, mongo_config: MongoHandlerConfig):
+        """
+        Initializes the DataIngestion process with configuration for both
+        data paths and MongoDB connection.
 
-    def __init__(self, data_ingestion_config: DataIngestionConfig):
+        Args:
+            ingestion_config (DataIngestionConfig): Config for file paths and storage.
+            mongo_config (MongoHandlerConfig): Config for MongoDB connection and access.
+        """
         try:
-            self.config=data_ingestion_config
+            self.ingestion_config = ingestion_config
+            self.mongo_config = mongo_config
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
     def load_data_from_mongo(self) -> pd.DataFrame:
-        """Connects to MongoDB using config and saves data to the staging directory."""
+        """
+        Connects to MongoDB, exports data, saves raw and cleaned CSVs.
+
+        Returns:
+            pd.DataFrame: Cleaned DataFrame.
+        """
         try:
-            logger.info("Connecting to MongoDB...")
+            logger.info("Starting data ingestion from MongoDB.")
 
-            mongodb_uri_base = os.getenv("MONGODB_URI_BASE")
-            mongodb_username = os.getenv("MONGODB_USERNAME")
-            mongodb_password = os.getenv("MONGODB_PASSWORD")
+            # Step 1: Fetch data from MongoDB
+            mongo_handler = MongoDBHandler(config=self.mongo_config)
+            raw_df = mongo_handler.export_collection_as_dataframe()
 
-            mongodb_uri = replace_username_password_in_uri(
-                mongodb_uri_base, mongodb_username, mongodb_password
-            )
+            # Step 2: Save raw data
+            create_directories(self.ingestion_config.featurestore_dir)
+            raw_df.to_csv(self.ingestion_config.raw_data_filepath, index=False)
+            logger.info(f"Raw data saved to: {self.ingestion_config.raw_data_filepath.as_posix()}")
 
-            client = MongoClient(mongodb_uri)
+            # Step 3: Clean data
+            cleaned_df = raw_df.drop(columns=["_id"]) if "_id" in raw_df.columns else raw_df.copy()
+            cleaned_df.replace({"na": np.nan}, inplace=True)
 
-            database_name = os.getenv("DATABASE_NAME")
-            collection_name = os.getenv("COLLECTION_NAME")
+            # Step 4: Save cleaned data
+            create_directories(self.ingestion_config.ingested_data_dir)
+            cleaned_df.to_csv(self.ingestion_config.ingested_data_filepath, index=False)
+            logger.info(f"Cleaned data saved to: {self.ingestion_config.ingested_data_filepath.as_posix()}")
 
-            database = client[database_name]
-            collection = database[collection_name]
-
-            logger.info(f"Reading data from MongoDB: '{database_name}/{collection_name}'")
-            raw_data_df = pd.DataFrame(list(collection.find()))
-
-            featurestore_dir = self.config.featurestore_dir
-            create_directories(featurestore_dir)
-            raw_data_df.to_csv(self.config.raw_data_filepath, index=False)
-
-            if "_id" in raw_data_df.columns:
-                ingested_data_df = raw_data_df.drop(columns=["_id"])
-
-            ingested_data_df = ingested_data_df.replace({"na": np.nan})
-            logger.info(f"Loaded {len(ingested_data_df)} records from MongoDB.")
-
-            create_directories(self.config.ingested_data_dir)
-            ingested_data_df.to_csv(self.config.ingested_data_filepath, index=False)
-            logger.info(f"Data ingested and saved to dir: '{self.config.ingested_data_filepath.as_posix()}'")
-
-            return ingested_data_df
+            logger.info(f"Data ingestion complete. {len(cleaned_df)} rows ingested.")
+            return cleaned_df
 
         except Exception as e:
-            logger.error("Failed to load data from MongoDB.")
+            logger.error("Error occurred during data ingestion.")
             raise NetworkSecurityError(e, logger) from e
