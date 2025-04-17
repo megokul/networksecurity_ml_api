@@ -1,5 +1,12 @@
 venv/
-/data/*
+
 .env
 pyproject.toml
 test.py
+
+# Ignore everything in data/
+data/*
+
+# But keep .dvc files and nested gitignore
+!data/**/*.dvc
+!data/**/.gitignore
