@@ -1,0 +1,9 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python debug.py
+    deps:
+    - path: debug.py
+      hash: md5
+      md5: 7cde9f5b09b495e68883b2cd790c470a
+      size: 706

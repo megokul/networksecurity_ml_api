@@ -10,16 +10,12 @@ from src.networksecurity.constants.constants import (
     DATA_INGESTION_SUBDIR,
     FEATURESTORE_SUBDIR,
     INGESTED_SUBDIR,
-    DATA_VALIDATION_SUBDIR,
-    VALIDATED_SUBDIR,
-    DRIFT_REPORT_SUBDIR,
     LOGS_ROOT,
 )
 
 from src.networksecurity.entity.config_entity import (
     MongoHandlerConfig,
     DataIngestionConfig,
-    DataValidationConfig,
 )
 
 from src.networksecurity.utils.common import (
@@ -27,14 +23,14 @@ from src.networksecurity.utils.common import (
     create_directories,
     replace_username_password_in_uri,
 )
-
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
+from src.networksecurity.logging import logger
 
 
 class ConfigurationManager:
     """
-    Central manager for loading config YAMLs and setting up timestamped
-    artifact + log directories using a consistent UTC timestamp.
+    Centralized manager for loading project configs, resolving paths for
+    artifacts, logs, and stable DVC paths using a shared UTC timestamp.
     """
 
     _global_timestamp: str = None
@@ -54,23 +50,21 @@ class ConfigurationManager:
         self.schema = read_yaml(schema_fp)
 
     def _initialize_paths(self) -> None:
-        """
-        Initializes artifact and log paths using the globally shared UTC timestamp.
-        This ensures that all pipeline components refer to the same consistent run ID.
-        """
         if ConfigurationManager._global_timestamp is None:
             ConfigurationManager._global_timestamp = get_shared_utc_timestamp()
 
         timestamp = ConfigurationManager._global_timestamp
 
-        # Artifact Root
         base_artifact_root = Path(self.config.project.artifacts_root)
         self.artifacts_root = base_artifact_root / timestamp
         create_directories(self.artifacts_root)
 
-        # Logs Root
         self.logs_root = Path(LOGS_ROOT) / timestamp
         create_directories(self.logs_root)
+
+        self.raw_dvc_path = Path(self.config.data_paths.raw_data)
+        self.processed_dvc_path = Path(self.config.data_paths.processed_data)
+        self.validated_dvc_path = Path(self.config.data_paths.validated_data)
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
@@ -112,24 +106,6 @@ class ConfigurationManager:
             raw_data_filename=ingestion_cfg.raw_data_filename,
             ingested_data_dir=ingested_data_dir,
             ingested_data_filename=ingestion_cfg.ingested_data_filename,
-        )
-
-    def get_datavalidation_config(self) -> DataValidationConfig:
-        val_cfg = self.config.data_validation
-        schema = self.schema.columns
-        params = self.params.drift_detection
-
-        root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
-        validated_data_dir = root_dir / VALIDATED_SUBDIR
-        drift_report_dir = root_dir / DRIFT_REPORT_SUBDIR
-        create_directories(validated_data_dir, drift_report_dir)
-
-        return DataValidationConfig(
-            root_dir=root_dir,
-            validated_data_dir=validated_data_dir,
-            validated_data_filename=val_cfg.validated_data_filename,
-            drift_report_dir=drift_report_dir,
-            drift_report_filename=val_cfg.drift_report_filename,
-            schema=schema,
-            params=params,
+            raw_dvc_path=self.raw_dvc_path,
+            processed_dvc_path=self.processed_dvc_path,
         )

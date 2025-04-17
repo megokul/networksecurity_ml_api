@@ -1,0 +1,18 @@
+[2025-04-17 20:56:42,609] - INFO - common - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-17 20:56:42,611] - INFO - common - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-17 20:56:42,613] - INFO - common - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-17 20:56:42,616] - INFO - common - Created directory at: 'artifacts/2025_04_17T19_56_42Z'
+[2025-04-17 20:56:42,616] - INFO - common - Created directory at: 'logs/2025_04_17T19_56_42Z'
+[2025-04-17 20:56:42,617] - INFO - common - Created directory at: 'artifacts/2025_04_17T19_56_42Z/mongo_handler/JSON_data'
+[2025-04-17 20:56:43,206] - INFO - common - CSV converted and saved to: 'artifacts/2025_04_17T19_56_42Z/mongo_handler/JSON_data/input_data.json'
+[2025-04-17 20:56:53,764] - INFO - mongo_handler - Inserted 11055 records into network_security_db.phishing_records
+[2025-04-17 20:56:53,869] - INFO - mongo_handler - MongoClient connection closed.
+[2025-04-17 20:56:53,873] - INFO - common - Created directory at: 'artifacts/2025_04_17T19_56_42Z/data_ingestion/featurestore'
+[2025-04-17 20:56:53,873] - INFO - common - Created directory at: 'artifacts/2025_04_17T19_56_42Z/data_ingestion/ingested'
+[2025-04-17 20:56:53,873] - INFO - data_ingestion - Starting data ingestion from MongoDB.
+[2025-04-17 20:56:57,762] - INFO - mongo_handler - Exported 22110 documents from network_security_db.phishing_records as DataFrame.
+[2025-04-17 20:56:57,826] - INFO - mongo_handler - MongoClient connection closed.
+[2025-04-17 20:56:57,826] - INFO - data_ingestion - Fetched 22110 raw rows from MongoDB.
+[2025-04-17 20:56:57,826] - INFO - common - Created directory at: 'data/raw'
+[2025-04-17 20:56:58,034] - INFO - common - Created directory at: 'data/processed'
+[2025-04-17 20:56:58,209] - INFO - data_ingestion - Data ingestion completed successfully.

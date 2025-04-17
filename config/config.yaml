@@ -1,8 +1,8 @@
-# Root directory where all experiment artifacts will be stored
+# Root directory for all experiment artifacts
 project:
   artifacts_root: artifacts
 
-# MongoDB configuration block
+# MongoDB configuration
 mongo_handler:
   input_data_path: network_data/input_csv/phisingData.csv
   json_data_filename: input_data.json
@@ -21,8 +21,8 @@ data_validation:
 
 # Data transformation configuration
 data_transformation:
-  transformed_train_filename: train.csv
-  transformed_test_filename: test.csv
+  transformed_train_filename: train.npy
+  transformed_test_filename: test.npy
   preprocessing_object_filename: preprocessing.pkl
 
 # Model trainer configuration
@@ -33,6 +33,18 @@ model_trainer:
 model_evaluation:
   evaluation_report_filename: evaluation_report.yaml
 
-# Prediction configuration
+# Model prediction configuration
 model_prediction:
   prediction_output_filename: prediction_output.csv
+
+# Stable DVC-tracked data paths
+data_paths:
+  raw_data: data/raw/raw_data.csv
+  processed_data: data/processed/cleaned_data.csv
+  validated_data: data/validated/validated_data.csv
+  transformed_train: data/transformed/train.npy
+  transformed_test: data/transformed/test.npy
+  preprocessor: data/transformed/preprocessing.pkl
+  trained_model: data/model/model.pkl
+  evaluation_report: data/evaluation/evaluation_report.yaml
+  predictions: data/predictions/prediction_output.csv

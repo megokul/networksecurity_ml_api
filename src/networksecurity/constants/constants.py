@@ -16,20 +16,20 @@ SCHEMA_FILE_PATH = CONFIG_DIR / "schema.yaml"
 MISSING_VALUE_TOKEN = "na"
 
 # ---------------------------
-# MongoDB connection constants
+# MongoDB connection constants (logic-only)
 # ---------------------------
 
-MONGODB_CONNECT_TIMEOUT_MS = 5000
-MONGODB_SOCKET_TIMEOUT_MS = 5000
+MONGODB_CONNECT_TIMEOUT_MS = 40000
+MONGODB_SOCKET_TIMEOUT_MS = 40000
 
 # ---------------------------
 # Root Directories
 # ---------------------------
 
-LOGS_ROOT = "logs"  # Root directory for timestamped logs
+LOGS_ROOT = "logs"  # Logs are stored outside artifacts for observability
 
 # ---------------------------
-# Artifact Subdirectory Names
+# Artifact Subdirectory Names (static structure logic)
 # ---------------------------
 
 MONGO_HANDLER_SUBDIR = "mongo_handler"
@@ -50,22 +50,3 @@ TRANSFORMED_OBJECT_SUBDIR = "transformed_object"
 MODEL_TRAINER_SUBDIR = "model_trainer"
 MODEL_EVALUATION_SUBDIR = "model_evaluation"
 MODEL_PREDICTION_SUBDIR = "model_prediction"
-
-# ---------------------------
-# Common filenames
-# ---------------------------
-
-RAW_DATA_FILENAME = "raw_data.csv"
-INGESTED_DATA_FILENAME = "ingested_data.csv"
-VALIDATED_DATA_FILENAME = "validated_data.csv"
-DRIFT_REPORT_FILENAME = "drift_report.yaml"
-
-TRANSFORMED_TRAIN_FILENAME = "train.npy"
-TRANSFORMED_TEST_FILENAME = "test.npy"
-PREPROCESSING_OBJECT_FILENAME = "preprocessing.pkl"
-
-TRAINED_MODEL_FILENAME = "model.pkl"
-EVALUATION_REPORT_FILENAME = "evaluation_report.yaml"
-PREDICTION_OUTPUT_FILENAME = "prediction_output.csv"
-
-MONGO_JSON_FILENAME = "input_data.json"

@@ -29,11 +29,15 @@ class DataIngestionConfig:
     raw_data_filename: str
     ingested_data_dir: Path
     ingested_data_filename: str
+    raw_dvc_path: Path
+    processed_dvc_path: Path
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
         self.featurestore_dir = Path(self.featurestore_dir)
         self.ingested_data_dir = Path(self.ingested_data_dir)
+        self.raw_dvc_path = Path(self.raw_dvc_path)
+        self.processed_dvc_path = Path(self.processed_dvc_path)
 
     @property
     def raw_data_filepath(self):

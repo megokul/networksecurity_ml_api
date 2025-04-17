@@ -5,3 +5,4 @@ pandas==2.2.3
 ensure==1.0.4
 python-box==7.3.2
 PyYAML==7.3.2
+dvc
