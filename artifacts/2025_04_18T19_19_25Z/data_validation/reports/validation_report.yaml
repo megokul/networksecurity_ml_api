@@ -1,0 +1,8 @@
+validation_status: true
+schema_check_type: hash
+check_results:
+  critical_checks:
+    schema_is_match: true
+  non_critical_checks:
+    no_missing_values: true
+    no_duplicate_rows: false

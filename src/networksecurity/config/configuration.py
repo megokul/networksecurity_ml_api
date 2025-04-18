@@ -10,12 +10,16 @@ from src.networksecurity.constants.constants import (
     DATA_INGESTION_SUBDIR,
     FEATURESTORE_SUBDIR,
     INGESTED_SUBDIR,
+    DATA_VALIDATION_SUBDIR,
+    VALIDATED_SUBDIR,
+    REPORTS_SUBDIR,
     LOGS_ROOT,
 )
 
 from src.networksecurity.entity.config_entity import (
     MongoHandlerConfig,
     DataIngestionConfig,
+    DataValidationConfig,
 )
 
 from src.networksecurity.utils.common import (
@@ -28,11 +32,6 @@ from src.networksecurity.logging import logger
 
 
 class ConfigurationManager:
-    """
-    Centralized manager for loading project configs, resolving paths for
-    artifacts, logs, and stable DVC paths using a shared UTC timestamp.
-    """
-
     _global_timestamp: str = None
 
     def __init__(
@@ -63,13 +62,12 @@ class ConfigurationManager:
         create_directories(self.logs_root)
 
         self.raw_dvc_path = Path(self.config.data_paths.raw_data)
-        self.processed_dvc_path = Path(self.config.data_paths.processed_data)
         self.validated_dvc_path = Path(self.config.data_paths.validated_data)
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
 
-    def get_mongohandler_config(self) -> MongoHandlerConfig:
+    def get_mongo_handler_config(self) -> MongoHandlerConfig:
         mongo_cfg = self.config.mongo_handler
 
         root_dir = self.artifacts_root / MONGO_HANDLER_SUBDIR
@@ -92,7 +90,7 @@ class ConfigurationManager:
             collection_name=mongo_cfg.collection_name,
         )
 
-    def get_dataingestion_config(self) -> DataIngestionConfig:
+    def get_data_ingestion_config(self) -> DataIngestionConfig:
         ingestion_cfg = self.config.data_ingestion
 
         root_dir = self.artifacts_root / DATA_INGESTION_SUBDIR
@@ -107,5 +105,26 @@ class ConfigurationManager:
             ingested_data_dir=ingested_data_dir,
             ingested_data_filename=ingestion_cfg.ingested_data_filename,
             raw_dvc_path=self.raw_dvc_path,
-            processed_dvc_path=self.processed_dvc_path,
+        )
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        validation_cfg = self.config.data_validation
+
+
+        root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
+        validated_dir = root_dir / VALIDATED_SUBDIR
+        report_dir = root_dir / REPORTS_SUBDIR
+        create_directories(validated_dir, report_dir)
+
+        return DataValidationConfig(
+            root_dir=root_dir,
+            validated_dir=validated_dir,
+            validated_filename=validation_cfg.validated_filename,
+            report_dir=report_dir,
+            missing_report_filename=validation_cfg.missing_report_filename,
+            drift_report_filename=validation_cfg.drift_report_filename,
+            validation_report_filename=validation_cfg.validation_report_filename,
+            schema=self.schema,
+            validated_dvc_path=self.validated_dvc_path,
+            validation_params=self.params.validation_params
         )

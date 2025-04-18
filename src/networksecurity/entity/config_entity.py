@@ -30,14 +30,12 @@ class DataIngestionConfig:
     ingested_data_dir: Path
     ingested_data_filename: str
     raw_dvc_path: Path
-    processed_dvc_path: Path
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
         self.featurestore_dir = Path(self.featurestore_dir)
         self.ingested_data_dir = Path(self.ingested_data_dir)
         self.raw_dvc_path = Path(self.raw_dvc_path)
-        self.processed_dvc_path = Path(self.processed_dvc_path)
 
     @property
     def raw_data_filepath(self):
@@ -48,28 +46,35 @@ class DataIngestionConfig:
         return self.ingested_data_dir / self.ingested_data_filename
 
 
-@dataclass
+@dataclass(frozen=True)
 class DataValidationConfig:
     root_dir: Path
-    validated_data_dir: Path
-    validated_data_filename: str
-    drift_report_dir: Path
+    validated_dir: Path
+    validated_filename: str
+    report_dir: Path
+    missing_report_filename: str
     drift_report_filename: str
+    validation_report_filename: str
     schema: dict
-    params: dict
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-        self.validated_data_dir = Path(self.validated_data_dir)
-        self.drift_report_dir = Path(self.drift_report_dir)
+    validation_params: dict
+    validated_dvc_path: Path
 
     @property
-    def validated_data_filepath(self):
-        return self.validated_data_dir / self.validated_data_filename
+    def validated_filepath(self) -> Path:
+        return self.validated_dir / self.validated_filename
 
     @property
-    def drift_report_filepath(self):
-        return self.drift_report_dir / self.drift_report_filename
+    def missing_report_path(self) -> Path:
+        return self.report_dir / self.missing_report_filename
+
+    @property
+    def drift_report_path(self) -> Path:
+        return self.report_dir / self.drift_report_filename
+
+    @property
+    def validation_report_path(self) -> Path:
+        return self.report_dir / self.validation_report_filename
+
 
 
 @dataclass

@@ -1,69 +1,74 @@
 import numpy as np
+import pandas as pd
 
 from src.networksecurity.entity.config_entity import DataIngestionConfig
 from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
-from src.networksecurity.dbhandler.mongo_handler import MongoDBHandler
+from pathlib import Path
+
+from src.networksecurity.dbhandler.base_handler import DBHandler
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import create_directories
+from src.networksecurity.utils.common import save_dataframe_to_paths
 
 
 class DataIngestion:
     def __init__(
         self,
         config: DataIngestionConfig,
-        mongo_handler: MongoDBHandler,
+        db_handler: DBHandler,
     ):
-        """
-        Data ingestion stage responsible for fetching raw data from MongoDB,
-        saving to artifact and DVC directories, and preparing cleaned versions.
-
-        Args:
-            config (DataIngestionConfig): Config paths for saving outputs.
-            mongo_handler (MongoDBHandler): Handler capable of exporting data from MongoDB.
-        """
         try:
             self.config = config
-            self.mongo_handler = mongo_handler
+            self.db_handler = db_handler
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
-    def load_data_from_mongo(self) -> DataIngestionArtifact:
-        """
-        Fetch data from MongoDB, save both raw and cleaned versions
-        to artifact and DVC paths, and return ingestion artifacts.
-
-        Returns:
-            DataIngestionArtifact: Paths to all raw and cleaned data outputs.
-        """
+    def _fetch_data_from_source(self) -> pd.DataFrame:
         try:
-            logger.info("Starting data ingestion from MongoDB.")
+            with self.db_handler as handler:
+                df = handler.load_from_source()
+            logger.info(f"Fetched {len(df)} raw rows from data source.")
+            return df
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
 
-            with self.mongo_handler as handler:
-                raw_df = handler.export_collection_as_dataframe()
-            logger.info(f"Fetched {len(raw_df)} raw rows from MongoDB.")
+    def _clean_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+        try:
+            df_cleaned = df.drop(columns=["_id"], errors="ignore").copy()
+            df_cleaned.replace({"na": np.nan}, inplace=True)
+            logger.info("Raw DataFrame cleaned successfully.")
+            return df_cleaned
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
 
-            # Save raw data to both artifact and DVC
-            create_directories(self.config.raw_dvc_path.parent)
-            raw_df.to_csv(self.config.raw_data_filepath, index=False)
-            raw_df.to_csv(self.config.raw_dvc_path, index=False)
+    def run_ingestion(self) -> DataIngestionArtifact:
+        try:
+            logger.info("Starting data ingestion pipeline...")
 
-            # Clean
-            cleaned_df = raw_df.drop(columns=["_id"], errors="ignore").copy()
-            cleaned_df.replace({"na": np.nan}, inplace=True)
+            # Fetch raw data
+            raw_df = self._fetch_data_from_source()
 
-            # Save cleaned to both artifact and DVC
-            create_directories(self.config.processed_dvc_path.parent)
-            cleaned_df.to_csv(self.config.ingested_data_filepath, index=False)
-            cleaned_df.to_csv(self.config.processed_dvc_path, index=False)
+            save_dataframe_to_paths(
+                raw_df,
+                self.config.raw_data_filepath,
+                self.config.raw_dvc_path,
+                label="Raw data"
+            )
+
+            cleaned_df = self._clean_dataframe(raw_df)
+
+            save_dataframe_to_paths(
+                cleaned_df,
+                self.config.ingested_data_filepath,
+                label="Cleaned data"
+            )
 
             logger.info("Data ingestion completed successfully.")
 
             return DataIngestionArtifact(
                 raw_artifact_path=self.config.raw_data_filepath,
-                cleaned_artifact_path=self.config.ingested_data_filepath,
                 raw_dvc_path=self.config.raw_dvc_path,
-                cleaned_dvc_path=self.config.processed_dvc_path,
+                ingested_data_filepath=self.config.ingested_data_filepath
             )
 
         except Exception as e:

@@ -79,11 +79,7 @@ def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
 
 
 @ensure_annotations
-def replace_username_password_in_uri(
-    base_uri: str,
-    username: str,
-    password: str,
-) -> str:
+def replace_username_password_in_uri(base_uri: str, username: str, password: str) -> str:
     """
     Safely replace <username> and <password> in a MongoDB URI with encoded credentials.
     """
@@ -99,3 +95,20 @@ def replace_username_password_in_uri(
         .replace("<password>", encoded_password)
     )
 
+@ensure_annotations
+def save_dataframe_to_paths(df: pd.DataFrame, *paths: Path, label: str):
+    """
+    Save a DataFrame to multiple file paths.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to save.
+        *paths (Path): One or more Path objects to save to.
+        label (str): Label to log.
+    """
+    try:
+        for path in paths:
+            create_directories(path.parent)
+            df.to_csv(path, index=False)
+            logger.info(f"{label} saved to: {path}")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e

@@ -16,8 +16,12 @@ data_ingestion:
 
 # Data validation configuration
 data_validation:
-  validated_data_filename: validated_data.csv
+  validated_filename: validated_data.csv
+  missing_report_filename: missing_values_report.json
   drift_report_filename: drift_report.yaml
+  validation_report_filename: validation_report.yaml
+  schema_hash_filename: schema_hash.json
+
 
 # Data transformation configuration
 data_transformation:
@@ -40,10 +44,9 @@ model_prediction:
 # Stable DVC-tracked data paths
 data_paths:
   raw_data: data/raw/raw_data.csv
-  processed_data: data/processed/cleaned_data.csv
   validated_data: data/validated/validated_data.csv
-  transformed_train: data/transformed/train.npy
-  transformed_test: data/transformed/test.npy
+  transformed_train: data/transformed/train.csv
+  transformed_test: data/transformed/test.csv
   preprocessor: data/transformed/preprocessing.pkl
   trained_model: data/model/model.pkl
   evaluation_report: data/evaluation/evaluation_report.yaml

@@ -1,7 +1,13 @@
 # Parameters for drift detection during data validation
-drift_detection:
-  method: ks_test
-  p_value_threshold: 0.05
+validation_params:
+  drift_detection:
+    enabled: true
+    method: ks_test
+    p_value_threshold: 0.05
+
+  schema_check:
+    enabled: true
+    method: hash
 
 # Parameters for data splitting
 data_split:
