@@ -1,0 +1,16 @@
+validation_report:
+  validation_status: value
+  critical_passed: value
+  non_critical_passed: value
+
+  schema_check_type: 
+  drift_check_method: value
+
+  check_results:
+    critical_checks: 
+      schema_is_match: value
+      no_data_drift: value
+
+    non_critical_checks:
+      no_missing_values: value
+      no_duplicate_rows: value

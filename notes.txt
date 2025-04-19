@@ -1,8 +1,4 @@
-Bugs:
+to solve:
 
-configuration.py : ccreating paths implicitly. convert to explicit.
 
-need to pass configurationmanager obj between pipelines, not reinitilize cm obj
-
-yaml to multiple directories
 

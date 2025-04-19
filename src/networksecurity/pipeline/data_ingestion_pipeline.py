@@ -35,7 +35,7 @@ class DataIngestionPipeline:
             )
             artifact = ingestion.run_ingestion()
 
-            logger.info(f"Data Ingestion Process Completed. {artifact}")
+            logger.info(f"Data Ingestion Process Completed.\n{artifact}")
             logger.info("========== Data Ingestion Stage Completed ==========")
 
             return artifact

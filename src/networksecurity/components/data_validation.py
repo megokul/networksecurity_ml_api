@@ -1,16 +1,16 @@
 import hashlib
-import json
-import yaml
 import pandas as pd
 from pathlib import Path
-from scipy.stats import ks_2samp
 from box import ConfigBox
+from datetime import timezone
+from scipy.stats import ks_2samp
 
 from src.networksecurity.entity.config_entity import DataValidationConfig
 from src.networksecurity.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
-from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.utils.common import save_to_yaml, save_to_csv, save_to_json
+from src.networksecurity.logging import logger
+from src.networksecurity.utils.common import save_to_yaml, save_to_csv, save_to_json, read_csv
+from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 
 
 class DataValidation:
@@ -19,28 +19,20 @@ class DataValidation:
             self.config = config
             self.schema = config.schema
             self.params = config.validation_params
-            self.df = pd.read_csv(ingestion_artifact.ingested_data_filepath)
+            self.df = read_csv(ingestion_artifact.ingested_data_filepath, "Ingested Data")
 
             self.base_df = None
             self.drift_check_performed = False
             if self.params.drift_detection.enabled and config.validated_dvc_path.exists():
-                self.base_df = pd.read_csv(config.validated_dvc_path)
+                self.base_df = read_csv(config.validated_dvc_path, "Validated Base Data")
                 self.drift_check_performed = True
 
-            self.missing_report_filepath = config.missing_report_filepath
-            self.drift_report_filepath = config.drift_report_filepath
-            self.validation_report_filepath = config.validation_report_filepath
             self.validated_filepath = None
+            self.timestamp = get_shared_utc_timestamp()
 
-            self.critical_checks = ConfigBox({
-                "schema_is_match": True,
-                "no_data_drift": True
-            })
-            self.non_critical_checks = ConfigBox({
-                "no_missing_values": True,
-                "no_duplicate_rows": True
-            })
-
+            self.report = ConfigBox(config.val_report_template.copy())
+            self.critical_checks = ConfigBox({k: False for k in self.report.check_results.critical_checks.keys()})
+            self.non_critical_checks = ConfigBox({k: False for k in self.report.check_results.non_critical_checks.keys()})
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
@@ -53,11 +45,8 @@ class DataValidation:
             current_str = "|".join(f"{col}:{self.df[col].dtype}" for col in sorted(self.df.columns))
             current_hash = hashlib.md5(current_str.encode()).hexdigest()
 
-            if current_hash != expected_hash:
-                self.critical_checks.schema_is_match = False
-                logger.error("Schema hash mismatch.")
-            else:
-                logger.info("Schema hash matches schema.yaml.")
+            self.critical_checks.schema_is_match = (current_hash == expected_hash)
+            logger.info("Schema hash check passed." if self.critical_checks.schema_is_match else "Schema hash mismatch.")
         except Exception as e:
             self.critical_checks.schema_is_match = False
             raise NetworkSecurityError(e, logger) from e
@@ -66,9 +55,9 @@ class DataValidation:
         try:
             expected = set(self.schema.columns.keys()) | {self.schema.target_column}
             actual = set(self.df.columns)
-            if expected != actual:
-                self.critical_checks.schema_is_match = False
-                logger.error(f"Schema mismatch: expected={expected}, actual={actual}")
+            self.critical_checks.schema_is_match = (expected == actual)
+            if not self.critical_checks.schema_is_match:
+                logger.error(f"Schema structure mismatch: expected={expected}, actual={actual}")
         except Exception as e:
             self.critical_checks.schema_is_match = False
             raise NetworkSecurityError(e, logger) from e
@@ -76,14 +65,9 @@ class DataValidation:
     def _check_missing_values(self):
         try:
             missing = self.df.isnull().sum().to_dict()
-
-            save_to_json(missing, self.missing_report_filepath, label="Missing Value")
-
-            if any(v > 0 for v in missing.values()):
-                self.non_critical_checks.no_missing_values = False
-                logger.warning("Missing values detected.")
-            else:
-                logger.info("No missing values.")
+            missing["timestamp"] = self.timestamp
+            save_to_yaml(missing, self.config.missing_report_filepath, label="Missing Value Report")
+            self.non_critical_checks.no_missing_values = not any(v > 0 for v in missing.values() if isinstance(v, (int, float)))
         except Exception as e:
             self.non_critical_checks.no_missing_values = False
             raise NetworkSecurityError(e, logger) from e
@@ -95,20 +79,16 @@ class DataValidation:
             after = len(self.df)
             duplicates_removed = before - after
 
-            # Prepare report and save it
-            duplicate_report = {"duplicate_rows_removed": duplicates_removed}
-            save_to_json(duplicate_report, self.config.duplicates_report_filepath, label="Duplicates Report")
+            result = {
+                "duplicate_rows_removed": duplicates_removed,
+                "timestamp": self.timestamp
+            }
 
-            if duplicates_removed > 0:
-                self.non_critical_checks.no_duplicate_rows = False
-                logger.warning(f"Removed {duplicates_removed} duplicate rows.")
-            else:
-                logger.info("No duplicate rows found.")
-
+            save_to_json(result, self.config.duplicates_report_filepath, label="Duplicates Report")
+            self.non_critical_checks.no_duplicate_rows = (duplicates_removed == 0)
         except Exception as e:
             self.non_critical_checks.no_duplicate_rows = False
             raise NetworkSecurityError(e, logger) from e
-
 
     def _check_drift(self):
         try:
@@ -129,36 +109,34 @@ class DataValidation:
                     drift_detected = True
 
             drift_results["drift_detected"] = drift_detected
+            drift_results["timestamp"] = self.timestamp
 
-            save_to_yaml(drift_results, self.config.drift_report_filepath, label="Drift result")
-
-            if drift_detected:
-                self.critical_checks.no_data_drift = False
-                logger.warning("Data drift detected.")
-            else:
-                logger.info("No drift detected.")
+            save_to_yaml(drift_results, self.config.drift_report_filepath, label="Drift Result")
+            self.critical_checks.no_data_drift = not drift_detected
         except Exception as e:
             self.critical_checks.no_data_drift = False
             raise NetworkSecurityError(e, logger) from e
 
-    def _get_validation_report(self):
+    def _generate_report(self) -> dict:
         try:
-            report = {
-                "validation_status": all(self.critical_checks.values()),
-                "schema_check_type": self.params.schema_check.method,
-                "check_results": {
-                    "critical_checks": dict(self.critical_checks),
-                    "non_critical_checks": dict(self.non_critical_checks)
-                }
-            }
+            validation_status = all(self.critical_checks.values())
+            non_critical_passed = all(self.non_critical_checks.values())
+
+            self.report.timestamp = self.timestamp
+            self.report.validation_status = validation_status
+            self.report.critical_passed = validation_status
+            self.report.non_critical_passed = non_critical_passed
+            self.report.schema_check_type = self.params.schema_check.method
 
             if self.drift_check_performed:
-                report["drift_check_method"] = self.params.drift_detection.method
+                self.report.drift_check_method = self.params.drift_detection.method
             else:
-                report["check_results"]["critical_checks"].pop("no_data_drift", None)
+                del self.report["drift_check_method"]
 
-            return report
+            self.report.check_results.critical_checks = self.critical_checks.to_dict()
+            self.report.check_results.non_critical_checks = self.non_critical_checks.to_dict()
 
+            return self.report.to_dict()
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
@@ -177,28 +155,21 @@ class DataValidation:
             if self.params.drift_detection.enabled:
                 self._check_drift()
 
-            validation_report = self._get_validation_report()
-
-            save_to_yaml(validation_report, self.validation_report_filepath, label="Validation Report")
+            report_dict = self._generate_report()
+            save_to_yaml(report_dict, self.config.validation_report_filepath, label="Validation Report")
 
             is_valid = all(self.critical_checks.values())
-
-            validated_filepath = None
+            validated_filepath = self.config.validated_filepath if is_valid else None
 
             if is_valid:
-
-                validated_filepath = self.config.validated_filepath
-
                 save_to_csv(self.df, validated_filepath, self.config.validated_dvc_path, label="Validated Data")
             else:
                 logger.warning("Validation failed. Validated data not saved.")
-
-            self.validated_filepath if self.validated_filepath else None,
 
             return DataValidationArtifact(
                 validated_filepath=validated_filepath,
                 validation_status=is_valid
             )
-        
+
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e

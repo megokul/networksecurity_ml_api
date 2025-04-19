@@ -15,12 +15,16 @@ if __name__ == "__main__":
         ingestion_pipeline = DataIngestionPipeline()
         ingestion_artifact = ingestion_pipeline.run()
         logger.info("========== Data Ingestion Pipeline Finished ==========")
+        logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
         # Run Data Validation
         logger.info("========== Launching Data Validation Pipeline ==========")
         validation_pipeline = DataValidationPipeline(ingestion_artifact=ingestion_artifact)
         validation_artifact = validation_pipeline.run()
         logger.info("========== Data Validation Pipeline Finished ==========")
+        logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
         # # Run Data Transformation
         # if validation_artifact.validation_status:

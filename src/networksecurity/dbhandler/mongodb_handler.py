@@ -30,7 +30,7 @@ class MongoDBHandler(DBHandler):
                 connectTimeoutMS=MONGODB_CONNECT_TIMEOUT_MS,
                 socketTimeoutMS=MONGODB_SOCKET_TIMEOUT_MS,
             )
-            logger.debug("MongoClient initialized.")
+            logger.info("MongoClient initialized.")
         return self._client
 
     def close(self) -> None:

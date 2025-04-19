@@ -1,5 +1,5 @@
 columns:
-  AAbnormal_URL: int64
+  Abnormal_URL: int64
   DNSRecord: int64
   Domain_registeration_length: int64
   Favicon: int64

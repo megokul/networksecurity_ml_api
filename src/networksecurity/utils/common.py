@@ -155,3 +155,27 @@ def save_to_json(data: dict | list, *paths: Path, label: str):
             logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
+    
+@ensure_annotations
+def read_csv(path: Path, label: str) -> pd.DataFrame:
+    """
+    Load a DataFrame from a CSV file and log the operation.
+
+    Args:
+        path (Path): Path to the CSV file.
+        label (str): Descriptive label used in logs.
+
+    Returns:
+        pd.DataFrame: Loaded DataFrame.
+    """
+    try:
+        path = Path(path)
+        if not path.exists():
+            raise FileNotFoundError(f"{label} not found at path: {path.as_posix()}")
+
+        df = pd.read_csv(path)
+        logger.info(f"{label} loaded successfully from: '{path.as_posix()}'")
+        return df
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e

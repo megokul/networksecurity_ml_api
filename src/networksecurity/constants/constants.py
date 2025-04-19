@@ -8,6 +8,7 @@ CONFIG_DIR = Path("config")
 CONFIG_FILE_PATH = CONFIG_DIR / "config.yaml"
 PARAMS_FILE_PATH = CONFIG_DIR / "params.yaml"
 SCHEMA_FILE_PATH = CONFIG_DIR / "schema.yaml"
+TEMPLATES_FILE_PATH = CONFIG_DIR / "templates.yaml"
 
 # ---------------------------
 # Generic Constants

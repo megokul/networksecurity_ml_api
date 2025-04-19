@@ -15,7 +15,7 @@ class DataIngestionArtifact:
         ingested_data_str = self.ingested_data_filepath.as_posix() if self.ingested_data_filepath else "None"
 
         return (
-            "\nData Ingestion Artifact Paths:\n"
+            "\nData Ingestion Artifact:\n"
             f"  - Raw Artifact:     '{raw_artifact_str}'\n"
             f"  - Raw DVC Path:     '{raw_dvc_str}'\n"
             f"  - Ingested Data Path:     '{ingested_data_str}'\n"
@@ -31,7 +31,7 @@ class DataValidationArtifact:
         validated_str = self.validated_filepath.as_posix() if self.validated_filepath else "None"
 
         return (
-            "\nData Validation Artifact Paths:\n"
+            "\nData Validation Artifact:\n"
             f"  - Validated Data Path: '{validated_str}'\n"
             f"  - Validation Status:   '{self.validation_status}'\n"
         )

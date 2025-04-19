@@ -1,0 +1,2150 @@
+
+📦 Project Structure of: E:\MyProjects\networksecurity
+
+📁 .dvc/
+    📄 .gitignore
+    📁 cache/
+        📁 files/
+            📁 md5/
+                📁 87/
+                    📄 f220430be73d16609bfd637b1644af
+                📁 bf/
+                    📄 fa4350e8aa16caaa3cbb92ec8e048c
+    📄 config
+    📁 tmp/
+        📄 btime
+        📁 exps/
+            📁 cache/
+                📁 3e/
+                    📄 a84c7b28b0242174e45334d5d6a9d3026f546d
+                📁 48/
+                    📄 faf510268751ce441d9178a563f5e2c4577d88
+                📁 4a/
+                    📄 640ce33b51ffeb8c1aa85e520ce78dfe105123
+                📁 8a/
+                    📄 ed08439cb37bbee9fee4ad00d82ea30435606b
+                📁 a8/
+                    📄 2c1cb5bbc048ca32cb78061a4b8aaf3735233f
+                📁 b0/
+                    📄 63569211a95f11f23c4f61f6b9518bbf3b2cf3
+                📁 c7/
+                    📄 31a093cb23b7a2bef65922d39d9d20ac56e6f3
+                📁 e3/
+                    📄 5de325a2125360b5ae289c080fc748a0140cdc
+            📁 celery/
+                📁 broker/
+                    📁 control/
+                    📁 in/
+                    📁 processed/
+                📁 result/
+        📄 lock
+        📄 rwlock
+        📄 rwlock.lock
+📄 .dvcignore
+📄 .env
+📄 .gitignore
+📄 Dockerfile
+📄 LICENSE
+📄 README.md
+📄 app.py
+📁 config/
+    📄 config.yaml
+    📄 params.yaml
+    📄 schema.yaml
+    📄 templates.yaml
+📁 data/
+    📁 raw/
+        📄 raw_data.csv
+        📄 raw_data.csv.dvc
+    📁 validated/
+        📄 validated_data.csv
+        📄 validated_data.csv.dvc
+📄 debug.py
+📄 debug_pipeline.py
+📄 main.py
+📁 network_data/
+    📁 input_csv/
+        📄 phisingData.csv
+📄 notes.txt
+📄 print_structure.py
+📄 project_code_dump.txt
+📄 project_dump.py
+📄 project_template.py
+📄 prompt.txt
+📄 requirements.txt
+📁 research/
+    📁 config/
+        📄 schema.yaml
+    📄 ingested_data.csv
+    📁 logs/
+        📁 2025_04_10T16_40_06/
+            📄 2025_04_10T16_40_06.log
+        📁 2025_04_10T17_30_35/
+            📄 2025_04_10T17_30_35.log
+        📁 2025_04_10T17_38_55/
+            📄 2025_04_10T17_38_55.log
+    📄 research.ipynb
+📄 setup.py
+📁 src/
+    📁 networksecurity/
+        📄 __init__.py
+        📁 cloud/
+            📄 __init__.py
+        📁 components/
+            📄 __init__.py
+            📄 data_ingestion.py
+            📄 data_transformation.py
+            📄 data_validation.py
+        📁 config/
+            📄 __init__.py
+            📄 configuration.py
+        📁 constants/
+            📄 __init__.py
+            📄 constants.py
+        📁 dbhandler/
+            📄 __init__.py
+            📄 base_handler.py
+            📄 mongodb_handler.py
+        📁 entity/
+            📄 __init__.py
+            📄 artifact_entity.py
+            📄 config_entity.py
+        📁 exception/
+            📄 __init__.py
+            📄 exception.py
+        📁 logging/
+            📄 __init__.py
+            📄 logger.py
+        📁 pipeline/
+            📄 __init__.py
+            📄 data_ingestion_pipeline.py
+            📄 data_transformation_pipeline.py
+            📄 data_validation_pipeline.py
+        📁 utils/
+            📄 __init__.py
+            📄 common.py
+            📄 timestamp.py
+📁 templates/
+    📄 index.html
+
+--- PYTHON CODE DUMP ---
+
+
+================================================================================
+# FILE: app.py
+================================================================================
+
+
+
+================================================================================
+# FILE: debug.py
+================================================================================
+
+from src.networksecurity.config.configuration import ConfigurationManager
+from src.networksecurity.dbhandler.mongodb_handler import MongoDBHandler
+from src.networksecurity.components.data_ingestion import DataIngestion
+from dotenv import load_dotenv
+load_dotenv()
+
+
+configmanager = ConfigurationManager()
+
+mongohandler_config = configmanager.get_mongo_handler_config()
+
+mongohandler = MongoDBHandler(mongohandler_config)
+
+with mongohandler:
+    mongohandler.insert_csv_to_collection(mongohandler_config.input_data_path)
+
+================================================================================
+# FILE: debug_pipeline.py
+================================================================================
+
+from dotenv import load_dotenv
+from src.networksecurity.pipeline.data_ingestion_pipeline import DataIngestionPipeline
+from src.networksecurity.pipeline.data_validation_pipeline import DataValidationPipeline
+# from src.networksecurity.pipeline.data_transformation_pipeline import DataTransformationPipeline
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+
+# Load environment variables
+load_dotenv()
+
+if __name__ == "__main__":
+    try:
+        # Run Data Ingestion
+        logger.info("========== Launching Data Ingestion Pipeline ==========")
+        ingestion_pipeline = DataIngestionPipeline()
+        ingestion_artifact = ingestion_pipeline.run()
+        logger.info("========== Data Ingestion Pipeline Finished ==========")
+
+        # Run Data Validation
+        logger.info("========== Launching Data Validation Pipeline ==========")
+        validation_pipeline = DataValidationPipeline(ingestion_artifact=ingestion_artifact)
+        validation_artifact = validation_pipeline.run()
+        logger.info("========== Data Validation Pipeline Finished ==========")
+
+        # # Run Data Transformation
+        # if validation_artifact.validation_status:
+        #     logger.info("========== Launching Data Transformation Pipeline ==========")
+        #     transformation_pipeline = DataTransformationPipeline(validation_artifact=validation_artifact)
+        #     transformation_artifact = transformation_pipeline.run()
+        #     logger.info("========== Data Transformation Pipeline Finished ==========")
+        # else:
+        #     logger.warning("Skipping Data Transformation due to failed validation.")
+
+    except NetworkSecurityError as e:
+        logger.exception("Pipeline failed due to a known exception.")
+    except Exception as e:
+        logger.exception("Pipeline failed due to an unexpected exception.")
+
+================================================================================
+# FILE: main.py
+================================================================================
+
+
+
+================================================================================
+# FILE: print_structure.py
+================================================================================
+
+import os
+
+
+def print_directory_tree(start_path: str, indent: str = "", exclude_dirs=None) -> None:
+    """
+    Recursively prints the directory structure starting from `start_path`,
+    excluding directories listed in `exclude_dirs`.
+
+    Args:
+        start_path (str): The root folder path to start from.
+        indent (str): Used for indentation in recursive calls.
+        exclude_dirs (set): Directory names to ignore.
+    """
+    if exclude_dirs is None:
+        exclude_dirs = {'.venv', 'venv', '__pycache__', '.github', '.git'}
+
+    try:
+        items = sorted(os.listdir(start_path))
+    except PermissionError:
+        return  # Skip directories/files we can't access
+
+    for item in items:
+        item_path = os.path.join(start_path, item)
+
+        if os.path.isdir(item_path):
+            if item in exclude_dirs:
+                continue
+            print(f"{indent}📁 {item}/")
+            print_directory_tree(item_path, indent + "    ", exclude_dirs)
+        else:
+            print(f"{indent}📄 {item}")
+
+
+if __name__ == "__main__":
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    print(f"\n📦 Project Structure of: {ROOT_DIR}\n")
+    print_directory_tree(ROOT_DIR)
+
+================================================================================
+# FILE: project_dump.py
+================================================================================
+
+import os
+
+EXCLUDE_DIRS = {'.venv', 'venv', '__pycache__', '.github', '.git', '.idea', '.vscode', 'build', 'dist', '.mypy_cache'}
+OUTPUT_FILE = "project_code_dump.txt"
+INCLUDE_YAML_FILES = {'config.yaml', 'params.yaml', 'schema.yaml'}
+
+
+def is_valid_directory(dirname):
+    return not any(part in EXCLUDE_DIRS for part in dirname.split(os.sep))
+
+
+def print_directory_tree(start_path: str, indent: str = "", exclude_dirs=None, out_lines=None) -> list:
+    """
+    Recursively builds the directory structure starting from `start_path`.
+    """
+    if exclude_dirs is None:
+        exclude_dirs = EXCLUDE_DIRS
+    if out_lines is None:
+        out_lines = []
+
+    try:
+        items = sorted(os.listdir(start_path))
+    except PermissionError:
+        return
+
+    for item in items:
+        item_path = os.path.join(start_path, item)
+        if os.path.isdir(item_path):
+            if item in exclude_dirs:
+                continue
+            out_lines.append(f"{indent}📁 {item}/")
+            print_directory_tree(item_path, indent + "    ", exclude_dirs, out_lines)
+        else:
+            out_lines.append(f"{indent}📄 {item}")
+
+    return out_lines
+
+
+def list_target_files(root_dir):
+    py_files = []
+    yaml_files = []
+
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        dirnames[:] = [d for d in dirnames if is_valid_directory(os.path.join(dirpath, d))]
+
+        for filename in filenames:
+            full_path = os.path.join(dirpath, filename)
+            rel_path = os.path.relpath(full_path, root_dir)
+
+            if filename.endswith('.py'):
+                py_files.append((rel_path, full_path))
+            elif filename in INCLUDE_YAML_FILES:
+                yaml_files.append((rel_path, full_path))
+
+    return sorted(py_files), sorted(yaml_files)
+
+
+def dump_project_code_to_file(root_dir='.'):
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as out_file:
+        out_file.write(f"\n📦 Project Structure of: {os.path.abspath(root_dir)}\n\n")
+
+        # Directory structure
+        tree_lines = print_directory_tree(root_dir, out_lines=[])
+        out_file.write("\n".join(tree_lines))
+        out_file.write("\n\n--- PYTHON CODE DUMP ---\n\n")
+
+        # File lists
+        py_files, yaml_files = list_target_files(root_dir)
+
+        # Dump .py files
+        for rel_path, full_path in py_files:
+            out_file.write(f"\n{'=' * 80}\n")
+            out_file.write(f"# FILE: {rel_path}\n")
+            out_file.write(f"{'=' * 80}\n\n")
+            try:
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    code = f.read()
+                    out_file.write(code.strip() + "\n")
+            except Exception as e:
+                out_file.write(f"Error reading {rel_path}: {e}\n")
+
+        # Dump YAML files
+        out_file.write("\n\n--- YAML CONFIG FILES DUMP ---\n\n")
+        for rel_path, full_path in yaml_files:
+            out_file.write(f"\n{'=' * 80}\n")
+            out_file.write(f"# YAML FILE: {rel_path}\n")
+            out_file.write(f"{'=' * 80}\n\n")
+            try:
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    out_file.write(content.strip() + "\n")
+            except Exception as e:
+                out_file.write(f"Error reading {rel_path}: {e}\n")
+
+    print(f"\n✅ Full project dump saved to: {os.path.abspath(OUTPUT_FILE)}")
+
+
+if __name__ == "__main__":
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    dump_project_code_to_file(ROOT_DIR)
+
+================================================================================
+# FILE: project_template.py
+================================================================================
+
+import os
+from pathlib import Path
+import logging
+
+
+# ==============================
+# 🔹 LOGGING SETUP
+# ==============================
+
+# ✅ Define the directory where logs will be stored
+log_dir = "logs"
+
+# ✅ Define the log file name and full path
+log_filepath = os.path.join(log_dir, 'directorygen_logs.log')
+
+# ✅ Define the format for log messages
+log_format = '[%(asctime)s] - %(levelname)s - %(module)s - %(message)s'
+
+
+def setup_logging():
+    """
+    Sets up a custom logger:
+    - Creates the `logs/` directory if it doesn't exist.
+    - Configures log messages to be written to both a file and the console.
+    - Uses append mode (`"a"`) so logs persist across multiple runs.
+    - Ensures handlers are not added multiple times.
+    - Logger name: `directory_builder` (used for all logging in this script).
+
+    Returns:
+        logging.Logger: Custom logger instance.
+    """
+
+    # ✅ Ensure the log directory exists before creating the log file
+    os.makedirs(log_dir, exist_ok=True)
+
+    # ✅ Create a custom logger (separate from the root logger)
+    logger = logging.getLogger('directory_builder')
+
+    # ✅ Set the logger level to DEBUG (captures all log levels)
+    logger.setLevel(logging.DEBUG)
+
+    # ✅ Prevent adding duplicate handlers
+    if not logger.hasHandlers():
+        formatter = logging.Formatter(log_format)  # ✅ Define the log message format
+
+        # ✅ Create a File Handler (logs INFO and above)
+        file_handler = logging.FileHandler(log_filepath, mode='a')  # Append mode ("a")
+        file_handler.setFormatter(formatter)  # Apply the log format
+
+        # ✅ Create a Stream Handler (logs DEBUG and above to console)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(formatter)  # Apply the log format
+
+        # ✅ Add handlers to the logger
+        logger.addHandler(file_handler)
+        logger.addHandler(stream_handler)
+
+    return logger  # ✅ Return the configured logger
+
+
+# ==============================
+# 🔹 PROJECT SETUP
+# ==============================
+
+# ✅ Define the project name (used in file paths)
+project_name = input("Please enter the project name: ")
+
+# ✅ List of files and directories to be created in the project structure
+list_of_files = [
+    # 🔹 GitHub workflows (for CI/CD setup)
+    ".github/workflows/.gitkeep",
+    
+    # 🔹 Source Code Structure
+    f"src/{project_name}/__init__.py",  # Main package initializer
+    f"src/{project_name}/components/__init__.py",  # Components submodule initializer
+    f"src/{project_name}/utils/__init__.py",  # Utilities submodule initializer
+    f"src/{project_name}/utils/common.py",  # Common utility functions
+    f"src/{project_name}/config/__init__.py",  # Configuration submodule
+    f"src/{project_name}/config/configuration.py",  # Configuration handling script
+    f"src/{project_name}/pipeline/__init__.py",  # Pipeline processing module
+    f"src/{project_name}/entity/__init__.py",  # Entity-related module
+    f"src/{project_name}/entity/config_entity.py",  # Configuration entity class
+    f"src/{project_name}/constants/__init__.py",  # Constants module
+
+    # 🔹 Configuration and Parameter Files
+    "config/config.yaml",  # YAML file for configuration settings
+    "params.yaml",  # YAML file for parameter tuning
+    "schema.yaml",  # YAML file for data schema definition
+
+    # 🔹 Project Execution and Deployment
+    "main.py",  # Main entry point of the project
+    "Dockerfile",  # Dockerfile for containerization
+    "setup.py",  # Setup script for packaging
+    "requirements.txt",  # Requirements file for Python dependencies
+
+    # 🔹 Research and Web Components
+    "research/research.ipynb",  # Jupyter notebook for exploratory research
+    "templates/index.html",  # HTML template file (for a web component)
+
+    # 🔹 Backend API
+    "app.py"  # Flask or FastAPI backend application script
+]
+
+
+# ==============================
+# 🔹 DIRECTORY & FILE CREATION
+# ==============================
+
+def create_file_structure(file_list):
+    """
+    Creates directories and files based on the given list.
+    
+    - If a directory does not exist, it is created.
+    - If a file does not exist or is empty, it is created.
+    - Logs every operation to track what is being created.
+
+    Parameters:
+        file_list (list): List of file paths to be created.
+    """
+
+    for filepath in file_list:
+        filepath = Path(filepath)  # ✅ Convert string path to a `Path` object
+        filedir, filename = os.path.split(filepath)  # ✅ Extract directory and filename separately
+
+        # ✅ Ensure the parent directory exists before creating the file
+        if filedir:
+            os.makedirs(filedir, exist_ok=True)  # ✅ Create directory if it does not exist
+            logger.info(f"Creating the directory '{filedir}' for file: '{filename}'")
+
+        # ✅ Check if the file does not exist or is empty, then create it
+        if not filepath.exists() or filepath.stat().st_size == 0:
+            with open(filepath, 'w'):  # ✅ Create an empty file
+                pass  # No content is added, just initializing the file
+            logger.info(f"Creating empty file: '{filepath}'")  # ✅ Log file creation
+        else:
+            logger.info(f"'{filepath}' already exists")  # ✅ Log if the file already exists
+
+
+# ✅ Initialize the logger
+logger = setup_logging()
+
+# ✅ Run the file creation function
+create_file_structure(list_of_files)
+
+================================================================================
+# FILE: setup.py
+================================================================================
+
+from setuptools import find_packages, setup
+from typing import List
+
+
+def get_requirements() -> List[str]:
+    requirement_lst: List[str] = []
+    try:
+        with open("requirements.txt", "r") as file:
+            lines = file.readlines()
+            for line in lines:
+                requirement = line.strip()
+                if requirement and requirement != "-e .":
+                    requirement_lst.append(requirement)
+    except FileExistsError:
+        print("'requirements.txt' file not found")
+
+    return requirement_lst
+
+
+setup(
+    name="NetworkSecurity",
+    version="0.0.1",
+    author="Gokul Krishna",
+    author_email="iamgokul93@gmail.com",
+    packages=find_packages(),
+    install_requires=get_requirements(),
+)
+
+================================================================================
+# FILE: src\networksecurity\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\cloud\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\components\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\components\data_ingestion.py
+================================================================================
+
+import numpy as np
+import pandas as pd
+
+from src.networksecurity.entity.config_entity import DataIngestionConfig
+from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
+from src.networksecurity.dbhandler.base_handler import DBHandler
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+from src.networksecurity.utils.common import save_to_csv, read_csv
+
+
+class DataIngestion:
+    def __init__(
+        self,
+        config: DataIngestionConfig,
+        db_handler: DBHandler,
+    ):
+        try:
+            self.config = config
+            self.db_handler = db_handler
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def __fetch_raw_data(self) -> pd.DataFrame:
+        try:
+            with self.db_handler as handler:
+                df = handler.load_from_source()
+            logger.info(f"Fetched {len(df)} raw rows from data source.")
+            return df
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def __clean_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+        try:
+            df_cleaned = df.drop(columns=["_id"], errors="ignore").copy()
+            df_cleaned.replace({"na": np.nan}, inplace=True)
+            logger.info("Raw DataFrame cleaned successfully.")
+            return df_cleaned
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def run_ingestion(self) -> DataIngestionArtifact:
+        try:
+            logger.info("========== Starting Data Ingestion ==========")
+
+            # Step 1: Fetch raw data
+            raw_df = self.__fetch_raw_data()
+
+            # Step 2: Save raw data
+            save_to_csv(
+                raw_df,
+                self.config.raw_data_filepath,
+                self.config.raw_dvc_path,
+                label="Raw Data"
+            )
+
+            # Step 3: Clean raw data
+            cleaned_df = self.__clean_dataframe(raw_df)
+
+            # Step 4: Save cleaned (ingested) data
+            save_to_csv(
+                cleaned_df,
+                self.config.ingested_data_filepath,
+                label="Cleaned (Ingested) Data"
+            )
+
+            logger.info("========== Data Ingestion Completed ==========")
+
+            return DataIngestionArtifact(
+                raw_artifact_path=self.config.raw_data_filepath,
+                raw_dvc_path=self.config.raw_dvc_path,
+                ingested_data_filepath=self.config.ingested_data_filepath,
+            )
+
+        except Exception as e:
+            logger.error("Data ingestion failed.")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\components\data_transformation.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\components\data_validation.py
+================================================================================
+
+import hashlib
+import pandas as pd
+from pathlib import Path
+from box import ConfigBox
+from datetime import timezone
+from scipy.stats import ks_2samp
+
+from src.networksecurity.entity.config_entity import DataValidationConfig
+from src.networksecurity.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+from src.networksecurity.utils.common import save_to_yaml, save_to_csv, save_to_json, read_csv
+from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
+
+
+class DataValidation:
+    def __init__(self, config: DataValidationConfig, ingestion_artifact: DataIngestionArtifact):
+        try:
+            self.config = config
+            self.schema = config.schema
+            self.params = config.validation_params
+            self.df = read_csv(ingestion_artifact.ingested_data_filepath, "Ingested Data")
+
+            self.base_df = None
+            self.drift_check_performed = False
+            if self.params.drift_detection.enabled and config.validated_dvc_path.exists():
+                self.base_df = read_csv(config.validated_dvc_path, "Validated Base Data")
+                self.drift_check_performed = True
+
+            self.validated_filepath = None
+            self.timestamp = get_shared_utc_timestamp()
+
+            self.report = ConfigBox(config.val_report_template.copy())
+            self.critical_checks = ConfigBox({k: False for k in self.report.check_results.critical_checks.keys()})
+            self.non_critical_checks = ConfigBox({k: False for k in self.report.check_results.non_critical_checks.keys()})
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _check_schema_hash(self):
+        try:
+            expected_schema = self.schema.columns
+            expected_str = "|".join(f"{col}:{dtype}" for col, dtype in sorted(expected_schema.items()))
+            expected_hash = hashlib.md5(expected_str.encode()).hexdigest()
+
+            current_str = "|".join(f"{col}:{self.df[col].dtype}" for col in sorted(self.df.columns))
+            current_hash = hashlib.md5(current_str.encode()).hexdigest()
+
+            self.critical_checks.schema_is_match = (current_hash == expected_hash)
+            logger.info("Schema hash check passed." if self.critical_checks.schema_is_match else "Schema hash mismatch.")
+        except Exception as e:
+            self.critical_checks.schema_is_match = False
+            raise NetworkSecurityError(e, logger) from e
+
+    def _check_structure_schema(self):
+        try:
+            expected = set(self.schema.columns.keys()) | {self.schema.target_column}
+            actual = set(self.df.columns)
+            self.critical_checks.schema_is_match = (expected == actual)
+            if not self.critical_checks.schema_is_match:
+                logger.error(f"Schema structure mismatch: expected={expected}, actual={actual}")
+        except Exception as e:
+            self.critical_checks.schema_is_match = False
+            raise NetworkSecurityError(e, logger) from e
+
+    def _check_missing_values(self):
+        try:
+            missing = self.df.isnull().sum().to_dict()
+            missing["timestamp"] = self.timestamp
+            save_to_yaml(missing, self.config.missing_report_filepath, label="Missing Value Report")
+            self.non_critical_checks.no_missing_values = not any(v > 0 for v in missing.values() if isinstance(v, (int, float)))
+        except Exception as e:
+            self.non_critical_checks.no_missing_values = False
+            raise NetworkSecurityError(e, logger) from e
+
+    def _check_duplicates(self):
+        try:
+            before = len(self.df)
+            self.df = self.df.drop_duplicates()
+            after = len(self.df)
+            duplicates_removed = before - after
+
+            result = {
+                "duplicate_rows_removed": duplicates_removed,
+                "timestamp": self.timestamp
+            }
+
+            save_to_json(result, self.config.duplicates_report_filepath, label="Duplicates Report")
+            self.non_critical_checks.no_duplicate_rows = (duplicates_removed == 0)
+        except Exception as e:
+            self.non_critical_checks.no_duplicate_rows = False
+            raise NetworkSecurityError(e, logger) from e
+
+    def _check_drift(self):
+        try:
+            if self.base_df is None:
+                logger.info("Base dataset not found. Skipping drift check.")
+                return
+
+            drift_results = {}
+            drift_detected = False
+
+            for col in self.df.columns:
+                if col not in self.base_df.columns:
+                    continue
+                _, p = ks_2samp(self.base_df[col], self.df[col])
+                drift = bool(p < self.params.drift_detection.p_value_threshold)
+                drift_results[col] = {"p_value": float(p), "drift": drift}
+                if drift:
+                    drift_detected = True
+
+            drift_results["drift_detected"] = drift_detected
+            drift_results["timestamp"] = self.timestamp
+
+            save_to_yaml(drift_results, self.config.drift_report_filepath, label="Drift Result")
+            self.critical_checks.no_data_drift = not drift_detected
+        except Exception as e:
+            self.critical_checks.no_data_drift = False
+            raise NetworkSecurityError(e, logger) from e
+
+    def _generate_report(self) -> dict:
+        try:
+            validation_status = all(self.critical_checks.values())
+            non_critical_passed = all(self.non_critical_checks.values())
+
+            self.report.timestamp = self.timestamp
+            self.report.validation_status = validation_status
+            self.report.critical_passed = validation_status
+            self.report.non_critical_passed = non_critical_passed
+            self.report.schema_check_type = self.params.schema_check.method
+
+            if self.drift_check_performed:
+                self.report.drift_check_method = self.params.drift_detection.method
+            else:
+                del self.report["drift_check_method"]
+
+            self.report.check_results.critical_checks = self.critical_checks.to_dict()
+            self.report.check_results.non_critical_checks = self.non_critical_checks.to_dict()
+
+            return self.report.to_dict()
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def run_validation(self) -> DataValidationArtifact:
+        try:
+            logger.info("Running data validation...")
+
+            if self.params.schema_check.method == "hash":
+                self._check_schema_hash()
+            else:
+                self._check_structure_schema()
+
+            self._check_missing_values()
+            self._check_duplicates()
+
+            if self.params.drift_detection.enabled:
+                self._check_drift()
+
+            report_dict = self._generate_report()
+            save_to_yaml(report_dict, self.config.validation_report_filepath, label="Validation Report")
+
+            is_valid = all(self.critical_checks.values())
+            validated_filepath = self.config.validated_filepath if is_valid else None
+
+            if is_valid:
+                save_to_csv(self.df, validated_filepath, self.config.validated_dvc_path, label="Validated Data")
+            else:
+                logger.warning("Validation failed. Validated data not saved.")
+
+            return DataValidationArtifact(
+                validated_filepath=validated_filepath,
+                validation_status=is_valid
+            )
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\config\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\config\configuration.py
+================================================================================
+
+from pathlib import Path
+import os
+
+from src.networksecurity.constants.constants import (
+    CONFIG_FILE_PATH,
+    PARAMS_FILE_PATH,
+    SCHEMA_FILE_PATH,
+    TEMPLATES_FILE_PATH,
+    MONGO_HANDLER_SUBDIR,
+    MONGO_JSON_SUBDIR,
+    DATA_INGESTION_SUBDIR,
+    FEATURESTORE_SUBDIR,
+    INGESTED_SUBDIR,
+    DATA_VALIDATION_SUBDIR,
+    VALIDATED_SUBDIR,
+    REPORTS_SUBDIR,
+    DATA_TRANSFORMATION_SUBDIR,
+    TRANSFORMED_SUBDIR,
+    TRANSFORMED_OBJECT_SUBDIR,
+    LOGS_ROOT
+)
+
+from src.networksecurity.entity.config_entity import (
+    MongoHandlerConfig,
+    DataIngestionConfig,
+    DataValidationConfig,
+    DataTransformationConfig,
+)
+
+from src.networksecurity.utils.common import (
+    read_yaml,
+    replace_username_password_in_uri,
+)
+from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
+from src.networksecurity.logging import logger
+
+
+class ConfigurationManager:
+    """
+    Loads YAML-based configuration and generates paths for all pipeline stages.
+    Dynamically sets timestamped artifact directories per run.
+    """
+    _global_timestamp: str = None
+
+    def __init__(
+        self,
+        config_filepath: Path = CONFIG_FILE_PATH,
+        params_filepath: Path = PARAMS_FILE_PATH,
+        schema_filepath: Path = SCHEMA_FILE_PATH,
+        templates_filepath: Path = TEMPLATES_FILE_PATH,
+    ) -> None:
+        self._load_configs(config_filepath, params_filepath, schema_filepath, templates_filepath)
+        self._initialize_paths()
+
+    def _load_configs(self, config_filepath: Path, params_filepath: Path, schema_filepath: Path, templates_filepath: Path):
+        self.config = read_yaml(config_filepath)
+        self.params = read_yaml(params_filepath)
+        self.schema = read_yaml(schema_filepath)
+        self.templates = read_yaml(templates_filepath)
+
+    def _initialize_paths(self) -> None:
+        if ConfigurationManager._global_timestamp is None:
+            ConfigurationManager._global_timestamp = get_shared_utc_timestamp()
+
+        timestamp = ConfigurationManager._global_timestamp
+        base_artifact_root = Path(self.config.project.artifacts_root)
+        self.artifacts_root = base_artifact_root / timestamp
+
+        self.logs_root = Path(LOGS_ROOT) / timestamp
+
+        # ✅ Corrected keys from config.yaml
+        self.raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
+        self.validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
+
+    def get_logs_dir(self) -> Path:
+        return self.logs_root
+
+    def get_artifact_root(self) -> Path:
+        return self.artifacts_root
+
+    def get_mongo_handler_config(self) -> MongoHandlerConfig:
+        mongo_cfg = self.config.mongo_handler
+        root_dir = self.artifacts_root / MONGO_HANDLER_SUBDIR
+        json_data_dir = root_dir / MONGO_JSON_SUBDIR
+
+        mongodb_uri = replace_username_password_in_uri(
+            base_uri=os.getenv("MONGODB_URI_BASE"),
+            username=os.getenv("MONGODB_USERNAME"),
+            password=os.getenv("MONGODB_PASSWORD"),
+        )
+
+        return MongoHandlerConfig(
+            root_dir=root_dir,
+            input_data_path=Path(mongo_cfg.input_data_path),
+            json_data_filename=mongo_cfg.json_data_filename,
+            json_data_dir=json_data_dir,
+            mongodb_uri=mongodb_uri,
+            database_name=mongo_cfg.database_name,
+            collection_name=mongo_cfg.collection_name,
+        )
+
+    def get_data_ingestion_config(self) -> DataIngestionConfig:
+        ingestion_cfg = self.config.data_ingestion
+        root_dir = self.artifacts_root / DATA_INGESTION_SUBDIR
+        featurestore_dir = root_dir / FEATURESTORE_SUBDIR
+        ingested_data_dir = root_dir / INGESTED_SUBDIR
+
+        return DataIngestionConfig(
+            root_dir=root_dir,
+            featurestore_dir=featurestore_dir,
+            raw_data_filename=ingestion_cfg.raw_data_filename,
+            ingested_data_dir=ingested_data_dir,
+            ingested_data_filename=ingestion_cfg.ingested_data_filename,
+            raw_dvc_path=self.raw_dvc_path,
+        )
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        validation_cfg = self.config.data_validation
+        root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
+        validated_dir = root_dir / VALIDATED_SUBDIR
+        report_dir = root_dir / REPORTS_SUBDIR
+
+        return DataValidationConfig(
+            root_dir=root_dir,
+            validated_dir=validated_dir,
+            validated_filename=validation_cfg.validated_filename,
+            report_dir=report_dir,
+            missing_report_filename=validation_cfg.missing_report_filename,
+            duplicates_report_filename=validation_cfg.duplicates_report_filename,
+            drift_report_filename=validation_cfg.drift_report_filename,
+            validation_report_filename=validation_cfg.validation_report_filename,
+            schema=self.schema,
+            validated_dvc_path=self.validated_dvc_path,
+            validation_params=self.params.validation_params,
+            val_report_template=self.templates.validation_report
+        )
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        transformation_cfg = self.config.data_transformation
+        transformation_params = self.params.transformation_params
+
+        root_dir = self.artifacts_root / DATA_TRANSFORMATION_SUBDIR
+        transformed_dir = root_dir / TRANSFORMED_SUBDIR
+        preprocessor_dir = root_dir / TRANSFORMED_OBJECT_SUBDIR
+
+        return DataTransformationConfig(
+            root_dir=root_dir,
+            transformed_dir=transformed_dir,
+            transformed_train_filename=transformation_cfg.transformed_train_data_filename,
+            transformed_test_filename=transformation_cfg.transformed_test_data_filename,
+            preprocessor_dir=preprocessor_dir,
+            preprocessing_object_filename=transformation_cfg.preprocessing_object_filename,
+            transformation_params=transformation_params
+        )
+
+================================================================================
+# FILE: src\networksecurity\constants\__init__.py
+================================================================================
+
+from pathlib import Path
+
+CONFIG_FILE_PATH = Path("config/config.yaml")
+PARAMS_FILE_PATH = Path("config/params.yaml")
+SCHEMA_FILE_PATH = Path("config/schema.yaml")
+
+================================================================================
+# FILE: src\networksecurity\constants\constants.py
+================================================================================
+
+from pathlib import Path
+
+# ---------------------------
+# Configuration File Paths
+# ---------------------------
+
+CONFIG_DIR = Path("config")
+CONFIG_FILE_PATH = CONFIG_DIR / "config.yaml"
+PARAMS_FILE_PATH = CONFIG_DIR / "params.yaml"
+SCHEMA_FILE_PATH = CONFIG_DIR / "schema.yaml"
+TEMPLATES_FILE_PATH = CONFIG_DIR / "templates.yaml"
+
+# ---------------------------
+# Generic Constants
+# ---------------------------
+
+MISSING_VALUE_TOKEN = "na"
+
+# ---------------------------
+# MongoDB Connection Settings
+# ---------------------------
+
+MONGODB_CONNECT_TIMEOUT_MS = 40000
+MONGODB_SOCKET_TIMEOUT_MS = 40000
+
+# ---------------------------
+# Root Directories
+# ---------------------------
+
+LOGS_ROOT = "logs"  # Central log directory (outside artifacts)
+STABLE_DATA_DIR = Path("data")
+RAW_DATA_SUBDIR = "raw"
+VALIDATED_DATA_SUBDIR = "validated"
+TRANSFORMED_DATA_SUBDIR = "transformed"
+MODEL_DIR = "model"
+EVALUATION_DIR = "evaluation"
+PREDICTIONS_DIR = "predictions"
+
+# ---------------------------
+# Artifact Subdirectory Names (Dynamic Timestamped)
+# ---------------------------
+
+MONGO_HANDLER_SUBDIR = "mongo_handler"
+MONGO_JSON_SUBDIR = "JSON_data"
+
+DATA_INGESTION_SUBDIR = "data_ingestion"
+FEATURESTORE_SUBDIR = "featurestore"
+INGESTED_SUBDIR = "ingested"
+
+DATA_VALIDATION_SUBDIR = "data_validation"
+VALIDATED_SUBDIR = "validated"
+REPORTS_SUBDIR = "reports"
+SCHEMA_HASH_SUBDIR = "schema_hash"
+
+DATA_TRANSFORMATION_SUBDIR = "data_transformation"
+TRANSFORMED_SUBDIR = "transformed"
+TRANSFORMED_OBJECT_SUBDIR = "transformed_object"
+
+MODEL_TRAINER_SUBDIR = "model_trainer"
+MODEL_EVALUATION_SUBDIR = "model_evaluation"
+MODEL_PREDICTION_SUBDIR = "model_prediction"
+
+# ---------------------------
+# Default Filenames (used by config.yaml)
+# ---------------------------
+
+DEFAULT_SCHEMA_HASH_FILENAME = "schema_hash.json"
+DEFAULT_VALIDATED_FILENAME = "validated_data.csv"
+DEFAULT_MISSING_REPORT_FILENAME = "missing_values_report.json"
+DEFAULT_DRIFT_REPORT_FILENAME = "drift_report.yaml"
+DEFAULT_VALIDATION_REPORT_FILENAME = "validation_report.yaml"
+
+================================================================================
+# FILE: src\networksecurity\dbhandler\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\dbhandler\base_handler.py
+================================================================================
+
+from abc import ABC, abstractmethod
+from pathlib import Path
+import pandas as pd
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class DBHandler(ABC):
+    """
+    Abstract base class for all database or storage handlers.
+    Enables unified behavior across MongoDB, CSV, PostgreSQL, S3, etc.
+    """
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+    @abstractmethod
+    def close(self) -> None:
+        """
+        Clean up resources like DB connections or sessions.
+        """
+        pass
+
+    @abstractmethod
+    def load_from_source(self) -> pd.DataFrame:
+        """
+        Load and return a DataFrame from the underlying data source.
+        Example:
+            - MongoDB: collection
+            - PostgreSQL: table
+            - CSVHandler: file
+            - S3Handler: object
+        """
+        pass
+
+    def load_from_csv(self, source: Path) -> pd.DataFrame:
+        """
+        Generic utility: load a DataFrame from a CSV file.
+        Available to all subclasses.
+        """
+        try:
+            df = pd.read_csv(source)
+            logger.info(f"DataFrame loaded from CSV: {source}")
+            return df
+        except Exception as e:
+            logger.error(f"Failed to load DataFrame from CSV: {source}")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\dbhandler\mongodb_handler.py
+================================================================================
+
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
+import pandas as pd
+from pathlib import Path
+import json
+
+from src.networksecurity.entity.config_entity import MongoHandlerConfig
+from src.networksecurity.utils.common import csv_to_json_convertor, create_directories
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+from src.networksecurity.constants.constants import (
+    MONGODB_CONNECT_TIMEOUT_MS,
+    MONGODB_SOCKET_TIMEOUT_MS,
+)
+
+from src.networksecurity.dbhandler.base_handler import DBHandler
+
+
+class MongoDBHandler(DBHandler):
+    def __init__(self, config: MongoHandlerConfig):
+        self.config = config
+        self._client: MongoClient | None = None
+        self._owns_client: bool = False
+
+    def _get_client(self) -> MongoClient:
+        if self._client is None:
+            self._client = MongoClient(
+                self.config.mongodb_uri,
+                server_api=ServerApi("1"),
+                connectTimeoutMS=MONGODB_CONNECT_TIMEOUT_MS,
+                socketTimeoutMS=MONGODB_SOCKET_TIMEOUT_MS,
+            )
+            logger.debug("MongoClient initialized.")
+        return self._client
+
+    def close(self) -> None:
+        if self._client:
+            self._client.close()
+            logger.info("MongoClient connection closed.")
+            self._client = None
+
+    def ping_mongodb(self) -> None:
+        try:
+            self._get_client().admin.command("ping")
+            logger.info("MongoDB ping successful.")
+        except Exception as e:
+            logger.error("MongoDB ping failed.")
+            raise NetworkSecurityError(e, logger) from e
+
+    def insert_csv_to_collection(self, csv_filepath: Path) -> int:
+        try:
+
+            records = csv_to_json_convertor(csv_filepath, self.config.json_data_filepath)
+
+            create_directories(self.config.json_data_dir)
+
+            # Save records as JSON to the specified filepath
+            with open(self.config.json_data_filepath, "w", encoding="utf-8") as f:
+                json.dump(records, f, indent=4)
+
+            db = self._get_client()[self.config.database_name]
+            collection = db[self.config.collection_name]
+            result = collection.insert_many(records)
+            logger.info(
+                f"Inserted {len(result.inserted_ids)} records into "
+                f"{self.config.database_name}.{self.config.collection_name}"
+            )
+            return len(result.inserted_ids)
+        except Exception as e:
+            logger.error("Failed to insert records into MongoDB.")
+            raise NetworkSecurityError(e, logger) from e
+
+    def load_from_source(self) -> pd.DataFrame:
+        """
+        Load data from the configured MongoDB collection as a pandas DataFrame.
+        """
+        try:
+            db = self._get_client()[self.config.database_name]
+            collection = db[self.config.collection_name]
+            records = list(collection.find())
+            df = pd.DataFrame(records)
+            logger.info(
+                f"Exported {len(df)} documents from "
+                f"{self.config.database_name}.{self.config.collection_name} as DataFrame."
+            )
+            return df
+        except Exception as e:
+            logger.error("Failed to export data from MongoDB.")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\entity\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\entity\artifact_entity.py
+================================================================================
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional
+
+
+@dataclass(frozen=True)
+class DataIngestionArtifact:
+    raw_artifact_path: Path
+    ingested_data_filepath: Path
+    raw_dvc_path: Path
+
+    def __repr__(self) -> str:
+        raw_artifact_str = self.raw_artifact_path.as_posix() if self.raw_artifact_path else "None"
+        raw_dvc_str = self.raw_dvc_path.as_posix() if self.raw_dvc_path else "None"
+        ingested_data_str = self.ingested_data_filepath.as_posix() if self.ingested_data_filepath else "None"
+
+        return (
+            "\nData Ingestion Artifact Paths:\n"
+            f"  - Raw Artifact:     '{raw_artifact_str}'\n"
+            f"  - Raw DVC Path:     '{raw_dvc_str}'\n"
+            f"  - Ingested Data Path:     '{ingested_data_str}'\n"
+        )
+
+
+@dataclass(frozen=True)
+class DataValidationArtifact:
+    validated_filepath: Path
+    validation_status: bool
+
+    def __repr__(self) -> str:
+        validated_str = self.validated_filepath.as_posix() if self.validated_filepath else "None"
+
+        return (
+            "\nData Validation Artifact Paths:\n"
+            f"  - Validated Data Path: '{validated_str}'\n"
+            f"  - Validation Status:   '{self.validation_status}'\n"
+        )
+
+================================================================================
+# FILE: src\networksecurity\entity\config_entity.py
+================================================================================
+
+from pathlib import Path
+from dataclasses import dataclass
+
+
+@dataclass
+class MongoHandlerConfig:
+    root_dir: Path
+    input_data_path: Path
+    json_data_filename: str
+    json_data_dir: Path
+    mongodb_uri: str
+    database_name: str
+    collection_name: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.input_data_path = Path(self.input_data_path)
+        self.json_data_dir = Path(self.json_data_dir)
+
+    @property
+    def json_data_filepath(self) -> Path:
+        return self.json_data_dir / self.json_data_filename
+
+
+@dataclass
+class DataIngestionConfig:
+    root_dir: Path
+    featurestore_dir: Path
+    raw_data_filename: str
+    ingested_data_dir: Path
+    ingested_data_filename: str
+    raw_dvc_path: Path
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.featurestore_dir = Path(self.featurestore_dir)
+        self.ingested_data_dir = Path(self.ingested_data_dir)
+        self.raw_dvc_path = Path(self.raw_dvc_path)
+
+    @property
+    def raw_data_filepath(self) -> Path:
+        return self.featurestore_dir / self.raw_data_filename
+
+    @property
+    def ingested_data_filepath(self) -> Path:
+        return self.ingested_data_dir / self.ingested_data_filename
+
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: Path
+    validated_dir: Path
+    validated_filename: str
+    report_dir: Path
+    missing_report_filename: str
+    duplicates_report_filename: str
+    drift_report_filename: str
+    validation_report_filename: str
+    schema: dict
+    validation_params: dict
+    validated_dvc_path: Path
+    val_report_template: dict
+
+    @property
+    def validated_filepath(self) -> Path:
+        return self.validated_dir / self.validated_filename
+
+    @property
+    def missing_report_filepath(self) -> Path:
+        return self.report_dir / self.missing_report_filename
+
+    @property
+    def duplicates_report_filepath(self) -> Path:
+        return self.report_dir / self.duplicates_report_filename
+
+    @property
+    def drift_report_filepath(self) -> Path:
+        return self.report_dir / self.drift_report_filename
+
+    @property
+    def validation_report_filepath(self) -> Path:
+        return self.report_dir / self.validation_report_filename
+
+
+@dataclass
+class DataTransformationConfig:
+    root_dir: Path
+    transformed_dir: Path
+    transformed_train_filename: str
+    transformed_test_filename: str
+    preprocessor_dir: Path
+    preprocessing_object_filename: str
+    transformation_params: dict
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.transformed_dir = Path(self.transformed_dir)
+        self.preprocessor_dir = Path(self.preprocessor_dir)
+
+    @property
+    def transformed_train_filepath(self) -> Path:
+        return self.transformed_dir / self.transformed_train_filename
+
+    @property
+    def transformed_test_filepath(self) -> Path:
+        return self.transformed_dir / self.transformed_test_filename
+
+    @property
+    def preprocessor_filepath(self) -> Path:
+        return self.preprocessor_dir / self.preprocessing_object_filename
+
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    trained_model_filename: str
+    params: dict
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def trained_model_filepath(self) -> Path:
+        return self.root_dir / self.trained_model_filename
+
+
+@dataclass
+class ModelEvaluationConfig:
+    root_dir: Path
+    evaluation_report_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def evaluation_report_filepath(self) -> Path:
+        return self.root_dir / self.evaluation_report_filename
+
+
+@dataclass
+class ModelPredictionConfig:
+    root_dir: Path
+    prediction_output_filename: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def prediction_output_filepath(self) -> Path:
+        return self.root_dir / self.prediction_output_filename
+
+================================================================================
+# FILE: src\networksecurity\exception\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\exception\exception.py
+================================================================================
+
+"""Custom exception and logger interface for the phishing detection web app.
+
+This module defines:
+- LoggerInterface: a structural protocol for logging
+- NetworkSecurityError: a traceback-aware exception with logging support
+"""
+
+
+import sys
+from typing import Protocol
+
+
+class LoggerInterface(Protocol):
+    """A structural interface that defines the logger's required methods.
+
+    Any logger passed to NetworkSecurityException must implement this interface.
+    """
+
+    def error(self, message: str) -> None:
+        """Log an error-level message."""
+        ...
+
+
+class NetworkSecurityError(Exception):
+    """Custom exception class for the phishing detection web application.
+
+    Captures traceback details and logs the error using the provided logger.
+    """
+
+    def __init__(self, error_message: Exception, logger: LoggerInterface) -> None:
+        """Initialize the exception and log it using the injected logger.
+
+        Args:
+            error_message (Exception): The original caught exception.
+            logger (LoggerInterface): A logger that supports an `error(str)` method.
+
+        """
+        super().__init__(str(error_message))
+        self.error_message: str = str(error_message)
+
+        # Get traceback info from sys
+        _, _, exc_tb = sys.exc_info()
+        self.lineno: int | None = exc_tb.tb_lineno if exc_tb else None
+        self.file_name: str | None = (
+            exc_tb.tb_frame.f_code.co_filename if exc_tb else "Unknown"
+        )
+
+        # Log the formatted error
+        logger.error(str(self))
+
+    def __str__(self) -> str:
+        """Return a formatted error message with file name and line number."""
+        return (
+            f"Error occurred in file [{self.file_name}], "
+            f"line [{self.lineno}], "
+            f"message: [{self.error_message}]"
+        )
+
+================================================================================
+# FILE: src\networksecurity\logging\__init__.py
+================================================================================
+
+"""
+Initialize centralized logger for the `networksecurity.logging` package.
+
+This module sets up a reusable logger instance (`logger`) that can be imported
+across the project to ensure consistent, centralized logging configuration.
+
+Supports:
+- Shared UTC timestamp for file/folder naming
+- Dynamic logger name via environment variable
+- Dynamic log level via environment variable
+"""
+
+import os
+import logging
+
+from .logger import setup_logger
+
+# Use env variable for logger name, default to "networksecurity"
+LOGGER_NAME = os.getenv("LOGGER_NAME", "networksecurity")
+
+# Use env variable for log level, default to "DEBUG"
+LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG").upper()
+
+# Initialize and configure the logger
+logger = setup_logger(name=LOGGER_NAME)
+logger.setLevel(getattr(logging, LOG_LEVEL, logging.DEBUG))
+
+================================================================================
+# FILE: src\networksecurity\logging\logger.py
+================================================================================
+
+"""
+Logging utility module.
+
+Provides `setup_logger()` to configure a logger with both a file and stream handler,
+using a UTC timestamp synchronized across the pipeline (logs, artifacts, models, etc.).
+"""
+
+import logging
+import sys
+from pathlib import Path
+
+from src.networksecurity.constants.constants import LOGS_ROOT
+from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
+
+
+def setup_logger(name: str = "app_logger") -> logging.Logger:
+    """
+    Set up and return a logger instance with a consistent timestamped log directory and file.
+
+    Ensures:
+    - One timestamp per pipeline run (shared with ConfigurationManager)
+    - No duplicate handlers on repeated setup
+    - Clean log formatting to stdout and file
+
+    Args:
+        name (str): The name of the logger instance (e.g., 'data_ingestion').
+
+    Returns:
+        logging.Logger: Configured logger with file and stream handlers.
+    """
+    # Get shared timestamp for this run
+    timestamp = get_shared_utc_timestamp()
+
+    # Log folder: logs/<timestamp>/
+    log_dir = Path(LOGS_ROOT) / timestamp
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    # Log file: logs/<timestamp>/<timestamp>.log
+    log_filepath = log_dir / f"{timestamp}.log"
+
+    # Log message format
+    log_format = "[%(asctime)s] - %(levelname)s - %(module)s - %(message)s"
+    formatter = logging.Formatter(log_format)
+
+    # Get or create logger
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+
+    # Add file handler if not already added
+    if not any(isinstance(h, logging.FileHandler) and h.baseFilename == str(log_filepath)
+               for h in logger.handlers):
+        file_handler = logging.FileHandler(log_filepath, mode="a")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+    # Add stdout stream handler if not already added
+    if not any(isinstance(h, logging.StreamHandler) and h.stream == sys.stdout
+               for h in logger.handlers):
+        stream_handler = logging.StreamHandler(sys.stdout)
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(stream_handler)
+
+    return logger
+
+
+# Example usage
+if __name__ == "__main__":
+    logger = setup_logger()
+    logger.info("Logger initialized successfully.")
+
+================================================================================
+# FILE: src\networksecurity\pipeline\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\pipeline\data_ingestion_pipeline.py
+================================================================================
+
+from src.networksecurity.config.configuration import ConfigurationManager
+from src.networksecurity.components.data_ingestion import DataIngestion
+from src.networksecurity.dbhandler.mongodb_handler import MongoDBHandler
+from src.networksecurity.entity.config_entity import DataIngestionConfig, MongoHandlerConfig
+from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+
+
+class DataIngestionPipeline:
+    """
+    Runs the data ingestion stage:
+    - Loads configs
+    - Instantiates handler and component
+    - Triggers ingestion and returns artifact
+    """
+
+    def __init__(self):
+        try:
+            self.config_manager = ConfigurationManager()
+            self.ingestion_config: DataIngestionConfig = self.config_manager.get_data_ingestion_config()
+            self.mongo_config: MongoHandlerConfig = self.config_manager.get_mongo_handler_config()
+            self.mongo_handler = MongoDBHandler(config=self.mongo_config)
+        except Exception as e:
+            logger.exception("Failed to initialize DataIngestionPipeline")
+            raise NetworkSecurityError(e, logger) from e
+
+    def run(self) -> DataIngestionArtifact:
+        try:
+            logger.info("========== Data Ingestion Stage Started ==========")
+
+            ingestion = DataIngestion(
+                config=self.ingestion_config,
+                db_handler=self.mongo_handler,
+            )
+            artifact = ingestion.run_ingestion()
+
+            logger.info(f"Data Ingestion Process Completed. {artifact}")
+            logger.info("========== Data Ingestion Stage Completed ==========")
+
+            return artifact
+
+        except Exception as e:
+            logger.exception("Data Ingestion Stage Failed")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\pipeline\data_transformation_pipeline.py
+================================================================================
+
+from src.networksecurity.config.configuration import ConfigurationManager
+from src.networksecurity.components.data_transformation import DataTransformation
+from src.networksecurity.entity.artifact_entity import (
+    DataValidationArtifact,
+    DataTransformationArtifact,
+)
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+
+
+class DataTransformationPipeline:
+    """
+    Orchestrates the Data Transformation stage of the pipeline.
+
+    Responsibilities:
+    - Loads transformation configuration
+    - Accepts validated artifact
+    - Performs feature transformation and returns transformation artifact
+    """
+
+    def __init__(self, validation_artifact: DataValidationArtifact):
+        try:
+            self.config_manager = ConfigurationManager()
+            self.config = self.config_manager.get_data_transformation_config()
+            self.validation_artifact = validation_artifact
+        except Exception as e:
+            logger.exception("Failed to initialize DataTransformationPipeline")
+            raise NetworkSecurityError(e, logger) from e
+
+    def run(self) -> DataTransformationArtifact:
+        try:
+            logger.info("========== Data Transformation Stage Started ==========")
+
+            transformer = DataTransformation(
+                config=self.config,
+                validation_artifact=self.validation_artifact,
+            )
+            transformation_artifact = transformer.run_transformation()
+
+            logger.info(f"Data Transformation Completed Successfully: {transformation_artifact}")
+            logger.info("========== Data Transformation Stage Completed ==========")
+
+            return transformation_artifact
+
+        except Exception as e:
+            logger.exception("Data Transformation Stage Failed")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\pipeline\data_validation_pipeline.py
+================================================================================
+
+from src.networksecurity.config.configuration import ConfigurationManager
+from src.networksecurity.components.data_validation import DataValidation
+from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+
+
+class DataValidationPipeline:
+    """
+    Orchestrates the Data Validation stage of the pipeline.
+
+    Responsibilities:
+    - Fetches the configuration and artifacts
+    - Loads validated DataFrame from artifact
+    - Validates schema and schema hash
+    """
+
+    def __init__(self, ingestion_artifact: DataIngestionArtifact):
+        try:
+            self.config_manager = ConfigurationManager()
+            self.ingestion_artifact = ingestion_artifact
+            self.config = self.config_manager.get_data_validation_config()
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def run(self):
+        try:
+            logger.info("========= Data Validation Stage Started =========")
+            validation = DataValidation(config=self.config, ingestion_artifact=self.ingestion_artifact)
+            validation_artifact = validation.run_validation()
+            logger.info(f"Data Validation Process Completed. {validation_artifact}")
+            logger.info("========= Data Validation Stage Completed =========")
+            return validation_artifact
+        except Exception as e:
+            logger.error("Data Validation Pipeline Failed")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\utils\__init__.py
+================================================================================
+
+
+
+================================================================================
+# FILE: src\networksecurity\utils\common.py
+================================================================================
+
+import json
+from pathlib import Path
+from typing import Union
+from urllib.parse import quote_plus
+
+import pandas as pd
+import yaml
+from box import ConfigBox
+from box.exceptions import BoxKeyError, BoxTypeError, BoxValueError
+from ensure import ensure_annotations
+from datetime import datetime, timezone
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+@ensure_annotations
+def read_yaml(path_to_yaml: Path) -> ConfigBox:
+    """Read and parse a YAML file into a ConfigBox object."""
+    if not path_to_yaml.exists():
+        msg = f"YAML file not found: '{path_to_yaml}'"
+        logger.error(msg)
+        raise NetworkSecurityError(FileNotFoundError(msg), logger)
+
+    try:
+        with path_to_yaml.open("r") as f:
+            content = yaml.safe_load(f)
+    except (BoxValueError, BoxTypeError, BoxKeyError, yaml.YAMLError) as e:
+        logger.error(f"Failed to load YAML from {path_to_yaml.as_posix()}: {e}")
+        raise NetworkSecurityError(e, logger) from e
+    except Exception as e:
+        logger.error(f"Unexpected error reading YAML file: {e}")
+        raise NetworkSecurityError(e, logger) from e
+
+    if content is None:
+        msg = "YAML file is empty or improperly formatted."
+        logger.error(msg)
+        raise NetworkSecurityError(ValueError(msg), logger)
+
+    logger.info(f"YAML loaded successfully from: '{path_to_yaml.as_posix()}'")
+    return ConfigBox(content)
+
+
+@ensure_annotations
+def create_directories(*paths: Path):
+    """Create one or more directories (including parent folders if needed)."""
+    try:
+        for path in paths:
+            path = Path(path)
+            path.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Created directory at: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+
+@ensure_annotations
+def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
+    """
+    Convert a CSV file to a list of JSON records and optionally save it.
+    """
+    try:
+        df = pd.read_csv(source_filepath).reset_index(drop=True)
+        records = df.to_dict(orient="records")
+
+        # Ensure output directory exists
+        parent_dir = destination_filepath.parent
+        if not parent_dir.exists():
+            parent_dir.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Created directory for JSON output at: '{parent_dir.as_posix()}'")
+
+        with destination_filepath.open("w", encoding="utf-8") as f:
+            json.dump(records, f, indent=4)
+
+        logger.info(f"CSV converted and saved to: '{destination_filepath.as_posix()}'")
+        return records
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+
+@ensure_annotations
+def replace_username_password_in_uri(base_uri: str, username: str, password: str) -> str:
+    """
+    Safely replace <username> and <password> in a MongoDB URI with encoded credentials.
+    """
+    if not all([base_uri, username, password]):
+        raise ValueError("base_uri, username, and password must all be provided.")
+
+    encoded_username = quote_plus(username)
+    encoded_password = quote_plus(password)
+
+    return (
+        base_uri
+        .replace("<username>", encoded_username)
+        .replace("<password>", encoded_password)
+    )
+
+
+@ensure_annotations
+def save_to_yaml(data: dict, *paths: Path, label: str):
+    """
+    Save a dictionary to one or more YAML file paths.
+
+    Args:
+        data (dict): The dictionary to be written as YAML.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
+    """
+    try:
+        for path in paths:
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, "w") as file:
+                yaml.dump(data, file, sort_keys=False)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+@ensure_annotations
+def save_to_csv(df: pd.DataFrame, *paths: Path, label: str):
+    """
+    Save a DataFrame to one or more CSV file paths.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to save.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
+    """
+    try:
+        for path in paths:
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            df.to_csv(path, index=False)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+    
+
+@ensure_annotations
+def save_to_json(data: dict | list, *paths: Path, label: str):
+    """
+    Save a dictionary or list to one or more JSON file paths.
+
+    Args:
+        data (dict | list): The data to be written as JSON.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
+    """
+    try:
+        for path in paths:
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+    
+@ensure_annotations
+def read_csv(path: Path, label: str) -> pd.DataFrame:
+    """
+    Load a DataFrame from a CSV file and log the operation.
+
+    Args:
+        path (Path): Path to the CSV file.
+        label (str): Descriptive label used in logs.
+
+    Returns:
+        pd.DataFrame: Loaded DataFrame.
+    """
+    try:
+        path = Path(path)
+        if not path.exists():
+            raise FileNotFoundError(f"{label} not found at path: {path.as_posix()}")
+
+        df = pd.read_csv(path)
+        logger.info(f"{label} loaded successfully from: '{path.as_posix()}'")
+        return df
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\utils\timestamp.py
+================================================================================
+
+from datetime import datetime, timezone
+
+# Internal module-level cache to ensure the timestamp is consistent across the entire pipeline
+_timestamp_cache: str = None
+
+def get_shared_utc_timestamp(fmt: str = "%Y_%m_%dT%H_%M_%SZ") -> str:
+    """
+    Returns a consistent, cached UTC timestamp for the current pipeline run.
+
+    This function guarantees that:
+    - The timestamp is generated only once.
+    - All modules (logger, config, etc.) use the exact same value.
+    - The format is clean and safe for filenames, directories, and versioning.
+
+    Args:
+        fmt (str): Optional datetime format string.
+                   Default: 'YYYY_MM_DDTHH_MM_SSZ' (e.g., '2025_04_16T17_45_02Z')
+
+    Returns:
+        str: UTC timestamp string formatted per the provided format.
+    """
+    global _timestamp_cache
+    if _timestamp_cache is None:
+        _timestamp_cache = datetime.now(timezone.utc).strftime(fmt)
+    return _timestamp_cache
+
+
+--- YAML CONFIG FILES DUMP ---
+
+
+================================================================================
+# YAML FILE: config\config.yaml
+================================================================================
+
+# Root directory for all experiment artifacts
+project:
+  artifacts_root: artifacts
+
+# MongoDB configuration
+mongo_handler:
+  input_data_path: network_data/input_csv/phisingData.csv
+  json_data_filename: input_data.json
+  database_name: network_security_db
+  collection_name: phishing_records
+
+# Data ingestion configuration
+data_ingestion:
+  raw_data_filename: raw_data.csv
+  ingested_data_filename: ingested_data.csv
+
+# Data validation configuration
+data_validation:
+  validated_filename: validated_data.csv
+  missing_report_filename: missing_values_report.json
+  duplicates_report_filename: duplicates_report.yaml
+  drift_report_filename: drift_report.yaml
+  validation_report_filename: validation_report.yaml
+  schema_hash_filename: schema_hash.json
+
+
+# Data transformation configuration
+data_transformation:
+  transformed_train_data_filename: train_data.csv
+  transformed_test_data_filename: test_data.csv
+  validation_data_filename: validation_data.csv
+  preprocessing_object_filename: preprocessing.pkl
+
+# Model trainer configuration
+model_trainer:
+  trained_model_filename: model.pkl
+
+# Model evaluation configuration
+model_evaluation:
+  evaluation_report_filename: evaluation_report.yaml
+
+# Model prediction configuration
+model_prediction:
+  prediction_output_filename: prediction_output.csv
+
+# Stable DVC-tracked data paths
+data_paths:
+  raw_data_dvc_filepath: data/raw/raw_data.csv
+  validated_dvc_filepath: data/validated/validated_data.csv
+  transformed_train_dvc_filepath: data/transformed/train.csv
+  transformed_test_dvc_filepath: data/transformed/test.csv
+  preprocessor_dvc_filepath: data/transformed/preprocessing.pkl
+  trained_model_dvc_filepath: data/model/model.pkl
+  predictions_dvc_filepath: data/predictions/prediction_output.csv
+
+================================================================================
+# YAML FILE: config\params.yaml
+================================================================================
+
+# Parameters for drift detection during data validation
+validation_params:
+  drift_detection:
+    enabled: true
+    method: ks_test
+    p_value_threshold: 0.05
+
+  schema_check:
+    enabled: true
+    method: hash
+
+
+# Parameters for data transformation
+transformation_params:
+  imputer:
+    method: knn
+    knn:
+      missing_values: .nan
+      n_neighbors: 3
+      weights: uniform
+
+
+# Parameters for data splitting
+data_split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# Parameters for model training
+model_trainer:
+  model_type: RandomForestClassifier
+  n_estimators: 100
+  max_depth: 10
+  random_state: 42
+
+================================================================================
+# YAML FILE: config\schema.yaml
+================================================================================
+
+columns:
+  Abnormal_URL: int64
+  DNSRecord: int64
+  Domain_registeration_length: int64
+  Favicon: int64
+  Google_Index: int64
+  HTTPS_token: int64
+  Iframe: int64
+  Links_in_tags: int64
+  Links_pointing_to_page: int64
+  Page_Rank: int64
+  Prefix_Suffix: int64
+  Redirect: int64
+  Request_URL: int64
+  Result: int64
+  RightClick: int64
+  SFH: int64
+  SSLfinal_State: int64
+  Shortining_Service: int64
+  Statistical_report: int64
+  Submitting_to_email: int64
+  URL_Length: int64
+  URL_of_Anchor: int64
+  age_of_domain: int64
+  double_slash_redirecting: int64
+  having_At_Symbol: int64
+  having_IP_Address: int64
+  having_Sub_Domain: int64
+  on_mouseover: int64
+  popUpWidnow: int64
+  port: int64
+  web_traffic: int64
+
+target_column: Result
+
+================================================================================
+# YAML FILE: research\config\schema.yaml
+================================================================================
+
+columns:
+  Abnormal_URL: int64
+  DNSRecord: int64
+  Domain_registeration_length: int64
+  Favicon: int64
+  Google_Index: int64
+  HTTPS_token: int64
+  Iframe: int64
+  Links_in_tags: int64
+  Links_pointing_to_page: int64
+  Page_Rank: int64
+  Prefix_Suffix: int64
+  Redirect: int64
+  Request_URL: int64
+  Result: int64
+  RightClick: int64
+  SFH: int64
+  SSLfinal_State: int64
+  Shortining_Service: int64
+  Statistical_report: int64
+  Submitting_to_email: int64
+  URL_Length: int64
+  URL_of_Anchor: int64
+  age_of_domain: int64
+  double_slash_redirecting: int64
+  having_At_Symbol: int64
+  having_IP_Address: int64
+  having_Sub_Domain: int64
+  on_mouseover: int64
+  popUpWidnow: int64
+  port: int64
+  web_traffic: int64

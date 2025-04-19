@@ -45,11 +45,10 @@ model_prediction:
 
 # Stable DVC-tracked data paths
 data_paths:
-  raw_data: data/raw/raw_data.csv
-  validated_data: data/validated/validated_data.csv
-  transformed_train: data/transformed/train.csv
-  transformed_test: data/transformed/test.csv
-  preprocessor: data/transformed/preprocessing.pkl
-  trained_model: data/model/model.pkl
-  evaluation_report: data/evaluation/evaluation_report.yaml
-  predictions: data/predictions/prediction_output.csv
+  raw_data_dvc_filepath: data/raw/raw_data.csv
+  validated_dvc_filepath: data/validated/validated_data.csv
+  transformed_train_dvc_filepath: data/transformed/train.csv
+  transformed_test_dvc_filepath: data/transformed/test.csv
+  preprocessor_dvc_filepath: data/transformed/preprocessing.pkl
+  trained_model_dvc_filepath: data/model/model.pkl
+  predictions_dvc_filepath: data/predictions/prediction_output.csv

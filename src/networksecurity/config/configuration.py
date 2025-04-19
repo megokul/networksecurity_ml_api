@@ -5,6 +5,7 @@ from src.networksecurity.constants.constants import (
     CONFIG_FILE_PATH,
     PARAMS_FILE_PATH,
     SCHEMA_FILE_PATH,
+    TEMPLATES_FILE_PATH,
     MONGO_HANDLER_SUBDIR,
     MONGO_JSON_SUBDIR,
     DATA_INGESTION_SUBDIR,
@@ -16,7 +17,7 @@ from src.networksecurity.constants.constants import (
     DATA_TRANSFORMATION_SUBDIR,
     TRANSFORMED_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
-    LOGS_ROOT,
+    LOGS_ROOT
 )
 
 from src.networksecurity.entity.config_entity import (
@@ -30,12 +31,15 @@ from src.networksecurity.utils.common import (
     read_yaml,
     replace_username_password_in_uri,
 )
-
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 from src.networksecurity.logging import logger
 
 
 class ConfigurationManager:
+    """
+    Loads YAML-based configuration and generates paths for all pipeline stages.
+    Dynamically sets timestamped artifact directories per run.
+    """
     _global_timestamp: str = None
 
     def __init__(
@@ -43,14 +47,16 @@ class ConfigurationManager:
         config_filepath: Path = CONFIG_FILE_PATH,
         params_filepath: Path = PARAMS_FILE_PATH,
         schema_filepath: Path = SCHEMA_FILE_PATH,
+        templates_filepath: Path = TEMPLATES_FILE_PATH,
     ) -> None:
-        self._load_configs(config_filepath, params_filepath, schema_filepath)
+        self._load_configs(config_filepath, params_filepath, schema_filepath, templates_filepath)
         self._initialize_paths()
 
-    def _load_configs(self, config_fp: Path, params_fp: Path, schema_fp: Path) -> None:
-        self.config = read_yaml(config_fp)
-        self.params = read_yaml(params_fp)
-        self.schema = read_yaml(schema_fp)
+    def _load_configs(self, config_filepath: Path, params_filepath: Path, schema_filepath: Path, templates_filepath: Path):
+        self.config = read_yaml(config_filepath)
+        self.params = read_yaml(params_filepath)
+        self.schema = read_yaml(schema_filepath)
+        self.templates = read_yaml(templates_filepath)
 
     def _initialize_paths(self) -> None:
         if ConfigurationManager._global_timestamp is None:
@@ -61,11 +67,16 @@ class ConfigurationManager:
         self.artifacts_root = base_artifact_root / timestamp
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
-        self.raw_dvc_path = Path(self.config.data_paths.raw_data)
-        self.validated_dvc_path = Path(self.config.data_paths.validated_data)
+
+        # ✅ Corrected keys from config.yaml
+        self.raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
+        self.validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
+
+    def get_artifact_root(self) -> Path:
+        return self.artifacts_root
 
     def get_mongo_handler_config(self) -> MongoHandlerConfig:
         mongo_cfg = self.config.mongo_handler
@@ -121,6 +132,7 @@ class ConfigurationManager:
             schema=self.schema,
             validated_dvc_path=self.validated_dvc_path,
             validation_params=self.params.validation_params,
+            val_report_template=self.templates.validation_report
         )
 
     def get_data_transformation_config(self) -> DataTransformationConfig:
@@ -134,8 +146,8 @@ class ConfigurationManager:
         return DataTransformationConfig(
             root_dir=root_dir,
             transformed_dir=transformed_dir,
-            transformed_train_filename=transformation_cfg.transformed_train_filename,
-            transformed_test_filename=transformation_cfg.transformed_test_filename,
+            transformed_train_filename=transformation_cfg.transformed_train_data_filename,
+            transformed_test_filename=transformation_cfg.transformed_test_data_filename,
             preprocessor_dir=preprocessor_dir,
             preprocessing_object_filename=transformation_cfg.preprocessing_object_filename,
             transformation_params=transformation_params

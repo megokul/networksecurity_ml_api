@@ -18,7 +18,7 @@ class MongoHandlerConfig:
         self.json_data_dir = Path(self.json_data_dir)
 
     @property
-    def json_data_filepath(self):
+    def json_data_filepath(self) -> Path:
         return self.json_data_dir / self.json_data_filename
 
 
@@ -38,11 +38,11 @@ class DataIngestionConfig:
         self.raw_dvc_path = Path(self.raw_dvc_path)
 
     @property
-    def raw_data_filepath(self):
+    def raw_data_filepath(self) -> Path:
         return self.featurestore_dir / self.raw_data_filename
 
     @property
-    def ingested_data_filepath(self):
+    def ingested_data_filepath(self) -> Path:
         return self.ingested_data_dir / self.ingested_data_filename
 
 
@@ -59,6 +59,7 @@ class DataValidationConfig:
     schema: dict
     validation_params: dict
     validated_dvc_path: Path
+    val_report_template: dict
 
     @property
     def validated_filepath(self) -> Path:
@@ -67,10 +68,10 @@ class DataValidationConfig:
     @property
     def missing_report_filepath(self) -> Path:
         return self.report_dir / self.missing_report_filename
-    
+
     @property
     def duplicates_report_filepath(self) -> Path:
-        return self.report_dir / self.missing_report_filename
+        return self.report_dir / self.duplicates_report_filename
 
     @property
     def drift_report_filepath(self) -> Path:
@@ -81,26 +82,15 @@ class DataValidationConfig:
         return self.report_dir / self.validation_report_filename
 
 
-
 @dataclass
 class DataTransformationConfig:
     root_dir: Path
     transformed_dir: Path
-    transformed_train_data_filename: str
-    transformed_test_data_filename: str
-    validation_data_filename: str
-    transformation_params: dict
-    transformed_train_data_dvc_path: str
-    transformed_test_data_dvc_path: str
-    validation_data_dvc_path: str
-    
-
-    transformed_dvc_path: Path
-    transformed_train_data_filename: str
+    transformed_train_filename: str
     transformed_test_filename: str
-    
-    preprocessing_object_filename: str
     preprocessor_dir: Path
+    preprocessing_object_filename: str
+    transformation_params: dict
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)
@@ -108,15 +98,15 @@ class DataTransformationConfig:
         self.preprocessor_dir = Path(self.preprocessor_dir)
 
     @property
-    def transformed_train_filepath(self):
+    def transformed_train_filepath(self) -> Path:
         return self.transformed_dir / self.transformed_train_filename
 
     @property
-    def transformed_test_filepath(self):
+    def transformed_test_filepath(self) -> Path:
         return self.transformed_dir / self.transformed_test_filename
 
     @property
-    def preprocessor_filepath(self):
+    def preprocessor_filepath(self) -> Path:
         return self.preprocessor_dir / self.preprocessing_object_filename
 
 
@@ -130,7 +120,7 @@ class ModelTrainerConfig:
         self.root_dir = Path(self.root_dir)
 
     @property
-    def trained_model_filepath(self):
+    def trained_model_filepath(self) -> Path:
         return self.root_dir / self.trained_model_filename
 
 
@@ -143,7 +133,7 @@ class ModelEvaluationConfig:
         self.root_dir = Path(self.root_dir)
 
     @property
-    def evaluation_report_filepath(self):
+    def evaluation_report_filepath(self) -> Path:
         return self.root_dir / self.evaluation_report_filename
 
 
@@ -156,5 +146,5 @@ class ModelPredictionConfig:
         self.root_dir = Path(self.root_dir)
 
     @property
-    def prediction_output_filepath(self):
+    def prediction_output_filepath(self) -> Path:
         return self.root_dir / self.prediction_output_filename
