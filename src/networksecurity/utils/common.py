@@ -95,20 +95,63 @@ def replace_username_password_in_uri(base_uri: str, username: str, password: str
         .replace("<password>", encoded_password)
     )
 
+
 @ensure_annotations
-def save_dataframe_to_paths(df: pd.DataFrame, *paths: Path, label: str):
+def save_to_yaml(data: dict, *paths: Path, label: str):
     """
-    Save a DataFrame to multiple file paths.
+    Save a dictionary to one or more YAML file paths.
 
     Args:
-        df (pd.DataFrame): The DataFrame to save.
-        *paths (Path): One or more Path objects to save to.
-        label (str): Label to log.
+        data (dict): The dictionary to be written as YAML.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
     """
     try:
         for path in paths:
-            create_directories(path.parent)
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, "w") as file:
+                yaml.dump(data, file, sort_keys=False)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+@ensure_annotations
+def save_to_csv(df: pd.DataFrame, *paths: Path, label: str):
+    """
+    Save a DataFrame to one or more CSV file paths.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to save.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
+    """
+    try:
+        for path in paths:
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
             df.to_csv(path, index=False)
-            logger.info(f"{label} saved to: {path}")
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+    
+
+@ensure_annotations
+def save_to_json(data: dict | list, *paths: Path, label: str):
+    """
+    Save a dictionary or list to one or more JSON file paths.
+
+    Args:
+        data (dict | list): The data to be written as JSON.
+        *paths (Path): One or more output file paths.
+        label (str): Descriptive label used in logs.
+    """
+    try:
+        for path in paths:
+            path = Path(path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e

@@ -1,0 +1,10 @@
+validation_status: false
+schema_check_type: hash
+check_results:
+  critical_checks:
+    schema_is_match: false
+    no_data_drift: true
+  non_critical_checks:
+    no_missing_values: true
+    no_duplicate_rows: false
+drift_check_method: ks_test

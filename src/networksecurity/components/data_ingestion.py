@@ -1,14 +1,13 @@
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
 from src.networksecurity.entity.config_entity import DataIngestionConfig
 from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
-from pathlib import Path
-
 from src.networksecurity.dbhandler.base_handler import DBHandler
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import save_dataframe_to_paths
+from src.networksecurity.utils.common import save_to_csv
 
 
 class DataIngestion:
@@ -48,16 +47,24 @@ class DataIngestion:
             # Fetch raw data
             raw_df = self._fetch_data_from_source()
 
-            save_dataframe_to_paths(
+            # Ensure parent directories exist before saving
+            self.config.raw_data_filepath.parent.mkdir(parents=True, exist_ok=True)
+            self.config.raw_dvc_path.parent.mkdir(parents=True, exist_ok=True)
+
+            save_to_csv(
                 raw_df,
                 self.config.raw_data_filepath,
                 self.config.raw_dvc_path,
                 label="Raw data"
             )
 
+            # Clean the raw data
             cleaned_df = self._clean_dataframe(raw_df)
 
-            save_dataframe_to_paths(
+            # Ensure ingested data directory exists
+            self.config.ingested_data_filepath.parent.mkdir(parents=True, exist_ok=True)
+
+            save_to_csv(
                 cleaned_df,
                 self.config.ingested_data_filepath,
                 label="Cleaned data"

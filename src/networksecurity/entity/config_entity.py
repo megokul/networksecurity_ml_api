@@ -53,6 +53,7 @@ class DataValidationConfig:
     validated_filename: str
     report_dir: Path
     missing_report_filename: str
+    duplicates_report_filename: str
     drift_report_filename: str
     validation_report_filename: str
     schema: dict
@@ -64,15 +65,19 @@ class DataValidationConfig:
         return self.validated_dir / self.validated_filename
 
     @property
-    def missing_report_path(self) -> Path:
+    def missing_report_filepath(self) -> Path:
+        return self.report_dir / self.missing_report_filename
+    
+    @property
+    def duplicates_report_filepath(self) -> Path:
         return self.report_dir / self.missing_report_filename
 
     @property
-    def drift_report_path(self) -> Path:
+    def drift_report_filepath(self) -> Path:
         return self.report_dir / self.drift_report_filename
 
     @property
-    def validation_report_path(self) -> Path:
+    def validation_report_filepath(self) -> Path:
         return self.report_dir / self.validation_report_filename
 
 
@@ -81,10 +86,21 @@ class DataValidationConfig:
 class DataTransformationConfig:
     root_dir: Path
     transformed_dir: Path
-    transformed_train_filename: str
+    transformed_train_data_filename: str
+    transformed_test_data_filename: str
+    validation_data_filename: str
+    transformation_params: dict
+    transformed_train_data_dvc_path: str
+    transformed_test_data_dvc_path: str
+    validation_data_dvc_path: str
+    
+
+    transformed_dvc_path: Path
+    transformed_train_data_filename: str
     transformed_test_filename: str
-    preprocessor_dir: Path
+    
     preprocessing_object_filename: str
+    preprocessor_dir: Path
 
     def __post_init__(self):
         self.root_dir = Path(self.root_dir)

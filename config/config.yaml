@@ -18,6 +18,7 @@ data_ingestion:
 data_validation:
   validated_filename: validated_data.csv
   missing_report_filename: missing_values_report.json
+  duplicates_report_filename: duplicates_report.yaml
   drift_report_filename: drift_report.yaml
   validation_report_filename: validation_report.yaml
   schema_hash_filename: schema_hash.json
@@ -25,8 +26,9 @@ data_validation:
 
 # Data transformation configuration
 data_transformation:
-  transformed_train_filename: train.npy
-  transformed_test_filename: test.npy
+  transformed_train_data_filename: train_data.csv
+  transformed_test_data_filename: test_data.csv
+  validation_data_filename: validation_data.csv
   preprocessing_object_filename: preprocessing.pkl
 
 # Model trainer configuration

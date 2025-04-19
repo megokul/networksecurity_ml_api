@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from src.networksecurity.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from src.networksecurity.pipeline.data_validation_pipeline import DataValidationPipeline
+# from src.networksecurity.pipeline.data_transformation_pipeline import DataTransformationPipeline
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
 
@@ -9,8 +10,6 @@ load_dotenv()
 
 if __name__ == "__main__":
     try:
-        logger.info("========== Starting Full Debug Pipeline ==========")
-
         # Run Data Ingestion
         logger.info("========== Launching Data Ingestion Pipeline ==========")
         ingestion_pipeline = DataIngestionPipeline()
@@ -23,7 +22,14 @@ if __name__ == "__main__":
         validation_artifact = validation_pipeline.run()
         logger.info("========== Data Validation Pipeline Finished ==========")
 
-        logger.info("========== Full Debug Pipeline Completed Successfully ==========")
+        # # Run Data Transformation
+        # if validation_artifact.validation_status:
+        #     logger.info("========== Launching Data Transformation Pipeline ==========")
+        #     transformation_pipeline = DataTransformationPipeline(validation_artifact=validation_artifact)
+        #     transformation_artifact = transformation_pipeline.run()
+        #     logger.info("========== Data Transformation Pipeline Finished ==========")
+        # else:
+        #     logger.warning("Skipping Data Transformation due to failed validation.")
 
     except NetworkSecurityError as e:
         logger.exception("Pipeline failed due to a known exception.")

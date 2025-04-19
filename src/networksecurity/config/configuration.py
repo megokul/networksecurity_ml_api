@@ -13,6 +13,9 @@ from src.networksecurity.constants.constants import (
     DATA_VALIDATION_SUBDIR,
     VALIDATED_SUBDIR,
     REPORTS_SUBDIR,
+    DATA_TRANSFORMATION_SUBDIR,
+    TRANSFORMED_SUBDIR,
+    TRANSFORMED_OBJECT_SUBDIR,
     LOGS_ROOT,
 )
 
@@ -20,13 +23,14 @@ from src.networksecurity.entity.config_entity import (
     MongoHandlerConfig,
     DataIngestionConfig,
     DataValidationConfig,
+    DataTransformationConfig,
 )
 
 from src.networksecurity.utils.common import (
     read_yaml,
-    create_directories,
     replace_username_password_in_uri,
 )
+
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 from src.networksecurity.logging import logger
 
@@ -53,14 +57,10 @@ class ConfigurationManager:
             ConfigurationManager._global_timestamp = get_shared_utc_timestamp()
 
         timestamp = ConfigurationManager._global_timestamp
-
         base_artifact_root = Path(self.config.project.artifacts_root)
         self.artifacts_root = base_artifact_root / timestamp
-        create_directories(self.artifacts_root)
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
-        create_directories(self.logs_root)
-
         self.raw_dvc_path = Path(self.config.data_paths.raw_data)
         self.validated_dvc_path = Path(self.config.data_paths.validated_data)
 
@@ -69,10 +69,8 @@ class ConfigurationManager:
 
     def get_mongo_handler_config(self) -> MongoHandlerConfig:
         mongo_cfg = self.config.mongo_handler
-
         root_dir = self.artifacts_root / MONGO_HANDLER_SUBDIR
         json_data_dir = root_dir / MONGO_JSON_SUBDIR
-        create_directories(json_data_dir)
 
         mongodb_uri = replace_username_password_in_uri(
             base_uri=os.getenv("MONGODB_URI_BASE"),
@@ -92,11 +90,9 @@ class ConfigurationManager:
 
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         ingestion_cfg = self.config.data_ingestion
-
         root_dir = self.artifacts_root / DATA_INGESTION_SUBDIR
         featurestore_dir = root_dir / FEATURESTORE_SUBDIR
         ingested_data_dir = root_dir / INGESTED_SUBDIR
-        create_directories(featurestore_dir, ingested_data_dir)
 
         return DataIngestionConfig(
             root_dir=root_dir,
@@ -109,12 +105,9 @@ class ConfigurationManager:
 
     def get_data_validation_config(self) -> DataValidationConfig:
         validation_cfg = self.config.data_validation
-
-
         root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
         validated_dir = root_dir / VALIDATED_SUBDIR
         report_dir = root_dir / REPORTS_SUBDIR
-        create_directories(validated_dir, report_dir)
 
         return DataValidationConfig(
             root_dir=root_dir,
@@ -122,9 +115,28 @@ class ConfigurationManager:
             validated_filename=validation_cfg.validated_filename,
             report_dir=report_dir,
             missing_report_filename=validation_cfg.missing_report_filename,
+            duplicates_report_filename=validation_cfg.duplicates_report_filename,
             drift_report_filename=validation_cfg.drift_report_filename,
             validation_report_filename=validation_cfg.validation_report_filename,
             schema=self.schema,
             validated_dvc_path=self.validated_dvc_path,
-            validation_params=self.params.validation_params
+            validation_params=self.params.validation_params,
+        )
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        transformation_cfg = self.config.data_transformation
+        transformation_params = self.params.transformation_params
+
+        root_dir = self.artifacts_root / DATA_TRANSFORMATION_SUBDIR
+        transformed_dir = root_dir / TRANSFORMED_SUBDIR
+        preprocessor_dir = root_dir / TRANSFORMED_OBJECT_SUBDIR
+
+        return DataTransformationConfig(
+            root_dir=root_dir,
+            transformed_dir=transformed_dir,
+            transformed_train_filename=transformation_cfg.transformed_train_filename,
+            transformed_test_filename=transformation_cfg.transformed_test_filename,
+            preprocessor_dir=preprocessor_dir,
+            preprocessing_object_filename=transformation_cfg.preprocessing_object_filename,
+            transformation_params=transformation_params
         )

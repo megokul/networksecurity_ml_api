@@ -28,7 +28,7 @@ class DataValidationPipeline:
             logger.info("========= Data Validation Stage Started =========")
             validation = DataValidation(config=self.config, ingestion_artifact=self.ingestion_artifact)
             validation_artifact = validation.run_validation()
-            logger.info(f"Data Validation Completed Successfully: {validation_artifact}")
+            logger.info(f"Data Validation Process Completed. {validation_artifact}")
             logger.info("========= Data Validation Stage Completed =========")
             return validation_artifact
         except Exception as e:
