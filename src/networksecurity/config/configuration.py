@@ -15,7 +15,10 @@ from src.networksecurity.constants.constants import (
     VALIDATED_SUBDIR,
     REPORTS_SUBDIR,
     DATA_TRANSFORMATION_SUBDIR,
-    TRANSFORMED_SUBDIR,
+    TRANSFORMED_DATA_SUBDIR,
+    DATA_TRAIN_SUBDIR,
+    DATA_VAL_SUBDIR,
+    DATA_TEST_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
     LOGS_ROOT
 )
@@ -27,7 +30,7 @@ from src.networksecurity.entity.config_entity import (
     DataTransformationConfig,
 )
 
-from src.networksecurity.utils.common import (
+from src.networksecurity.utils.core import (
     read_yaml,
     replace_username_password_in_uri,
 )
@@ -68,9 +71,8 @@ class ConfigurationManager:
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
 
-        # ✅ Corrected keys from config.yaml
-        self.raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
-        self.validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
+        
+        
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
@@ -105,13 +107,15 @@ class ConfigurationManager:
         featurestore_dir = root_dir / FEATURESTORE_SUBDIR
         ingested_data_dir = root_dir / INGESTED_SUBDIR
 
+        raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
+
         return DataIngestionConfig(
             root_dir=root_dir,
             featurestore_dir=featurestore_dir,
             raw_data_filename=ingestion_cfg.raw_data_filename,
             ingested_data_dir=ingested_data_dir,
             ingested_data_filename=ingestion_cfg.ingested_data_filename,
-            raw_dvc_path=self.raw_dvc_path,
+            raw_dvc_path=raw_dvc_path,
         )
 
     def get_data_validation_config(self) -> DataValidationConfig:
@@ -119,6 +123,8 @@ class ConfigurationManager:
         root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
         validated_dir = root_dir / VALIDATED_SUBDIR
         report_dir = root_dir / REPORTS_SUBDIR
+
+        validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
 
         return DataValidationConfig(
             root_dir=root_dir,
@@ -130,7 +136,7 @@ class ConfigurationManager:
             drift_report_filename=validation_cfg.drift_report_filename,
             validation_report_filename=validation_cfg.validation_report_filename,
             schema=self.schema,
-            validated_dvc_path=self.validated_dvc_path,
+            validated_dvc_path=validated_dvc_path,
             validation_params=self.params.validation_params,
             val_report_template=self.templates.validation_report
         )
@@ -138,17 +144,35 @@ class ConfigurationManager:
     def get_data_transformation_config(self) -> DataTransformationConfig:
         transformation_cfg = self.config.data_transformation
         transformation_params = self.params.transformation_params
+        target_column = self.schema.target_column
 
         root_dir = self.artifacts_root / DATA_TRANSFORMATION_SUBDIR
-        transformed_dir = root_dir / TRANSFORMED_SUBDIR
+        train_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_TRAIN_SUBDIR
+        val_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_VAL_SUBDIR
+        test_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_TEST_SUBDIR
         preprocessor_dir = root_dir / TRANSFORMED_OBJECT_SUBDIR
+
+        train_dvc_dir = Path(self.config.data_paths.train_dvc_dir)
+        val_dvc_dir = Path(self.config.data_paths.val_dvc_dir)
+        test_dvc_dir = Path(self.config.data_paths.test_dvc_dir)
 
         return DataTransformationConfig(
             root_dir=root_dir,
-            transformed_dir=transformed_dir,
-            transformed_train_filename=transformation_cfg.transformed_train_data_filename,
-            transformed_test_filename=transformation_cfg.transformed_test_data_filename,
+            transformation_params=transformation_params,
+            train_dir=train_dir,
+            val_dir=val_dir,
+            test_dir=test_dir,
+            target_column=target_column,
+            x_train_filename=transformation_cfg.x_train_filename,
+            y_train_filename=transformation_cfg.y_train_filename,
+            x_val_filename=transformation_cfg.x_val_filename,
+            y_val_filename=transformation_cfg.y_val_filename,
+            x_test_filename=transformation_cfg.x_test_filename,
+            y_test_filename=transformation_cfg.y_test_filename,
             preprocessor_dir=preprocessor_dir,
-            preprocessing_object_filename=transformation_cfg.preprocessing_object_filename,
-            transformation_params=transformation_params
+            x_preprocessor_filename=transformation_cfg.x_preprocessor_filename,
+            y_preprocessor_filename=transformation_cfg.y_preprocessor_filename,
+            train_dvc_dir=train_dvc_dir,
+            val_dvc_dir=val_dvc_dir,
+            test_dvc_dir=test_dvc_dir,
         )

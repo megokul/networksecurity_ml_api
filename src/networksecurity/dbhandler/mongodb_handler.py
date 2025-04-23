@@ -2,10 +2,9 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 import pandas as pd
 from pathlib import Path
-import json
 
 from src.networksecurity.entity.config_entity import MongoHandlerConfig
-from src.networksecurity.utils.common import csv_to_json_convertor, create_directories
+from src.networksecurity.utils.core import csv_to_json_convertor, save_to_json
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
 from src.networksecurity.constants.constants import (
@@ -49,14 +48,10 @@ class MongoDBHandler(DBHandler):
 
     def insert_csv_to_collection(self, csv_filepath: Path) -> int:
         try:
-
             records = csv_to_json_convertor(csv_filepath, self.config.json_data_filepath)
 
-            create_directories(self.config.json_data_dir)
-
-            # Save records as JSON to the specified filepath
-            with open(self.config.json_data_filepath, "w", encoding="utf-8") as f:
-                json.dump(records, f, indent=4)
+            # Save records as JSON using core utility
+            save_to_json(records, self.config.json_data_filepath, label="Converted JSON Records")
 
             db = self._get_client()[self.config.database_name]
             collection = db[self.config.collection_name]

@@ -26,14 +26,18 @@ data_validation:
 
 # Data transformation configuration
 data_transformation:
-  transformed_train_data_filename: train_data.csv
-  transformed_test_data_filename: test_data.csv
-  validation_data_filename: validation_data.csv
-  preprocessing_object_filename: preprocessing.pkl
+  x_train_filename: x_train.npy
+  y_train_filename: y_train.npy
+  x_val_filename: x_val.npy
+  y_val_filename: y_val.npy
+  x_test_filename: x_test.npy
+  y_test_filename: y_test.npy
+  x_preprocessor_filename: x_preprocessor.joblib
+  y_preprocessor_filename: y_preprocessor.joblib
 
 # Model trainer configuration
 model_trainer:
-  trained_model_filename: model.pkl
+  trained_model_filename: model.joblib
 
 # Model evaluation configuration
 model_evaluation:
@@ -47,8 +51,6 @@ model_prediction:
 data_paths:
   raw_data_dvc_filepath: data/raw/raw_data.csv
   validated_dvc_filepath: data/validated/validated_data.csv
-  transformed_train_dvc_filepath: data/transformed/train.csv
-  transformed_test_dvc_filepath: data/transformed/test.csv
-  preprocessor_dvc_filepath: data/transformed/preprocessing.pkl
-  trained_model_dvc_filepath: data/model/model.pkl
-  predictions_dvc_filepath: data/predictions/prediction_output.csv
+  train_dvc_dir: data/transformed/train
+  val_dvc_dir: data/transformed/val
+  test_dvc_dir: data/transformed/test

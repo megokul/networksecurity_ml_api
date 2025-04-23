@@ -13,6 +13,7 @@
     📄 config
     📁 tmp/
         📄 btime
+        📄 dag.md
         📁 exps/
             📁 cache/
                 📁 3e/
@@ -27,6 +28,8 @@
                     📄 2c1cb5bbc048ca32cb78061a4b8aaf3735233f
                 📁 b0/
                     📄 63569211a95f11f23c4f61f6b9518bbf3b2cf3
+                📁 c4/
+                    📄 9033287ca54d77ad6ab9c7603c06825bbac4e6
                 📁 c7/
                     📄 31a093cb23b7a2bef65922d39d9d20ac56e6f3
                 📁 e3/
@@ -47,6 +50,153 @@
 📄 LICENSE
 📄 README.md
 📄 app.py
+📁 artifacts/
+    📁 2025_04_19T12_56_55Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T21_53_01Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+    📁 2025_04_22T21_56_37Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_05_53Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_10_04Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_17_30Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_19_50Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_27_46Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_29_59Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_30_37Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+    📁 2025_04_22T22_31_10Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
 📁 config/
     📄 config.yaml
     📄 params.yaml
@@ -61,6 +211,47 @@
         📄 validated_data.csv.dvc
 📄 debug.py
 📄 debug_pipeline.py
+📁 logs/
+    📁 2025_04_19T12_56_55Z/
+        📄 2025_04_19T12_56_55Z.log
+    📁 2025_04_22T21_23_46Z/
+        📄 2025_04_22T21_23_46Z.log
+    📁 2025_04_22T21_24_10Z/
+        📄 2025_04_22T21_24_10Z.log
+    📁 2025_04_22T21_24_25Z/
+        📄 2025_04_22T21_24_25Z.log
+    📁 2025_04_22T21_27_50Z/
+        📄 2025_04_22T21_27_50Z.log
+    📁 2025_04_22T21_28_33Z/
+        📄 2025_04_22T21_28_33Z.log
+    📁 2025_04_22T21_31_47Z/
+        📄 2025_04_22T21_31_47Z.log
+    📁 2025_04_22T21_32_05Z/
+        📄 2025_04_22T21_32_05Z.log
+    📁 2025_04_22T21_32_12Z/
+        📄 2025_04_22T21_32_12Z.log
+    📁 2025_04_22T21_33_22Z/
+        📄 2025_04_22T21_33_22Z.log
+    📁 2025_04_22T21_53_01Z/
+        📄 2025_04_22T21_53_01Z.log
+    📁 2025_04_22T21_56_37Z/
+        📄 2025_04_22T21_56_37Z.log
+    📁 2025_04_22T22_05_53Z/
+        📄 2025_04_22T22_05_53Z.log
+    📁 2025_04_22T22_10_04Z/
+        📄 2025_04_22T22_10_04Z.log
+    📁 2025_04_22T22_17_30Z/
+        📄 2025_04_22T22_17_30Z.log
+    📁 2025_04_22T22_19_50Z/
+        📄 2025_04_22T22_19_50Z.log
+    📁 2025_04_22T22_27_46Z/
+        📄 2025_04_22T22_27_46Z.log
+    📁 2025_04_22T22_29_59Z/
+        📄 2025_04_22T22_29_59Z.log
+    📁 2025_04_22T22_30_37Z/
+        📄 2025_04_22T22_30_37Z.log
+    📁 2025_04_22T22_31_10Z/
+        📄 2025_04_22T22_31_10Z.log
 📄 main.py
 📁 network_data/
     📁 input_csv/
@@ -101,6 +292,12 @@
         📁 constants/
             📄 __init__.py
             📄 constants.py
+        📁 data_processors/
+            📄 encoder_factory.py
+            📄 imputer_factory.py
+            📄 preprocessor_builder.py
+            📄 scaler_factory.py
+            📄 target_label_normalizer.py
         📁 dbhandler/
             📄 __init__.py
             📄 base_handler.py
@@ -122,7 +319,7 @@
             📄 data_validation_pipeline.py
         📁 utils/
             📄 __init__.py
-            📄 common.py
+            📄 core.py
             📄 timestamp.py
 📁 templates/
     📄 index.html
@@ -163,7 +360,7 @@ with mongohandler:
 from dotenv import load_dotenv
 from src.networksecurity.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from src.networksecurity.pipeline.data_validation_pipeline import DataValidationPipeline
-# from src.networksecurity.pipeline.data_transformation_pipeline import DataTransformationPipeline
+from src.networksecurity.pipeline.data_transformation_pipeline import DataTransformationPipeline
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
 
@@ -177,26 +374,29 @@ if __name__ == "__main__":
         ingestion_pipeline = DataIngestionPipeline()
         ingestion_artifact = ingestion_pipeline.run()
         logger.info("========== Data Ingestion Pipeline Finished ==========")
+        logger.info("======================================================")
 
         # Run Data Validation
         logger.info("========== Launching Data Validation Pipeline ==========")
         validation_pipeline = DataValidationPipeline(ingestion_artifact=ingestion_artifact)
         validation_artifact = validation_pipeline.run()
         logger.info("========== Data Validation Pipeline Finished ==========")
+        logger.info("======================================================")
 
-        # # Run Data Transformation
-        # if validation_artifact.validation_status:
-        #     logger.info("========== Launching Data Transformation Pipeline ==========")
-        #     transformation_pipeline = DataTransformationPipeline(validation_artifact=validation_artifact)
-        #     transformation_artifact = transformation_pipeline.run()
-        #     logger.info("========== Data Transformation Pipeline Finished ==========")
-        # else:
-        #     logger.warning("Skipping Data Transformation due to failed validation.")
+        # Run Data Transformation
+        if validation_artifact.validation_status:
+            logger.info("========== Launching Data Transformation Pipeline ==========")
+            transformation_pipeline = DataTransformationPipeline(validation_artifact=validation_artifact)
+            transformation_artifact = transformation_pipeline.run()
+            logger.info("========== Data Transformation Pipeline Finished ==========")
+            logger.info("======================================================")
+        else:
+            logger.warning("⚠️ Skipping Data Transformation: Validation failed.")
 
     except NetworkSecurityError as e:
-        logger.exception("Pipeline failed due to a known exception.")
+        logger.exception("❌ Pipeline failed due to a known exception.")
     except Exception as e:
-        logger.exception("Pipeline failed due to an unexpected exception.")
+        logger.exception("❌ Pipeline failed due to an unexpected exception.")
 
 ================================================================================
 # FILE: main.py
@@ -561,7 +761,7 @@ from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
 from src.networksecurity.dbhandler.base_handler import DBHandler
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import save_to_csv, read_csv
+from src.networksecurity.utils.core import save_to_csv, read_csv
 
 
 class DataIngestion:
@@ -635,7 +835,126 @@ class DataIngestion:
 # FILE: src\networksecurity\components\data_transformation.py
 ================================================================================
 
+# FILE: src/networksecurity/components/data_transformation.py
 
+from pathlib import Path
+from typing import Tuple
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+from src.networksecurity.entity.config_entity import DataTransformationConfig
+from src.networksecurity.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.utils.core import read_csv, save_to_csv, save_object
+from src.networksecurity.data_processors.preprocessor_builder import PreprocessorBuilder
+from src.networksecurity.constants.constants import (
+    X_TRAIN_LABEL, Y_TRAIN_LABEL,
+    X_VAL_LABEL, Y_VAL_LABEL,
+    X_TEST_LABEL, Y_TEST_LABEL
+)
+
+
+class DataTransformation:
+    def __init__(self, config: DataTransformationConfig, validation_artifact: DataValidationArtifact):
+        try:
+            self.config = config
+            self.validation_artifact = validation_artifact
+            self.df = read_csv(validation_artifact.validated_filepath, label="Validated Data")
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _split_features_and_target(self) -> Tuple[pd.DataFrame, pd.Series]:
+        try:
+            df = self.df.copy()
+            X = df.drop(columns=[self.config.target_column])
+            y = df[self.config.target_column]
+            return X, y
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _split_data(self, X: pd.DataFrame, y: pd.Series) -> Tuple:
+        try:
+            split_params = self.config.transformation_params.data_split
+            stratify = y if split_params.stratify else None
+
+            X_train, X_temp, y_train, y_temp = train_test_split(
+                X, y,
+                train_size=split_params.train_size,
+                stratify=stratify,
+                random_state=split_params.random_state
+            )
+
+            relative_test_size = split_params.test_size / (split_params.test_size + split_params.val_size)
+            X_val, X_test, y_val, y_test = train_test_split(
+                X_temp, y_temp,
+                test_size=relative_test_size,
+                stratify=y_temp if split_params.stratify else None,
+                random_state=split_params.random_state
+            )
+
+            return X_train, X_val, X_test, y_train, y_val, y_test
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _save_datasets(self, X_train, X_val, X_test, y_train, y_val, y_test):
+        try:
+            save_to_csv(X_train, self.config.x_train_filepath, label=X_TRAIN_LABEL)
+            save_to_csv(y_train, self.config.y_train_filepath, label=Y_TRAIN_LABEL)
+            save_to_csv(X_val, self.config.x_val_filepath, label=X_VAL_LABEL)
+            save_to_csv(y_val, self.config.y_val_filepath, label=Y_VAL_LABEL)
+            save_to_csv(X_test, self.config.x_test_filepath, label=X_TEST_LABEL)
+            save_to_csv(y_test, self.config.y_test_filepath, label=Y_TEST_LABEL)
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def run_transformation(self) -> DataTransformationArtifact:
+        try:
+            logger.info("========== Starting Data Transformation ==========")
+
+            # Step 1: Separate features and target
+            X, y = self._split_features_and_target()
+
+            # Step 2: Split data into train/val/test
+            X_train, X_val, X_test, y_train, y_val, y_test = self._split_data(X, y)
+
+            # Step 3: Build preprocessor pipelines for X and Y
+            builder = PreprocessorBuilder(
+                steps=self.config.transformation_params.steps,
+                methods=self.config.transformation_params.methods,
+            )
+            x_processor, y_processor = builder.build()
+
+            # Step 4: Fit and transform data
+            X_train = x_processor.fit_transform(X_train)
+            X_val = x_processor.transform(X_val)
+            X_test = x_processor.transform(X_test)
+
+            y_train = y_processor.fit_transform(y_train)
+            y_val = y_processor.transform(y_val)
+            y_test = y_processor.transform(y_test)
+
+            # Step 5: Save X and Y processors
+            save_object(x_processor, self.config.x_preprocessor_filepath, label="X Preprocessor Pipeline")
+            save_object(y_processor, self.config.y_preprocessor_filepath, label="Y Preprocessor Pipeline")
+
+            # Step 6: Save transformed datasets
+            self._save_datasets(X_train, X_val, X_test, y_train, y_val, y_test)
+
+            logger.info("========== Data Transformation Completed ==========")
+
+            return DataTransformationArtifact(
+                x_train_filepath=self.config.x_train_filepath,
+                y_train_filepath=self.config.y_train_filepath,
+                x_val_filepath=self.config.x_val_filepath,
+                y_val_filepath=self.config.y_val_filepath,
+                x_test_filepath=self.config.x_test_filepath,
+                y_test_filepath=self.config.y_test_filepath
+            )
+
+        except Exception as e:
+            logger.error("Data transformation failed.")
+            raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
 # FILE: src\networksecurity\components\data_validation.py
@@ -652,7 +971,7 @@ from src.networksecurity.entity.config_entity import DataValidationConfig
 from src.networksecurity.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import save_to_yaml, save_to_csv, save_to_json, read_csv
+from src.networksecurity.utils.core import save_to_yaml, save_to_csv, save_to_json, read_csv
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 
 
@@ -844,7 +1163,10 @@ from src.networksecurity.constants.constants import (
     VALIDATED_SUBDIR,
     REPORTS_SUBDIR,
     DATA_TRANSFORMATION_SUBDIR,
-    TRANSFORMED_SUBDIR,
+    TRANSFORMED_DATA_SUBDIR,
+    DATA_TRAIN_SUBDIR,
+    DATA_VAL_SUBDIR,
+    DATA_TEST_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
     LOGS_ROOT
 )
@@ -856,7 +1178,7 @@ from src.networksecurity.entity.config_entity import (
     DataTransformationConfig,
 )
 
-from src.networksecurity.utils.common import (
+from src.networksecurity.utils.core import (
     read_yaml,
     replace_username_password_in_uri,
 )
@@ -897,7 +1219,7 @@ class ConfigurationManager:
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
 
-        # ✅ Corrected keys from config.yaml
+        # keys from config.yaml
         self.raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
         self.validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
 
@@ -967,19 +1289,30 @@ class ConfigurationManager:
     def get_data_transformation_config(self) -> DataTransformationConfig:
         transformation_cfg = self.config.data_transformation
         transformation_params = self.params.transformation_params
+        target_column = self.schema.target_column
 
         root_dir = self.artifacts_root / DATA_TRANSFORMATION_SUBDIR
-        transformed_dir = root_dir / TRANSFORMED_SUBDIR
+        train_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_TRAIN_SUBDIR
+        val_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_VAL_SUBDIR
+        test_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_TEST_SUBDIR
         preprocessor_dir = root_dir / TRANSFORMED_OBJECT_SUBDIR
 
         return DataTransformationConfig(
             root_dir=root_dir,
-            transformed_dir=transformed_dir,
-            transformed_train_filename=transformation_cfg.transformed_train_data_filename,
-            transformed_test_filename=transformation_cfg.transformed_test_data_filename,
+            transformation_params=transformation_params,
+            train_dir=train_dir,
+            val_dir=val_dir,
+            test_dir=test_dir,
+            target_column=target_column,
+            x_train_filename=transformation_cfg.x_train_filename,
+            y_train_filename=transformation_cfg.y_train_filename,
+            x_val_filename=transformation_cfg.x_val_filename,
+            y_val_filename=transformation_cfg.y_val_filename,
+            x_test_filename=transformation_cfg.x_test_filename,
+            y_test_filename=transformation_cfg.y_test_filename,
             preprocessor_dir=preprocessor_dir,
-            preprocessing_object_filename=transformation_cfg.preprocessing_object_filename,
-            transformation_params=transformation_params
+            x_preprocessor_filename=transformation_cfg.x_preprocessor_filename,
+            y_preprocessor_filename=transformation_cfg.y_preprocessor_filename,
         )
 
 ================================================================================
@@ -1051,8 +1384,12 @@ REPORTS_SUBDIR = "reports"
 SCHEMA_HASH_SUBDIR = "schema_hash"
 
 DATA_TRANSFORMATION_SUBDIR = "data_transformation"
-TRANSFORMED_SUBDIR = "transformed"
-TRANSFORMED_OBJECT_SUBDIR = "transformed_object"
+DATA_SUBDIR = "data"
+DATA_TRAIN_SUBDIR = "train"
+DATA_VAL_SUBDIR = "val"
+DATA_TEST_SUBDIR = "test"
+
+TRANSFORMED_OBJECT_SUBDIR = "preprocessor"
 
 MODEL_TRAINER_SUBDIR = "model_trainer"
 MODEL_EVALUATION_SUBDIR = "model_evaluation"
@@ -1067,6 +1404,214 @@ DEFAULT_VALIDATED_FILENAME = "validated_data.csv"
 DEFAULT_MISSING_REPORT_FILENAME = "missing_values_report.json"
 DEFAULT_DRIFT_REPORT_FILENAME = "drift_report.yaml"
 DEFAULT_VALIDATION_REPORT_FILENAME = "validation_report.yaml"
+
+# Logging and output labels
+X_TRAIN_LABEL = "X_train"
+Y_TRAIN_LABEL = "y_train"
+X_VAL_LABEL = "X_val"
+Y_VAL_LABEL = "y_val"
+X_TEST_LABEL = "X_test"
+Y_TEST_LABEL = "y_test"
+
+================================================================================
+# FILE: src\networksecurity\data_processors\encoder_factory.py
+================================================================================
+
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
+from sklearn.pipeline import Pipeline
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class EncoderFactory:
+    """
+    Factory to build encoding pipelines for categorical features.
+    Supports: onehot, ordinal.
+    Easily extendable with new encoders.
+    """
+    _SUPPORTED_METHODS = {
+        "onehot": OneHotEncoder,
+        "ordinal": OrdinalEncoder
+    }
+
+    @staticmethod
+    def get_encoder_pipeline(method: str, params: dict = None) -> Pipeline:
+        try:
+            if method in EncoderFactory._SUPPORTED_METHODS:
+                encoder_class = EncoderFactory._SUPPORTED_METHODS[method]
+                encoder = encoder_class(**(params or {}))
+            else:
+                raise ValueError(f"Unsupported encoding method: {method}")
+
+            return Pipeline([("encoder", encoder)])
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\data_processors\imputer_factory.py
+================================================================================
+
+from sklearn.experimental import enable_iterative_imputer  # noqa: F401
+from sklearn.impute import KNNImputer, SimpleImputer, IterativeImputer
+from sklearn.pipeline import Pipeline
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class ImputerFactory:
+    """
+    Factory to generate sklearn-compatible imputer pipelines.
+    Supports: knn, simple, iterative, and custom methods.
+    Easily extendable with new methods.
+    """
+    _SUPPORTED_METHODS = {
+        "knn": KNNImputer,
+        "simple": SimpleImputer,
+        "iterative": IterativeImputer,
+    }
+
+    @staticmethod
+    def get_imputer_pipeline(method: str, params: dict) -> Pipeline:
+        try:
+            if method == "custom":
+                if "custom_callable" not in params:
+                    raise ValueError("Custom imputer requires a 'custom_callable' in params.")
+                imputer = params["custom_callable"]()
+            else:
+                imputer_class = ImputerFactory._SUPPORTED_METHODS.get(method)
+                if not imputer_class:
+                    raise ValueError(f"Unsupported imputation method: {method}")
+                imputer = imputer_class(**params)
+
+            return Pipeline([("imputer", imputer)])
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\data_processors\preprocessor_builder.py
+================================================================================
+
+# FILE: src/networksecurity/data_processors/preprocessor_builder.py
+
+from sklearn.pipeline import Pipeline
+from sklearn.experimental import enable_iterative_imputer
+from src.networksecurity.data_processors.imputer_factory import ImputerFactory
+from src.networksecurity.data_processors.scaler_factory import ScalerFactory
+from src.networksecurity.data_processors.encoder_factory import EncoderFactory
+from src.networksecurity.data_processors.target_label_normalizer import TargetLabelNormalizer
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class PreprocessorBuilder:
+    """
+    Builds preprocessing pipelines for X and Y using dynamic configuration.
+    Skips steps that are explicitly set to "none" or not provided at all.
+    """
+
+    STEP_BUILDERS = {
+        "imputer": ImputerFactory.get_imputer_pipeline,
+        "scaler": ScalerFactory.get_scaler_pipeline,
+        "encoder": EncoderFactory.get_encoder_pipeline,
+        "label_normalizer": lambda method, params: TargetLabelNormalizer()
+    }
+
+    def __init__(self, steps: dict, methods: dict):
+        self.steps = steps or {}
+        self.methods = methods or {}
+
+
+    def _build_pipeline(self, section: str) -> Pipeline:
+        try:
+            pipeline_steps = []
+            steps_to_build = self.steps.get(section, {})
+            methods = self.methods.get(section, {})
+
+            for step_name, method_name in steps_to_build.items():
+                # Skip if explicitly marked as 'none' (case-insensitive)
+                if method_name is None or str(method_name).lower() == "none":
+                    logger.info(f"Skipping step '{step_name}' for '{section}' as it is set to 'none'.")
+                    continue
+
+                builder = self.STEP_BUILDERS.get(step_name)
+                if not builder:
+                    raise ValueError(f"Unsupported step: {step_name}")
+
+                params = methods.get(step_name, {})
+                pipeline_steps.append((step_name, builder(method_name, params)))
+
+            return Pipeline(pipeline_steps)
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def build(self):
+        try:
+            x_pipeline = self._build_pipeline("x")
+            y_pipeline = self._build_pipeline("y")
+            return x_pipeline, y_pipeline
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\data_processors\scaler_factory.py
+================================================================================
+
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+from sklearn.pipeline import Pipeline
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class ScalerFactory:
+    """
+    Factory to create scaling transformers.
+    Supports: standard, minmax, robust.
+    Easily extendable with new scalers.
+    """
+    _SUPPORTED_METHODS = {
+        "standard": StandardScaler,
+        "minmax": MinMaxScaler,
+        "robust": RobustScaler
+    }
+
+    @staticmethod
+    def get_scaler_pipeline(method: str, params: dict = None) -> Pipeline:
+        try:
+            if method in ScalerFactory._SUPPORTED_METHODS:
+                scaler_class = ScalerFactory._SUPPORTED_METHODS[method]
+                scaler = scaler_class(**(params or {}))
+            else:
+                raise ValueError(f"Unsupported scaler method: {method}")
+
+            return Pipeline([("scaler", scaler)])
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# FILE: src\networksecurity\data_processors\target_label_normalizer.py
+================================================================================
+
+import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
+
+
+class TargetLabelNormalizer(BaseEstimator, TransformerMixin):
+    """
+    Custom transformer to normalize the target column values.
+    Replaces -1 with 0.
+    """
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, y: pd.Series) -> pd.Series:
+        return y.replace(-1, 0)
 
 ================================================================================
 # FILE: src\networksecurity\dbhandler\__init__.py
@@ -1138,10 +1683,9 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 import pandas as pd
 from pathlib import Path
-import json
 
 from src.networksecurity.entity.config_entity import MongoHandlerConfig
-from src.networksecurity.utils.common import csv_to_json_convertor, create_directories
+from src.networksecurity.utils.core import csv_to_json_convertor, save_to_json
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
 from src.networksecurity.constants.constants import (
@@ -1166,7 +1710,7 @@ class MongoDBHandler(DBHandler):
                 connectTimeoutMS=MONGODB_CONNECT_TIMEOUT_MS,
                 socketTimeoutMS=MONGODB_SOCKET_TIMEOUT_MS,
             )
-            logger.debug("MongoClient initialized.")
+            logger.info("MongoClient initialized.")
         return self._client
 
     def close(self) -> None:
@@ -1185,14 +1729,10 @@ class MongoDBHandler(DBHandler):
 
     def insert_csv_to_collection(self, csv_filepath: Path) -> int:
         try:
-
             records = csv_to_json_convertor(csv_filepath, self.config.json_data_filepath)
 
-            create_directories(self.config.json_data_dir)
-
-            # Save records as JSON to the specified filepath
-            with open(self.config.json_data_filepath, "w", encoding="utf-8") as f:
-                json.dump(records, f, indent=4)
+            # Save records as JSON using core utility
+            save_to_json(records, self.config.json_data_filepath, label="Converted JSON Records")
 
             db = self._get_client()[self.config.database_name]
             collection = db[self.config.collection_name]
@@ -1251,10 +1791,10 @@ class DataIngestionArtifact:
         ingested_data_str = self.ingested_data_filepath.as_posix() if self.ingested_data_filepath else "None"
 
         return (
-            "\nData Ingestion Artifact Paths:\n"
-            f"  - Raw Artifact:     '{raw_artifact_str}'\n"
-            f"  - Raw DVC Path:     '{raw_dvc_str}'\n"
-            f"  - Ingested Data Path:     '{ingested_data_str}'\n"
+            "\nData Ingestion Artifact:\n"
+            f"  - Raw Artifact:         '{raw_artifact_str}'\n"
+            f"  - Raw DVC Path:         '{raw_dvc_str}'\n"
+            f"  - Ingested Data Path:   '{ingested_data_str}'\n"
         )
 
 
@@ -1267,9 +1807,36 @@ class DataValidationArtifact:
         validated_str = self.validated_filepath.as_posix() if self.validated_filepath else "None"
 
         return (
-            "\nData Validation Artifact Paths:\n"
+            "\nData Validation Artifact:\n"
             f"  - Validated Data Path: '{validated_str}'\n"
             f"  - Validation Status:   '{self.validation_status}'\n"
+        )
+
+@dataclass(frozen=True)
+class DataTransformationArtifact:
+    x_train_filepath: Path
+    y_train_filepath: Path
+    x_val_filepath: Path
+    y_val_filepath: Path
+    x_test_filepath: Path
+    y_test_filepath: Path
+
+    def __repr__(self) -> str:
+        x_train_str = self.x_train_filepath.as_posix() if self.x_train_filepath else "None"
+        y_train_str = self.y_train_filepath.as_posix() if self.y_train_filepath else "None"
+        x_val_str = self.x_val_filepath.as_posix() if self.x_val_filepath else "None"
+        y_val_str = self.y_val_filepath.as_posix() if self.y_val_filepath else "None"
+        x_test_str = self.x_test_filepath.as_posix() if self.x_test_filepath else "None"
+        y_test_str = self.y_test_filepath.as_posix() if self.y_test_filepath else "None"
+
+        return (
+            "\nData Transformation Artifact:\n"
+            f"  - X-Train Data Path:    '{x_train_str}'\n"
+            f"  - Y-Train Data Path:    '{y_train_str}'\n"
+            f"  - X-Val Data Path:      '{x_val_str}'\n"
+            f"  - Y-Val Data Path:      '{y_val_str}'\n"
+            f"  - X-Test Data Path:     '{x_test_str}'\n"
+            f"  - Y-Test Data Path:     '{y_test_str}'\n"
         )
 
 ================================================================================
@@ -1324,7 +1891,7 @@ class DataIngestionConfig:
         return self.ingested_data_dir / self.ingested_data_filename
 
 
-@dataclass(frozen=True)
+@dataclass
 class DataValidationConfig:
     root_dir: Path
     validated_dir: Path
@@ -1338,6 +1905,12 @@ class DataValidationConfig:
     validation_params: dict
     validated_dvc_path: Path
     val_report_template: dict
+
+    def __post_init__(self) -> Path:
+        self.root_dir = Path(self.root_dir)
+        self.validated_dir = Path(self.validated_dir)
+        self.report_dir = Path(self.report_dir)
+        self.validated_dvc_path = Path(self.validated_dvc_path)
 
     @property
     def validated_filepath(self) -> Path:
@@ -1363,69 +1936,59 @@ class DataValidationConfig:
 @dataclass
 class DataTransformationConfig:
     root_dir: Path
-    transformed_dir: Path
-    transformed_train_filename: str
-    transformed_test_filename: str
-    preprocessor_dir: Path
-    preprocessing_object_filename: str
     transformation_params: dict
+    train_dir: Path
+    val_dir: Path
+    test_dir: Path
+    x_train_filename: str
+    y_train_filename: str
+    x_val_filename: str
+    y_val_filename: str
+    x_test_filename: str
+    y_test_filename: str
+    preprocessor_dir: Path
+    x_preprocessor_filename: str
+    y_preprocessor_filename: str
+    target_column: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> Path:
         self.root_dir = Path(self.root_dir)
-        self.transformed_dir = Path(self.transformed_dir)
+        self.train_dir = Path(self.train_dir)
+        self.val_dir = Path(self.val_dir)
+        self.test_dir = Path(self.test_dir)
         self.preprocessor_dir = Path(self.preprocessor_dir)
 
     @property
-    def transformed_train_filepath(self) -> Path:
-        return self.transformed_dir / self.transformed_train_filename
+    def x_train_filepath(self) -> Path:
+        return self.train_dir / self.x_train_filename
 
     @property
-    def transformed_test_filepath(self) -> Path:
-        return self.transformed_dir / self.transformed_test_filename
+    def y_train_filepath(self) -> Path:
+        return self.train_dir / self.y_train_filename
 
     @property
-    def preprocessor_filepath(self) -> Path:
-        return self.preprocessor_dir / self.preprocessing_object_filename
-
-
-@dataclass
-class ModelTrainerConfig:
-    root_dir: Path
-    trained_model_filename: str
-    params: dict
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
+    def x_val_filepath(self) -> Path:
+        return self.val_dir / self.x_val_filename
 
     @property
-    def trained_model_filepath(self) -> Path:
-        return self.root_dir / self.trained_model_filename
-
-
-@dataclass
-class ModelEvaluationConfig:
-    root_dir: Path
-    evaluation_report_filename: str
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
+    def y_val_filepath(self) -> Path:
+        return self.val_dir / self.y_val_filename
 
     @property
-    def evaluation_report_filepath(self) -> Path:
-        return self.root_dir / self.evaluation_report_filename
-
-
-@dataclass
-class ModelPredictionConfig:
-    root_dir: Path
-    prediction_output_filename: str
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
+    def x_test_filepath(self) -> Path:
+        return self.test_dir / self.x_test_filename
 
     @property
-    def prediction_output_filepath(self) -> Path:
-        return self.root_dir / self.prediction_output_filename
+    def y_test_filepath(self) -> Path:
+        return self.test_dir / self.y_test_filename
+
+    @property
+    def x_preprocessor_filepath(self) -> Path:
+        return self.preprocessor_dir / self.x_preprocessor_filename
+
+    @property
+    def y_preprocessor_filepath(self) -> Path:
+        return self.preprocessor_dir / self.y_preprocessor_filename
 
 ================================================================================
 # FILE: src\networksecurity\exception\__init__.py
@@ -1647,7 +2210,7 @@ class DataIngestionPipeline:
             )
             artifact = ingestion.run_ingestion()
 
-            logger.info(f"Data Ingestion Process Completed. {artifact}")
+            logger.info(f"Data Ingestion Process Completed.\n{artifact}")
             logger.info("========== Data Ingestion Stage Completed ==========")
 
             return artifact
@@ -1742,7 +2305,7 @@ class DataValidationPipeline:
             logger.info("========= Data Validation Stage Started =========")
             validation = DataValidation(config=self.config, ingestion_artifact=self.ingestion_artifact)
             validation_artifact = validation.run_validation()
-            logger.info(f"Data Validation Process Completed. {validation_artifact}")
+            logger.info(f"Data Validation Process Completed.\n{validation_artifact}")
             logger.info("========= Data Validation Stage Completed =========")
             return validation_artifact
         except Exception as e:
@@ -1756,20 +2319,18 @@ class DataValidationPipeline:
 
 
 ================================================================================
-# FILE: src\networksecurity\utils\common.py
+# FILE: src\networksecurity\utils\core.py
 ================================================================================
 
 import json
-from pathlib import Path
-from typing import Union
-from urllib.parse import quote_plus
-
+import joblib
 import pandas as pd
 import yaml
+from pathlib import Path
 from box import ConfigBox
 from box.exceptions import BoxKeyError, BoxTypeError, BoxValueError
+from urllib.parse import quote_plus
 from ensure import ensure_annotations
-from datetime import datetime, timezone
 
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
@@ -1777,7 +2338,6 @@ from src.networksecurity.logging import logger
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
-    """Read and parse a YAML file into a ConfigBox object."""
     if not path_to_yaml.exists():
         msg = f"YAML file not found: '{path_to_yaml}'"
         logger.error(msg)
@@ -1803,31 +2363,23 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
 
 
 @ensure_annotations
-def create_directories(*paths: Path):
-    """Create one or more directories (including parent folders if needed)."""
-    try:
-        for path in paths:
-            path = Path(path)
-            path.mkdir(parents=True, exist_ok=True)
-            logger.info(f"Created directory at: '{path.as_posix()}'")
-    except Exception as e:
-        raise NetworkSecurityError(e, logger) from e
-
-
-@ensure_annotations
 def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
     """
     Convert a CSV file to a list of JSON records and optionally save it.
     """
     try:
+        if not source_filepath.exists():
+            raise FileNotFoundError(f"CSV source file not found: '{source_filepath.as_posix()}'")
+
         df = pd.read_csv(source_filepath).reset_index(drop=True)
         records = df.to_dict(orient="records")
 
-        # Ensure output directory exists
         parent_dir = destination_filepath.parent
         if not parent_dir.exists():
             parent_dir.mkdir(parents=True, exist_ok=True)
-            logger.info(f"Created directory for JSON output at: '{parent_dir.as_posix()}'")
+            logger.info(f"Created directory for JSON output: '{parent_dir.as_posix()}'")
+        else:
+            logger.info(f"Directory already exists for JSON output: '{parent_dir.as_posix()}'")
 
         with destination_filepath.open("w", encoding="utf-8") as f:
             json.dump(records, f, indent=4)
@@ -1838,12 +2390,12 @@ def csv_to_json_convertor(source_filepath: Path, destination_filepath: Path):
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
 
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
 
 @ensure_annotations
 def replace_username_password_in_uri(base_uri: str, username: str, password: str) -> str:
-    """
-    Safely replace <username> and <password> in a MongoDB URI with encoded credentials.
-    """
     if not all([base_uri, username, password]):
         raise ValueError("base_uri, username, and password must all be provided.")
 
@@ -1859,85 +2411,86 @@ def replace_username_password_in_uri(base_uri: str, username: str, password: str
 
 @ensure_annotations
 def save_to_yaml(data: dict, *paths: Path, label: str):
-    """
-    Save a dictionary to one or more YAML file paths.
-
-    Args:
-        data (dict): The dictionary to be written as YAML.
-        *paths (Path): One or more output file paths.
-        label (str): Descriptive label used in logs.
-    """
     try:
         for path in paths:
             path = Path(path)
-            path.parent.mkdir(parents=True, exist_ok=True)
+            if not path.parent.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Created directory for {label}: '{path.parent.as_posix()}'")
+            else:
+                logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
+
             with open(path, "w") as file:
                 yaml.dump(data, file, sort_keys=False)
+
             logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
 
+
 @ensure_annotations
 def save_to_csv(df: pd.DataFrame, *paths: Path, label: str):
-    """
-    Save a DataFrame to one or more CSV file paths.
-
-    Args:
-        df (pd.DataFrame): The DataFrame to save.
-        *paths (Path): One or more output file paths.
-        label (str): Descriptive label used in logs.
-    """
     try:
         for path in paths:
             path = Path(path)
-            path.parent.mkdir(parents=True, exist_ok=True)
+            if not path.parent.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Created directory for {label}: '{path.parent.as_posix()}'")
+            else:
+                logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
+
             df.to_csv(path, index=False)
             logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
-    
+
 
 @ensure_annotations
-def save_to_json(data: dict | list, *paths: Path, label: str):
-    """
-    Save a dictionary or list to one or more JSON file paths.
-
-    Args:
-        data (dict | list): The data to be written as JSON.
-        *paths (Path): One or more output file paths.
-        label (str): Descriptive label used in logs.
-    """
+def save_to_json(data: dict, *paths: Path, label: str):
     try:
         for path in paths:
             path = Path(path)
-            path.parent.mkdir(parents=True, exist_ok=True)
+            if not path.parent.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Created directory for {label}: '{path.parent.as_posix()}'")
+            else:
+                logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
+
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
+
             logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
-    
+
+
 @ensure_annotations
 def read_csv(path: Path, label: str) -> pd.DataFrame:
-    """
-    Load a DataFrame from a CSV file and log the operation.
-
-    Args:
-        path (Path): Path to the CSV file.
-        label (str): Descriptive label used in logs.
-
-    Returns:
-        pd.DataFrame: Loaded DataFrame.
-    """
     try:
         path = Path(path)
         if not path.exists():
             raise FileNotFoundError(f"{label} not found at path: {path.as_posix()}")
 
         df = pd.read_csv(path)
-        logger.info(f"{label} loaded successfully from: '{path.as_posix()}'")
+        logger.info(f"{label} loaded from: '{path.as_posix()}'")
         return df
 
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+
+@ensure_annotations
+def save_object(obj: object, path: Path, label: str):
+    try:
+        path = Path(path)
+        if not path.parent.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Created directory for {label}: '{path.parent.as_posix()}'")
+        else:
+            logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
+
+        joblib.dump(obj, path)
+        logger.info(f"{label} saved to: '{path.as_posix()}'")
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
 
@@ -2007,14 +2560,18 @@ data_validation:
 
 # Data transformation configuration
 data_transformation:
-  transformed_train_data_filename: train_data.csv
-  transformed_test_data_filename: test_data.csv
-  validation_data_filename: validation_data.csv
-  preprocessing_object_filename: preprocessing.pkl
+  x_train_filename: x_train.csv
+  y_train_filename: y_train.csv
+  x_val_filename: x_val.csv
+  y_val_filename: y_val.csv
+  x_test_filename: x_test.csv
+  y_test_filename: y_test.csv
+  x_preprocessor_filename: x_preprocessor.joblib
+  y_preprocessor_filename: y_preprocessor.joblib
 
 # Model trainer configuration
 model_trainer:
-  trained_model_filename: model.pkl
+  trained_model_filename: model.joblib
 
 # Model evaluation configuration
 model_evaluation:
@@ -2052,19 +2609,33 @@ validation_params:
 
 # Parameters for data transformation
 transformation_params:
-  imputer:
-    method: knn
-    knn:
-      missing_values: .nan
-      n_neighbors: 3
-      weights: uniform
+  # Parameters for data splitting
+  data_split:
+    train_size: 0.6
+    test_size: 0.2
+    val_size: 0.2
+    random_state: 42
+    stratify: true
+
+  steps:
+    x:
+      imputer: knn
+    y:
+      label_mapping: label_mapping
+
+  methods:
+    x:
+      imputer:
+        missing_values: null
+        n_neighbors: 3
+        weights: uniform
+    y:
+      label_mapping:
+        from: -1
+        to: 0
 
 
-# Parameters for data splitting
-data_split:
-  test_size: 0.2
-  random_state: 42
-  stratify: true
+
 
 # Parameters for model training
 model_trainer:
@@ -2111,6 +2682,10 @@ columns:
   web_traffic: int64
 
 target_column: Result
+
+target_labels:
+  0: phishing
+  1: legitimate
 
 ================================================================================
 # YAML FILE: research\config\schema.yaml

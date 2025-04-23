@@ -6,7 +6,7 @@ from src.networksecurity.entity.artifact_entity import DataIngestionArtifact
 from src.networksecurity.dbhandler.base_handler import DBHandler
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import save_to_csv, read_csv
+from src.networksecurity.utils.core import save_to_csv, read_csv
 
 
 class DataIngestion:

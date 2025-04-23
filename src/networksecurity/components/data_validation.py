@@ -9,7 +9,7 @@ from src.networksecurity.entity.config_entity import DataValidationConfig
 from src.networksecurity.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
-from src.networksecurity.utils.common import save_to_yaml, save_to_csv, save_to_json, read_csv
+from src.networksecurity.utils.core import save_to_yaml, save_to_csv, save_to_json, read_csv
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 
 

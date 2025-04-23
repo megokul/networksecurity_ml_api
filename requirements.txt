@@ -7,3 +7,5 @@ python-box==7.3.2
 PyYAML==7.3.2
 dvc
 scipy==1.15.2
+joblib
+scikit-learn

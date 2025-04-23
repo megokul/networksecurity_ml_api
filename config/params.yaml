@@ -12,19 +12,33 @@ validation_params:
 
 # Parameters for data transformation
 transformation_params:
-  imputer:
-    method: knn
-    knn:
-      missing_values: .nan
-      n_neighbors: 3
-      weights: uniform
+  # Parameters for data splitting
+  data_split:
+    train_size: 0.6
+    test_size: 0.2
+    val_size: 0.2
+    random_state: 42
+    stratify: true
+
+  steps:
+    x:
+      imputer: knn
+    y:
+      label_mapping: label_mapper
+
+  methods:
+    x:
+      imputer:
+        missing_values: null
+        n_neighbors: 3
+        weights: uniform
+    y:
+      label_mapping:
+        from: -1
+        to: 0
 
 
-# Parameters for data splitting
-data_split:
-  test_size: 0.2
-  random_state: 42
-  stratify: true
+
 
 # Parameters for model training
 model_trainer:

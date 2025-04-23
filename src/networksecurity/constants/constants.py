@@ -53,8 +53,12 @@ REPORTS_SUBDIR = "reports"
 SCHEMA_HASH_SUBDIR = "schema_hash"
 
 DATA_TRANSFORMATION_SUBDIR = "data_transformation"
-TRANSFORMED_SUBDIR = "transformed"
-TRANSFORMED_OBJECT_SUBDIR = "transformed_object"
+DATA_SUBDIR = "data"
+DATA_TRAIN_SUBDIR = "train"
+DATA_VAL_SUBDIR = "val"
+DATA_TEST_SUBDIR = "test"
+
+TRANSFORMED_OBJECT_SUBDIR = "preprocessor"
 
 MODEL_TRAINER_SUBDIR = "model_trainer"
 MODEL_EVALUATION_SUBDIR = "model_evaluation"
@@ -69,3 +73,11 @@ DEFAULT_VALIDATED_FILENAME = "validated_data.csv"
 DEFAULT_MISSING_REPORT_FILENAME = "missing_values_report.json"
 DEFAULT_DRIFT_REPORT_FILENAME = "drift_report.yaml"
 DEFAULT_VALIDATION_REPORT_FILENAME = "validation_report.yaml"
+
+# Logging and output labels
+X_TRAIN_LABEL = "X_train"
+Y_TRAIN_LABEL = "y_train"
+X_VAL_LABEL = "X_val"
+Y_VAL_LABEL = "y_val"
+X_TEST_LABEL = "X_test"
+Y_TEST_LABEL = "y_test"
