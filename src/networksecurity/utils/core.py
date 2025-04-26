@@ -15,13 +15,17 @@ from src.networksecurity.logging import logger
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
+    """
+    Load a YAML file as a ConfigBox, always using UTF-8.
+    """
     if not path_to_yaml.exists():
         msg = f"YAML file not found: '{path_to_yaml}'"
         logger.error(msg)
         raise NetworkSecurityError(FileNotFoundError(msg), logger)
 
     try:
-        with path_to_yaml.open("r") as f:
+        # Explicitly open as UTF-8 to avoid Windows cp1252 issues
+        with path_to_yaml.open("r", encoding="utf-8") as f:
             content = yaml.safe_load(f)
     except (BoxValueError, BoxTypeError, BoxKeyError, yaml.YAMLError) as e:
         logger.error(f"Failed to load YAML from {path_to_yaml.as_posix()}: {e}")
@@ -88,6 +92,9 @@ def replace_username_password_in_uri(base_uri: str, username: str, password: str
 
 @ensure_annotations
 def save_to_yaml(data: dict, *paths: Path, label: str):
+    """
+    Write a dict out to YAML, always using UTF-8.
+    """
     try:
         for path in paths:
             path = Path(path)
@@ -97,7 +104,8 @@ def save_to_yaml(data: dict, *paths: Path, label: str):
             else:
                 logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
 
-            with open(path, "w") as file:
+            # Write UTF-8
+            with open(path, "w", encoding="utf-8") as file:
                 yaml.dump(data, file, sort_keys=False)
 
             logger.info(f"{label} saved to: '{path.as_posix()}'")
@@ -200,5 +208,26 @@ def save_object(obj: object, path: Path, label: str):
 
         joblib.dump(obj, path)
         logger.info(f"{label} saved to: '{path.as_posix()}'")
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
+
+@ensure_annotations
+def load_object(path: Path):
+    """
+    Load a serialized Python object from the given path using joblib.
+
+    Args:
+        path (Path): Path to the saved object file.
+
+    Returns:
+        object: The deserialized Python object.
+
+    Raises:
+        NetworkSecurityError: If loading fails.
+    """
+    try:
+        path = Path(path)
+        logger.info(f"Loading object from: '{path.as_posix()}'")
+        return joblib.load(path)
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e

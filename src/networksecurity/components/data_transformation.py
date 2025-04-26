@@ -113,7 +113,9 @@ class DataTransformation:
                 x_val_filepath=self.config.x_val_filepath,
                 y_val_filepath=self.config.y_val_filepath,
                 x_test_filepath=self.config.x_test_filepath,
-                y_test_filepath=self.config.y_test_filepath
+                y_test_filepath=self.config.y_test_filepath,
+                x_preprocessor_filepath=self.config.x_preprocessor_filepath,
+                y_preprocessor_filepath=self.config.y_preprocessor_filepath ,
             )
 
         except Exception as e:

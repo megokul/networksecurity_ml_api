@@ -1,0 +1,25 @@
+timestamp: '2025-04-23T19:43:58.845930+00:00'
+best_model: GradientBoostingClassifier
+best_model_params:
+  n_estimators: 200
+  learning_rate: 0.13083319831442564
+  max_depth: 4
+train_metrics:
+  accuracy: 0.981761185522941
+  f1: 0.9811764705882353
+  precision: 0.9800235017626322
+  recall: 0.9823321554770318
+val_metrics:
+  accuracy: 0.9495726495726495
+  f1: 0.94874022589053
+  precision: 0.9333333333333333
+  recall: 0.9646643109540636
+optimization:
+  method: optuna
+  best_trial: 13
+  n_trials: 30
+  direction: maximize
+  cv:
+    folds: 5
+    mean_score: 0.9475661549841293
+    std_score: 0.0

@@ -34,10 +34,16 @@ data_transformation:
   y_test_filename: y_test.npy
   x_preprocessor_filename: x_preprocessor.joblib
   y_preprocessor_filename: y_preprocessor.joblib
+  
 
 # Model trainer configuration
 model_trainer:
+  root_dir: artifacts/model_trainer
+  model_dir: saved_models
   trained_model_filename: model.joblib
+  # where to dump a short training report
+  training_report_filename: training_report.yaml
+  
 
 # Model evaluation configuration
 model_evaluation:

@@ -6,10 +6,22 @@
     📁 cache/
         📁 files/
             📁 md5/
+                📁 68/
+                    📄 770e0efceb9cd3777502f505ecbec4
+                📁 70/
+                    📄 3506878baa6bf0360b2b42782e9677
+                📁 83/
+                    📄 de4e3a0dbe7d93403a8c15753377f7
+                📁 86/
+                    📄 4e5c8474fcd1b15bc434932036628d
                 📁 87/
                     📄 f220430be73d16609bfd637b1644af
+                📁 8d/
+                    📄 e71e17a20f71bece7659a34bae7027
                 📁 bf/
                     📄 fa4350e8aa16caaa3cbb92ec8e048c
+                📁 e1/
+                    📄 a8ae356f072436dd3acc1bcbafbd89
     📄 config
     📁 tmp/
         📄 btime
@@ -22,6 +34,8 @@
                     📄 faf510268751ce441d9178a563f5e2c4577d88
                 📁 4a/
                     📄 640ce33b51ffeb8c1aa85e520ce78dfe105123
+                📁 61/
+                    📄 a81d71c590a7a662176a82aa5f00a7532a3e16
                 📁 8a/
                     📄 ed08439cb37bbee9fee4ad00d82ea30435606b
                 📁 a8/
@@ -34,6 +48,8 @@
                     📄 31a093cb23b7a2bef65922d39d9d20ac56e6f3
                 📁 e3/
                     📄 5de325a2125360b5ae289c080fc748a0140cdc
+                📁 f9/
+                    📄 21cb7aa3662a13f16a67e07a71781cec9b1a91
             📁 celery/
                 📁 broker/
                     📁 control/
@@ -51,12 +67,26 @@
 📄 README.md
 📄 app.py
 📁 artifacts/
-    📁 2025_04_19T12_56_55Z/
+    📁 2025_04_23T19_43_09Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
             📁 ingested/
                 📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
         📁 data_validation/
             📁 reports/
                 📄 drift_report.yaml
@@ -65,18 +95,29 @@
                 📄 validation_report.yaml
             📁 validated/
                 📄 validated_data.csv
-    📁 2025_04_22T21_53_01Z/
+        📁 model_trainer/
+            📄 model.joblib
+            📄 training_report.yaml
+    📁 2025_04_23T19_48_15Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
             📁 ingested/
                 📄 ingested_data.csv
-    📁 2025_04_22T21_56_37Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
         📁 data_validation/
             📁 reports/
                 📄 drift_report.yaml
@@ -85,12 +126,29 @@
                 📄 validation_report.yaml
             📁 validated/
                 📄 validated_data.csv
-    📁 2025_04_22T22_05_53Z/
+        📁 model_trainer/
+            📄 model.joblib
+            📄 training_report.yaml
+    📁 2025_04_23T19_54_45Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
             📁 ingested/
                 📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
         📁 data_validation/
             📁 reports/
                 📄 drift_report.yaml
@@ -99,104 +157,9 @@
                 📄 validation_report.yaml
             📁 validated/
                 📄 validated_data.csv
-    📁 2025_04_22T22_10_04Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_17_30Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_19_50Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_27_46Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_29_59Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_30_37Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
-    📁 2025_04_22T22_31_10Z/
-        📁 data_ingestion/
-            📁 featurestore/
-                📄 raw_data.csv
-            📁 ingested/
-                📄 ingested_data.csv
-        📁 data_validation/
-            📁 reports/
-                📄 drift_report.yaml
-                📄 duplicates_report.yaml
-                📄 missing_values_report.json
-                📄 validation_report.yaml
-            📁 validated/
-                📄 validated_data.csv
+        📁 model_trainer/
+            📄 model.joblib
+            📄 training_report.yaml
 📁 config/
     📄 config.yaml
     📄 params.yaml
@@ -206,52 +169,34 @@
     📁 raw/
         📄 raw_data.csv
         📄 raw_data.csv.dvc
+    📁 transformed/
+        📁 test/
+            📄 x_test.npy
+            📄 x_test.npy.dvc
+            📄 y_test.npy
+            📄 y_test.npy.dvc
+        📁 train/
+            📄 x_train.npy
+            📄 x_train.npy.dvc
+            📄 y_train.npy
+            📄 y_train.npy.dvc
+        📁 val/
+            📄 x_val.npy
+            📄 x_val.npy.dvc
+            📄 y_val.npy
+            📄 y_val.npy.dvc
     📁 validated/
         📄 validated_data.csv
         📄 validated_data.csv.dvc
 📄 debug.py
 📄 debug_pipeline.py
 📁 logs/
-    📁 2025_04_19T12_56_55Z/
-        📄 2025_04_19T12_56_55Z.log
-    📁 2025_04_22T21_23_46Z/
-        📄 2025_04_22T21_23_46Z.log
-    📁 2025_04_22T21_24_10Z/
-        📄 2025_04_22T21_24_10Z.log
-    📁 2025_04_22T21_24_25Z/
-        📄 2025_04_22T21_24_25Z.log
-    📁 2025_04_22T21_27_50Z/
-        📄 2025_04_22T21_27_50Z.log
-    📁 2025_04_22T21_28_33Z/
-        📄 2025_04_22T21_28_33Z.log
-    📁 2025_04_22T21_31_47Z/
-        📄 2025_04_22T21_31_47Z.log
-    📁 2025_04_22T21_32_05Z/
-        📄 2025_04_22T21_32_05Z.log
-    📁 2025_04_22T21_32_12Z/
-        📄 2025_04_22T21_32_12Z.log
-    📁 2025_04_22T21_33_22Z/
-        📄 2025_04_22T21_33_22Z.log
-    📁 2025_04_22T21_53_01Z/
-        📄 2025_04_22T21_53_01Z.log
-    📁 2025_04_22T21_56_37Z/
-        📄 2025_04_22T21_56_37Z.log
-    📁 2025_04_22T22_05_53Z/
-        📄 2025_04_22T22_05_53Z.log
-    📁 2025_04_22T22_10_04Z/
-        📄 2025_04_22T22_10_04Z.log
-    📁 2025_04_22T22_17_30Z/
-        📄 2025_04_22T22_17_30Z.log
-    📁 2025_04_22T22_19_50Z/
-        📄 2025_04_22T22_19_50Z.log
-    📁 2025_04_22T22_27_46Z/
-        📄 2025_04_22T22_27_46Z.log
-    📁 2025_04_22T22_29_59Z/
-        📄 2025_04_22T22_29_59Z.log
-    📁 2025_04_22T22_30_37Z/
-        📄 2025_04_22T22_30_37Z.log
-    📁 2025_04_22T22_31_10Z/
-        📄 2025_04_22T22_31_10Z.log
+    📁 2025_04_23T19_43_09Z/
+        📄 2025_04_23T19_43_09Z.log
+    📁 2025_04_23T19_48_15Z/
+        📄 2025_04_23T19_48_15Z.log
+    📁 2025_04_23T19_54_45Z/
+        📄 2025_04_23T19_54_45Z.log
 📄 main.py
 📁 network_data/
     📁 input_csv/
@@ -286,6 +231,7 @@
             📄 data_ingestion.py
             📄 data_transformation.py
             📄 data_validation.py
+            📄 model_trainer.py
         📁 config/
             📄 __init__.py
             📄 configuration.py
@@ -295,9 +241,9 @@
         📁 data_processors/
             📄 encoder_factory.py
             📄 imputer_factory.py
+            📄 label_mapper.py
             📄 preprocessor_builder.py
             📄 scaler_factory.py
-            📄 target_label_normalizer.py
         📁 dbhandler/
             📄 __init__.py
             📄 base_handler.py
@@ -309,6 +255,8 @@
         📁 exception/
             📄 __init__.py
             📄 exception.py
+        📁 inference/
+            📄 estimator.py
         📁 logging/
             📄 __init__.py
             📄 logger.py
@@ -317,6 +265,7 @@
             📄 data_ingestion_pipeline.py
             📄 data_transformation_pipeline.py
             📄 data_validation_pipeline.py
+            📄 model_trainer_pipeline.py
         📁 utils/
             📄 __init__.py
             📄 core.py
@@ -357,45 +306,70 @@ with mongohandler:
 # FILE: debug_pipeline.py
 ================================================================================
 
+# FILE: debug_pipeline.py
+
 from dotenv import load_dotenv
 from src.networksecurity.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from src.networksecurity.pipeline.data_validation_pipeline import DataValidationPipeline
 from src.networksecurity.pipeline.data_transformation_pipeline import DataTransformationPipeline
+from src.networksecurity.pipeline.model_trainer_pipeline import ModelTrainerPipeline
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
 
-# Load environment variables
+# Load environment variables (e.g. MONGO_URI, MLFLOW_TRACKING_URI, etc.)
 load_dotenv()
 
 if __name__ == "__main__":
     try:
-        # Run Data Ingestion
+        # ────────────────
+        # Data Ingestion
+        # ────────────────
         logger.info("========== Launching Data Ingestion Pipeline ==========")
         ingestion_pipeline = DataIngestionPipeline()
         ingestion_artifact = ingestion_pipeline.run()
         logger.info("========== Data Ingestion Pipeline Finished ==========")
         logger.info("======================================================")
 
-        # Run Data Validation
+        # ────────────────
+        # Data Validation
+        # ────────────────
         logger.info("========== Launching Data Validation Pipeline ==========")
-        validation_pipeline = DataValidationPipeline(ingestion_artifact=ingestion_artifact)
+        validation_pipeline = DataValidationPipeline(
+            ingestion_artifact=ingestion_artifact
+        )
         validation_artifact = validation_pipeline.run()
         logger.info("========== Data Validation Pipeline Finished ==========")
         logger.info("======================================================")
 
-        # Run Data Transformation
+        # ────────────────
+        # Data Transformation
+        # ────────────────
         if validation_artifact.validation_status:
             logger.info("========== Launching Data Transformation Pipeline ==========")
-            transformation_pipeline = DataTransformationPipeline(validation_artifact=validation_artifact)
+            transformation_pipeline = DataTransformationPipeline(
+                validation_artifact=validation_artifact
+            )
             transformation_artifact = transformation_pipeline.run()
             logger.info("========== Data Transformation Pipeline Finished ==========")
             logger.info("======================================================")
         else:
             logger.warning("⚠️ Skipping Data Transformation: Validation failed.")
+            raise RuntimeError("Cannot proceed to transformation without valid data.")
 
-    except NetworkSecurityError as e:
+        # ────────────────
+        # Model Training
+        # ────────────────
+        logger.info("========== Launching Model Trainer Pipeline ==========")
+        trainer_pipeline = ModelTrainerPipeline(
+            transformation_artifact=transformation_artifact
+        )
+        trainer_artifact = trainer_pipeline.run()
+        logger.info("========== Model Trainer Pipeline Finished ==========")
+        logger.info("======================================================")
+
+    except NetworkSecurityError:
         logger.exception("❌ Pipeline failed due to a known exception.")
-    except Exception as e:
+    except Exception:
         logger.exception("❌ Pipeline failed due to an unexpected exception.")
 
 ================================================================================
@@ -846,7 +820,7 @@ from src.networksecurity.entity.config_entity import DataTransformationConfig
 from src.networksecurity.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.utils.core import read_csv, save_to_csv, save_object
+from src.networksecurity.utils.core import read_csv, save_to_csv, save_object, save_array
 from src.networksecurity.data_processors.preprocessor_builder import PreprocessorBuilder
 from src.networksecurity.constants.constants import (
     X_TRAIN_LABEL, Y_TRAIN_LABEL,
@@ -899,12 +873,13 @@ class DataTransformation:
 
     def _save_datasets(self, X_train, X_val, X_test, y_train, y_val, y_test):
         try:
-            save_to_csv(X_train, self.config.x_train_filepath, label=X_TRAIN_LABEL)
-            save_to_csv(y_train, self.config.y_train_filepath, label=Y_TRAIN_LABEL)
-            save_to_csv(X_val, self.config.x_val_filepath, label=X_VAL_LABEL)
-            save_to_csv(y_val, self.config.y_val_filepath, label=Y_VAL_LABEL)
-            save_to_csv(X_test, self.config.x_test_filepath, label=X_TEST_LABEL)
-            save_to_csv(y_test, self.config.y_test_filepath, label=Y_TEST_LABEL)
+            save_array(X_train, self.config.x_train_filepath, self.config.x_train_dvc_filepath, label=X_TRAIN_LABEL)
+
+            save_array(y_train, self.config.y_train_filepath, self.config.y_train_dvc_filepath, label=Y_TRAIN_LABEL)
+            save_array(X_val, self.config.x_val_filepath, self.config.x_val_dvc_filepath, label=X_VAL_LABEL)
+            save_array(y_val, self.config.y_val_filepath, self.config.y_val_dvc_filepath, label=Y_VAL_LABEL)
+            save_array(X_test, self.config.x_test_filepath, self.config.x_test_dvc_filepath, label=X_TEST_LABEL)
+            save_array(y_test, self.config.y_test_filepath, self.config.y_test_dvc_filepath, label=Y_TEST_LABEL)
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
@@ -1137,6 +1112,263 @@ class DataValidation:
             raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
+# FILE: src\networksecurity\components\model_trainer.py
+================================================================================
+
+import os
+import importlib
+from pathlib import Path
+from datetime import datetime, timezone
+
+import dagshub
+import mlflow
+import optuna
+import numpy as np
+import joblib
+
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import get_scorer
+from mlflow import sklearn as mlflow_sklearn
+
+from src.networksecurity.entity.config_entity import ModelTrainerConfig
+from src.networksecurity.entity.artifact_entity import (
+    DataTransformationArtifact,
+    ModelTrainerArtifact,
+)
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.utils.core import save_to_yaml, save_object
+
+
+class ModelTrainer:
+    def __init__(
+        self,
+        config: ModelTrainerConfig,
+        transformation_artifact: DataTransformationArtifact,
+    ):
+        """
+        Args:
+            config: ModelTrainerConfig (paths, optuna, mlflow, etc.)
+            transformation_artifact: DataTransformationArtifact (x/y train & val filepaths)
+        """
+        try:
+            self.config = config
+            self.transformation_artifact = transformation_artifact
+
+            logger.info(f"Initializing ModelTrainer with root_dir={config.root_dir}")
+            config.root_dir.mkdir(parents=True, exist_ok=True)
+
+            if config.tracking.mlflow.enabled:
+                logger.info("MLflow tracking is enabled. Initializing DagsHub + MLflow...")
+                dagshub.init(
+                    repo_owner=os.getenv("DAGSHUB_REPO_OWNER"),
+                    repo_name=os.getenv("DAGSHUB_REPO_NAME"),
+                    mlflow=True,
+                )
+                mlflow.set_tracking_uri(config.tracking.tracking_uri)
+                mlflow.set_experiment(config.tracking.mlflow.experiment_name)
+                logger.info(f"MLflow experiment set to '{config.tracking.mlflow.experiment_name}' "
+                            f"@ {config.tracking.tracking_uri}")
+
+        except Exception as e:
+            logger.error("Failed to initialize ModelTrainer", exc_info=True)
+            raise NetworkSecurityError(e, logger) from e
+
+    def _load_data(self):
+        """Load NumPy arrays directly from the transformation artifact."""
+        try:
+            logger.info("Loading transformed data arrays from disk...")
+            self.X_train = np.load(self.transformation_artifact.x_train_filepath)
+            self.y_train = np.load(self.transformation_artifact.y_train_filepath)
+            self.X_val   = np.load(self.transformation_artifact.x_val_filepath)
+            self.y_val   = np.load(self.transformation_artifact.y_val_filepath)
+            logger.info(f"Loaded X_train {self.X_train.shape}, y_train {self.y_train.shape}; "
+                        f"X_val {self.X_val.shape}, y_val {self.y_val.shape}")
+        except Exception as e:
+            logger.error("Error loading data arrays", exc_info=True)
+            raise NetworkSecurityError(e, logger) from e
+
+    def _instantiate(self, fullname: str, params: dict):
+        """Dynamically import & instantiate a sklearn estimator."""
+        module, cls = fullname.rsplit(".", 1)
+        logger.info(f"Instantiating model {fullname} with params={params}")
+        return getattr(importlib.import_module(module), cls)(**(params or {}))
+
+    def _optimize_one(self, model_spec: dict):
+        """
+        Run Optuna for a single candidate model spec.
+        Supports categorical, int, float (with optional log scale).
+        """
+        search_space = model_spec.get("search_space", {})
+        n_trials = self.config.optimization.n_trials
+        cv_folds = self.config.optimization.cv_folds
+        direction = self.config.optimization.direction
+
+        model_name = model_spec["name"]
+        logger.info(f"Starting hyperparameter search for {model_name}: "
+                    f"{n_trials} trials, cv={cv_folds}, direction={direction}")
+        logger.info(f"Search space: {search_space}")
+
+        def objective(trial):
+            sampled = {}
+            for name, space in search_space.items():
+                if "choices" in space:
+                    sampled[name] = trial.suggest_categorical(name, space["choices"])
+                else:
+                    low, high = space["low"], space["high"]
+                    step = space.get("step") or 1
+                    log = space.get("log", False)
+                    if isinstance(low, int) and isinstance(high, int):
+                        sampled[name] = trial.suggest_int(name, low, high, step=step)
+                    else:
+                        sampled[name] = trial.suggest_float(name, float(low), float(high), log=log)
+
+            logger.info(f"Trial params for {model_name}: {sampled}")
+            clf = self._instantiate(model_name, sampled)
+            scores = cross_val_score(
+                clf, self.X_train, self.y_train,
+                cv=cv_folds,
+                scoring=self.config.optimization.scoring,
+                n_jobs=-1,
+            )
+            mean_score, std_score = float(scores.mean()), float(scores.std())
+
+            if self.config.tracking.mlflow.log_trials:
+                with mlflow.start_run(nested=True):
+                    mlflow.log_params(sampled)
+                    mlflow.log_metric(f"mean_{self.config.optimization.scoring}", mean_score)
+                    mlflow.log_metric(f"std_{self.config.optimization.scoring}", std_score)
+
+            return mean_score
+
+        study = optuna.create_study(direction=direction, sampler=optuna.samplers.TPESampler())
+        study.optimize(objective, n_trials=n_trials)
+        logger.info(f"Completed search for {model_name}: best value={study.best_value:.4f}, "
+                    f"params={study.best_trial.params}")
+        return study.best_trial, study
+
+    def _select_and_tune(self):
+        """
+        Across all candidate specs:
+         - if optimization.enabled: run Optuna → pick best trial
+         - else: simple CV mean
+        Returns a dict with keys: spec, score, trial, study
+        """
+        logger.info("Selecting best model among candidates...")
+        best = {"score": -float("inf"), "spec": None, "trial": None, "study": None}
+
+        for spec in self.config.models:
+            model_name = spec["name"]
+            if self.config.optimization.enabled:
+                trial, study = self._optimize_one(spec)
+                score = trial.value
+            else:
+                clf = self._instantiate(model_name, spec.get("params", {}))
+                cv_scores = cross_val_score(
+                    clf, self.X_train, self.y_train,
+                    cv=self.config.optimization.cv_folds,
+                    scoring=self.config.optimization.scoring,
+                    n_jobs=-1,
+                )
+                score, trial, study = float(cv_scores.mean()), None, None
+                logger.info(f"Candidate {model_name} CV mean={score:.4f}")
+
+            if score > best["score"]:
+                best.update(spec=spec, score=score, trial=trial, study=study)
+
+        logger.info(f"Best model: {best['spec']['name']} with score={best['score']:.4f}")
+        return best
+
+    def _train_and_eval(self, spec: dict, params: dict):
+        """
+        Fit the champion on the train set, then compute train & val metrics.
+        """
+        model_name = spec["name"]
+        logger.info(f"Training final model {model_name} on full training set...")
+        clf = self._instantiate(model_name, params)
+        clf.fit(self.X_train, self.y_train)
+
+        train_metrics = {
+            m: float(get_scorer(m)(clf, self.X_train, self.y_train))
+            for m in self.config.tracking.mlflow.metrics_to_log
+        }
+        val_metrics = {
+            m: float(get_scorer(m)(clf, self.X_val, self.y_val))
+            for m in self.config.tracking.mlflow.metrics_to_log
+        }
+
+        logger.info(f"Final eval for {model_name} -> train: {train_metrics}, val: {val_metrics}")
+        return clf, train_metrics, val_metrics
+
+    def _generate_report(self, best, train_m, val_m):
+        t = datetime.now(timezone.utc).isoformat()
+        report = {
+            "timestamp":         t,
+            "best_model":        best["spec"]["name"].split(".")[-1],
+            "best_model_params": (best["trial"].params if best["trial"] else best["spec"].get("params")),
+            "train_metrics":     train_m,
+            "val_metrics":       val_m,
+            "optimization": {
+                "method":     self.config.optimization.method,
+                "best_trial": (best["trial"].number if best["trial"] else None),
+                "n_trials":   self.config.optimization.n_trials,
+                "direction":  self.config.optimization.direction,
+                "cv": {
+                    "folds":      self.config.optimization.cv_folds,
+                    "mean_score": best["score"],
+                    "std_score":  float(best["study"].best_trial.user_attrs.get("std", 0.0))
+                                  if best["study"] else None
+                }
+            }
+        }
+        logger.info(f"Generated training report: {report}")
+        return report
+
+    def run_training(self) -> ModelTrainerArtifact:
+        try:
+            logger.info("========== Starting Model Training Pipeline ==========")
+
+            # 1) load data
+            self._load_data()
+
+            # 2) hyperparameter search + final fit in a single MLflow run
+            with mlflow.start_run():
+                best = self._select_and_tune()
+                clf, tr_m, val_m = self._train_and_eval(
+                    best["spec"],
+                    (best["trial"].params if best["trial"] else best["spec"].get("params")),
+                )
+
+                mlflow.log_params(best["trial"].params if best["trial"] else best["spec"].get("params"))
+                for metric_name, metric_val in tr_m.items():
+                    mlflow.log_metric(f"train_{metric_name}", metric_val)
+                for metric_name, metric_val in val_m.items():
+                    mlflow.log_metric(f"val_{metric_name}", metric_val)
+
+                mlflow_sklearn.log_model(
+                    sk_model=clf,
+                    artifact_path="model",
+                    registered_model_name=self.config.tracking.mlflow.registry_model_name
+                )
+                logger.info("Registered model to MLflow registry "
+                            f"'{self.config.tracking.mlflow.registry_model_name}'")
+
+            # 3) persist local artifacts
+            report = self._generate_report(best, tr_m, val_m)
+            save_to_yaml(report, self.config.training_report_filepath, label="Training Report")
+            save_object(clf, self.config.trained_model_filepath, "Best Model")
+
+            logger.info("========== Model Training Pipeline Completed ==========")
+            return ModelTrainerArtifact(
+                trained_model_filepath=self.config.trained_model_filepath,
+                training_report_filepath=self.config.training_report_filepath,
+            )
+
+        except Exception as e:
+            logger.error("Model training pipeline failed", exc_info=True)
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
 # FILE: src\networksecurity\config\__init__.py
 ================================================================================
 
@@ -1168,7 +1400,8 @@ from src.networksecurity.constants.constants import (
     DATA_VAL_SUBDIR,
     DATA_TEST_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
-    LOGS_ROOT
+    LOGS_ROOT,
+    MODEL_TRAINER_SUBDIR
 )
 
 from src.networksecurity.entity.config_entity import (
@@ -1176,6 +1409,7 @@ from src.networksecurity.entity.config_entity import (
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
+    ModelTrainerConfig
 )
 
 from src.networksecurity.utils.core import (
@@ -1219,9 +1453,8 @@ class ConfigurationManager:
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
 
-        # keys from config.yaml
-        self.raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
-        self.validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
+        
+        
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
@@ -1256,13 +1489,15 @@ class ConfigurationManager:
         featurestore_dir = root_dir / FEATURESTORE_SUBDIR
         ingested_data_dir = root_dir / INGESTED_SUBDIR
 
+        raw_dvc_path = Path(self.config.data_paths.raw_data_dvc_filepath)
+
         return DataIngestionConfig(
             root_dir=root_dir,
             featurestore_dir=featurestore_dir,
             raw_data_filename=ingestion_cfg.raw_data_filename,
             ingested_data_dir=ingested_data_dir,
             ingested_data_filename=ingestion_cfg.ingested_data_filename,
-            raw_dvc_path=self.raw_dvc_path,
+            raw_dvc_path=raw_dvc_path,
         )
 
     def get_data_validation_config(self) -> DataValidationConfig:
@@ -1270,6 +1505,8 @@ class ConfigurationManager:
         root_dir = self.artifacts_root / DATA_VALIDATION_SUBDIR
         validated_dir = root_dir / VALIDATED_SUBDIR
         report_dir = root_dir / REPORTS_SUBDIR
+
+        validated_dvc_path = Path(self.config.data_paths.validated_dvc_filepath)
 
         return DataValidationConfig(
             root_dir=root_dir,
@@ -1281,7 +1518,7 @@ class ConfigurationManager:
             drift_report_filename=validation_cfg.drift_report_filename,
             validation_report_filename=validation_cfg.validation_report_filename,
             schema=self.schema,
-            validated_dvc_path=self.validated_dvc_path,
+            validated_dvc_path=validated_dvc_path,
             validation_params=self.params.validation_params,
             val_report_template=self.templates.validation_report
         )
@@ -1296,6 +1533,10 @@ class ConfigurationManager:
         val_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_VAL_SUBDIR
         test_dir = root_dir / TRANSFORMED_DATA_SUBDIR / DATA_TEST_SUBDIR
         preprocessor_dir = root_dir / TRANSFORMED_OBJECT_SUBDIR
+
+        train_dvc_dir = Path(self.config.data_paths.train_dvc_dir)
+        val_dvc_dir = Path(self.config.data_paths.val_dvc_dir)
+        test_dvc_dir = Path(self.config.data_paths.test_dvc_dir)
 
         return DataTransformationConfig(
             root_dir=root_dir,
@@ -1313,6 +1554,53 @@ class ConfigurationManager:
             preprocessor_dir=preprocessor_dir,
             x_preprocessor_filename=transformation_cfg.x_preprocessor_filename,
             y_preprocessor_filename=transformation_cfg.y_preprocessor_filename,
+            train_dvc_dir=train_dvc_dir,
+            val_dvc_dir=val_dvc_dir,
+            test_dvc_dir=test_dvc_dir,
+        )
+
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        """
+        Assemble and return the ModelTrainerConfig dataclass, incorporating:
+        - artifact output paths under a timestamped MODEL_TRAINER_SUBDIR
+        - filenames & report names from config.yaml
+        - candidate models, optimization & tracking from params.yaml
+        - MLflow URI injected from environment
+        - DVC‐tracked input dirs & filenames for X/Y train/val/test
+        """
+        # static config.yaml entries
+        yaml_cfg = self.config.model_trainer
+        # dynamic params.yaml entries
+        params_cfg = self.params.model_trainer
+
+        # where to write models & reports
+        root_dir = self.artifacts_root / MODEL_TRAINER_SUBDIR
+
+        # DVC‐tracked data dirs (under /data/transformed)
+        train_dir = Path(self.config.data_paths.train_dvc_dir)
+        val_dir = Path(self.config.data_paths.val_dvc_dir)
+        test_dir = Path(self.config.data_paths.test_dvc_dir)
+
+        # pull MLflow sub‐box and inject the URI from env
+        mlflow_cfg = params_cfg.tracking
+        mlflow_cfg.tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+
+        return ModelTrainerConfig(
+            # where to write artifacts
+            root_dir=root_dir,
+            trained_model_filename=yaml_cfg.trained_model_filename,
+            training_report_filename=yaml_cfg.training_report_filename,
+
+            # what to train & how
+            models=params_cfg.models,
+            optimization=params_cfg.optimization,
+            tracking=mlflow_cfg,
+
+            # where to load transformed data from
+            train_dir=train_dir,
+            val_dir=val_dir,
+            test_dir=test_dir,
         )
 
 ================================================================================
@@ -1492,17 +1780,43 @@ class ImputerFactory:
             raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
-# FILE: src\networksecurity\data_processors\preprocessor_builder.py
+# FILE: src\networksecurity\data_processors\label_mapper.py
 ================================================================================
 
-# FILE: src/networksecurity/data_processors/preprocessor_builder.py
+from sklearn.base import BaseEstimator, TransformerMixin
+import pandas as pd
+
+
+class LabelMapper(BaseEstimator, TransformerMixin):
+    """
+    Custom transformer to map target labels from one value to another.
+    For example, map -1 to 0.
+    """
+    def __init__(self, from_value, to_value):
+        self.from_value = from_value
+        self.to_value = to_value
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, y):
+        if isinstance(y, pd.Series):
+            return y.replace(self.from_value, self.to_value)
+        elif isinstance(y, pd.DataFrame):
+            return y.apply(lambda col: col.replace(self.from_value, self.to_value))
+        else:
+            raise ValueError("Unsupported data type for label transformation.")
+
+================================================================================
+# FILE: src\networksecurity\data_processors\preprocessor_builder.py
+================================================================================
 
 from sklearn.pipeline import Pipeline
 from sklearn.experimental import enable_iterative_imputer
 from src.networksecurity.data_processors.imputer_factory import ImputerFactory
 from src.networksecurity.data_processors.scaler_factory import ScalerFactory
 from src.networksecurity.data_processors.encoder_factory import EncoderFactory
-from src.networksecurity.data_processors.target_label_normalizer import TargetLabelNormalizer
+from src.networksecurity.data_processors.label_mapper import LabelMapper
 from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
 
@@ -1517,13 +1831,12 @@ class PreprocessorBuilder:
         "imputer": ImputerFactory.get_imputer_pipeline,
         "scaler": ScalerFactory.get_scaler_pipeline,
         "encoder": EncoderFactory.get_encoder_pipeline,
-        "label_normalizer": lambda method, params: TargetLabelNormalizer()
+        "label_mapping": lambda method, params: LabelMapper(from_value=params["from"], to_value=params["to"])
     }
 
     def __init__(self, steps: dict, methods: dict):
         self.steps = steps or {}
         self.methods = methods or {}
-
 
     def _build_pipeline(self, section: str) -> Pipeline:
         try:
@@ -1593,25 +1906,6 @@ class ScalerFactory:
 
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
-
-================================================================================
-# FILE: src\networksecurity\data_processors\target_label_normalizer.py
-================================================================================
-
-import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
-
-
-class TargetLabelNormalizer(BaseEstimator, TransformerMixin):
-    """
-    Custom transformer to normalize the target column values.
-    Replaces -1 with 0.
-    """
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, y: pd.Series) -> pd.Series:
-        return y.replace(-1, 0)
 
 ================================================================================
 # FILE: src\networksecurity\dbhandler\__init__.py
@@ -1839,12 +2133,30 @@ class DataTransformationArtifact:
             f"  - Y-Test Data Path:     '{y_test_str}'\n"
         )
 
+
+@dataclass(frozen=True)
+class ModelTrainerArtifact:
+    trained_model_filepath: Path
+    training_report_filepath: Path
+
+    def __repr__(self) -> str:
+        model_str  = self.trained_model_filepath.as_posix() if self.trained_model_filepath else "None"
+        report_str = self.training_report_filepath.as_posix() if self.training_report_filepath else "None"
+
+        return (
+            "\nModel Trainer Artifact:\n"
+            f"  - Trained Model Path:   '{model_str}'\n"
+            f"  - Training Report Path: '{report_str}'\n"
+        )
+
 ================================================================================
 # FILE: src\networksecurity\entity\config_entity.py
 ================================================================================
 
 from pathlib import Path
 from dataclasses import dataclass
+from box import ConfigBox
+from typing import List
 
 
 @dataclass
@@ -1950,6 +2262,9 @@ class DataTransformationConfig:
     x_preprocessor_filename: str
     y_preprocessor_filename: str
     target_column: str
+    train_dvc_dir: Path
+    val_dvc_dir: Path
+    test_dvc_dir: Path
 
     def __post_init__(self) -> Path:
         self.root_dir = Path(self.root_dir)
@@ -1989,6 +2304,59 @@ class DataTransformationConfig:
     @property
     def y_preprocessor_filepath(self) -> Path:
         return self.preprocessor_dir / self.y_preprocessor_filename
+
+    @property
+    def x_train_dvc_filepath(self) -> Path:
+        return self.train_dvc_dir / self.x_train_filename
+
+    @property
+    def y_train_dvc_filepath(self) -> Path:
+        return self.train_dvc_dir / self.y_train_filename
+
+    @property
+    def x_val_dvc_filepath(self) -> Path:
+        return self.val_dvc_dir / self.x_val_filename
+
+    @property
+    def y_val_dvc_filepath(self) -> Path:
+        return self.val_dvc_dir / self.y_val_filename
+
+    @property
+    def x_test_dvc_filepath(self) -> Path:
+        return self.test_dvc_dir / self.x_test_filename
+
+    @property
+    def y_test_dvc_filepath(self) -> Path:
+        return self.test_dvc_dir / self.y_test_filename
+
+
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    trained_model_filename: str
+    training_report_filename: str
+    models: list[dict]
+    optimization: dict
+    tracking: dict
+    models: List[dict]
+    optimization: ConfigBox
+    tracking: ConfigBox
+    # where to load transformed arrays from (DVC-tracked)
+    train_dir: Path
+    val_dir:   Path
+    test_dir:  Path
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def trained_model_filepath(self) -> Path:
+        return self.root_dir / self.trained_model_filename
+
+    @property
+    def training_report_filepath(self) -> Path:
+        return self.root_dir / self.training_report_filename
 
 ================================================================================
 # FILE: src\networksecurity\exception\__init__.py
@@ -2059,6 +2427,59 @@ class NetworkSecurityError(Exception):
         )
 
 ================================================================================
+# FILE: src\networksecurity\inference\estimator.py
+================================================================================
+
+import joblib
+import numpy as np
+import pandas as pd
+from pathlib import Path
+
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+
+
+class NetworkModel:
+    def __init__(self, preprocessor, model, y_preprocessor=None):
+        self.preprocessor = preprocessor
+        self.model = model
+        self.y_preprocessor = y_preprocessor
+
+    @classmethod
+    def from_artifacts(cls, model_path: Path, x_preprocessor_path: Path, y_preprocessor_path: Path = None):
+        try:
+            model = joblib.load(model_path)
+            x_preprocessor = joblib.load(x_preprocessor_path)
+            y_preprocessor = joblib.load(y_preprocessor_path) if y_preprocessor_path else None
+            logger.info("Loaded NetworkModel components from disk.")
+            return cls(x_preprocessor, model, y_preprocessor)
+        except Exception as e:
+            logger.error("Failed to load model artifacts", exc_info=True)
+            raise NetworkSecurityError(e, logger) from e
+
+    def predict(self, x: pd.DataFrame | dict) -> np.ndarray:
+        try:
+            if isinstance(x, dict):
+                x = pd.DataFrame([x])
+            elif not isinstance(x, pd.DataFrame):
+                raise TypeError("Input must be a dict or pandas DataFrame.")
+
+            logger.info(f"Input shape for prediction: {x.shape}")
+
+            x_transformed = self.preprocessor.transform(x)
+            predictions = self.model.predict(x_transformed)
+
+            if self.y_preprocessor:
+                predictions = self.y_preprocessor.inverse_transform(predictions)
+
+            logger.info(f"Prediction output: {predictions}")
+            return predictions
+
+        except Exception as e:
+            logger.error("Prediction failed", exc_info=True)
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
 # FILE: src\networksecurity\logging\__init__.py
 ================================================================================
 
@@ -2107,7 +2528,6 @@ from pathlib import Path
 from src.networksecurity.constants.constants import LOGS_ROOT
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 
-
 def setup_logger(name: str = "app_logger") -> logging.Logger:
     """
     Set up and return a logger instance with a consistent timestamped log directory and file.
@@ -2123,6 +2543,8 @@ def setup_logger(name: str = "app_logger") -> logging.Logger:
     Returns:
         logging.Logger: Configured logger with file and stream handlers.
     """
+    sys.stdout.reconfigure(encoding='utf-8')
+
     # Get shared timestamp for this run
     timestamp = get_shared_utc_timestamp()
 
@@ -2313,6 +2735,60 @@ class DataValidationPipeline:
             raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
+# FILE: src\networksecurity\pipeline\model_trainer_pipeline.py
+================================================================================
+
+from src.networksecurity.config.configuration import ConfigurationManager
+from src.networksecurity.components.model_trainer import ModelTrainer
+from src.networksecurity.entity.artifact_entity import (
+    DataTransformationArtifact,
+    ModelTrainerArtifact
+)
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+
+
+class ModelTrainerPipeline:
+    """
+    Orchestrates the Model Training stage of the pipeline.
+
+    Responsibilities:
+    - Loads model‐trainer configuration
+    - Accepts transformation artifact
+    - Trains (and tunes) candidate models
+    - Logs & registers via MLflow
+    - Emits a ModelTrainerArtifact
+    """
+
+    def __init__(self, transformation_artifact: DataTransformationArtifact):
+        try:
+            self.config_manager = ConfigurationManager()
+            self.config = self.config_manager.get_model_trainer_config()
+            self.transformation_artifact = transformation_artifact
+        except Exception as e:
+            logger.exception("Failed to initialize ModelTrainerPipeline")
+            raise NetworkSecurityError(e, logger) from e
+
+    def run(self) -> ModelTrainerArtifact:
+        try:
+            logger.info("========== Model Training Stage Started ==========")
+
+            trainer = ModelTrainer(
+                config=self.config,
+                transformation_artifact=self.transformation_artifact
+            )
+            trainer_artifact = trainer.run_training()
+
+            logger.info(f"Model Training Completed Successfully: {trainer_artifact}")
+            logger.info("========== Model Training Stage Completed ==========")
+
+            return trainer_artifact
+
+        except Exception as e:
+            logger.exception("Model Training Stage Failed")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
 # FILE: src\networksecurity\utils\__init__.py
 ================================================================================
 
@@ -2325,6 +2801,7 @@ class DataValidationPipeline:
 import json
 import joblib
 import pandas as pd
+import numpy as np
 import yaml
 from pathlib import Path
 from box import ConfigBox
@@ -2338,13 +2815,17 @@ from src.networksecurity.logging import logger
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
+    """
+    Load a YAML file as a ConfigBox, always using UTF-8.
+    """
     if not path_to_yaml.exists():
         msg = f"YAML file not found: '{path_to_yaml}'"
         logger.error(msg)
         raise NetworkSecurityError(FileNotFoundError(msg), logger)
 
     try:
-        with path_to_yaml.open("r") as f:
+        # Explicitly open as UTF-8 to avoid Windows cp1252 issues
+        with path_to_yaml.open("r", encoding="utf-8") as f:
             content = yaml.safe_load(f)
     except (BoxValueError, BoxTypeError, BoxKeyError, yaml.YAMLError) as e:
         logger.error(f"Failed to load YAML from {path_to_yaml.as_posix()}: {e}")
@@ -2411,6 +2892,9 @@ def replace_username_password_in_uri(base_uri: str, username: str, password: str
 
 @ensure_annotations
 def save_to_yaml(data: dict, *paths: Path, label: str):
+    """
+    Write a dict out to YAML, always using UTF-8.
+    """
     try:
         for path in paths:
             path = Path(path)
@@ -2420,7 +2904,8 @@ def save_to_yaml(data: dict, *paths: Path, label: str):
             else:
                 logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
 
-            with open(path, "w") as file:
+            # Write UTF-8
+            with open(path, "w", encoding="utf-8") as file:
                 yaml.dump(data, file, sort_keys=False)
 
             logger.info(f"{label} saved to: '{path.as_posix()}'")
@@ -2444,6 +2929,38 @@ def save_to_csv(df: pd.DataFrame, *paths: Path, label: str):
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
 
+@ensure_annotations
+def save_array(array: np.ndarray | pd.Series, *paths: Path, label: str):
+    """
+    Saves a NumPy array or pandas Series to the specified paths in `.npy` format.
+
+    Args:
+        array (Union[np.ndarray, pd.Series]): Data to save.
+        *paths (Path): One or more file paths.
+        label (str): Label for logging.
+    """
+    try:
+        # Convert Series to ndarray if needed
+        array = np.asarray(array)
+
+        for path in paths:
+            path = Path(path)
+
+            if not path.parent.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Created directory for {label}: '{path.parent.as_posix()}'")
+            else:
+                logger.info(f"Directory already exists for {label}: '{path.parent.as_posix()}'")
+
+            # # Ensure file ends with `.npy`
+            # if path.suffix != ".npy":
+            #     path = path.with_suffix(".npy")
+
+            np.save(path, array)
+            logger.info(f"{label} saved to: '{path.as_posix()}'")
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
 
 @ensure_annotations
 def save_to_json(data: dict, *paths: Path, label: str):
@@ -2560,18 +3077,24 @@ data_validation:
 
 # Data transformation configuration
 data_transformation:
-  x_train_filename: x_train.csv
-  y_train_filename: y_train.csv
-  x_val_filename: x_val.csv
-  y_val_filename: y_val.csv
-  x_test_filename: x_test.csv
-  y_test_filename: y_test.csv
+  x_train_filename: x_train.npy
+  y_train_filename: y_train.npy
+  x_val_filename: x_val.npy
+  y_val_filename: y_val.npy
+  x_test_filename: x_test.npy
+  y_test_filename: y_test.npy
   x_preprocessor_filename: x_preprocessor.joblib
   y_preprocessor_filename: y_preprocessor.joblib
+  
 
 # Model trainer configuration
 model_trainer:
+  root_dir: artifacts/model_trainer
+  model_dir: saved_models
   trained_model_filename: model.joblib
+  # where to dump a short training report
+  training_report_filename: training_report.yaml
+  
 
 # Model evaluation configuration
 model_evaluation:
@@ -2585,11 +3108,9 @@ model_prediction:
 data_paths:
   raw_data_dvc_filepath: data/raw/raw_data.csv
   validated_dvc_filepath: data/validated/validated_data.csv
-  transformed_train_dvc_filepath: data/transformed/train.csv
-  transformed_test_dvc_filepath: data/transformed/test.csv
-  preprocessor_dvc_filepath: data/transformed/preprocessing.pkl
-  trained_model_dvc_filepath: data/model/model.pkl
-  predictions_dvc_filepath: data/predictions/prediction_output.csv
+  train_dvc_dir: data/transformed/train
+  val_dvc_dir: data/transformed/val
+  test_dvc_dir: data/transformed/test
 
 ================================================================================
 # YAML FILE: config\params.yaml
@@ -2621,7 +3142,7 @@ transformation_params:
     x:
       imputer: knn
     y:
-      label_mapping: label_mapping
+      label_mapping: label_mapper
 
   methods:
     x:
@@ -2637,12 +3158,78 @@ transformation_params:
 
 
 
+# ───────────────────────────────────────────────────────────────────────────────
+# Parameters for model training
+# ───────────────────────────────────────────────────────────────────────────────
 # Parameters for model training
 model_trainer:
-  model_type: RandomForestClassifier
-  n_estimators: 100
-  max_depth: 10
-  random_state: 42
+
+
+  # candidate estimators (importable by sklearn convention)
+  models:
+    - name: sklearn.ensemble.RandomForestClassifier
+      # default params (used if optimization.enabled = false)
+      params:
+        n_estimators: 100
+        max_depth: 10
+        random_state: 42
+      # search-space for Optuna
+      search_space:
+        n_estimators:
+          distribution: int
+          low: 50
+          high: 300
+          step: 10
+        max_depth:
+          distribution: int
+          low: 5
+          high: 50
+          step: 1
+
+    - name: sklearn.ensemble.GradientBoostingClassifier
+      params:
+        n_estimators: 100
+        learning_rate: 0.1
+        max_depth: 3
+        random_state: 42
+      search_space:
+        n_estimators:
+          distribution: int
+          low: 50
+          high: 200
+          step: 10
+        learning_rate:
+          distribution: float
+          low: 0.01
+          high: 1.0
+          log: true
+        max_depth:
+          distribution: int
+          low: 2
+          high: 10
+
+  # hyperparameter optimization settings
+  optimization:
+    enabled: true
+    method: optuna
+    n_trials: 30
+    direction: maximize
+    cv_folds: 5
+    scoring: accuracy
+
+  # MLflow tracking & registry settings (URI is now picked from ENV)
+  tracking:
+    mlflow:
+      enabled: true
+      experiment_name: NetworkSecurityExperiment
+      registry_model_name: NetworkSecurityModel
+      metrics_to_log:
+        - accuracy
+        - f1
+        - precision
+        - recall
+      # new switch: whether to log each Optuna trial as its own MLflow run
+      log_trials: false
 
 ================================================================================
 # YAML FILE: config\schema.yaml

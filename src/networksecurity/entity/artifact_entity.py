@@ -44,6 +44,8 @@ class DataTransformationArtifact:
     y_val_filepath: Path
     x_test_filepath: Path
     y_test_filepath: Path
+    x_preprocessor_filepath: Path
+    y_preprocessor_filepath: Path
 
     def __repr__(self) -> str:
         x_train_str = self.x_train_filepath.as_posix() if self.x_train_filepath else "None"
@@ -52,6 +54,8 @@ class DataTransformationArtifact:
         y_val_str = self.y_val_filepath.as_posix() if self.y_val_filepath else "None"
         x_test_str = self.x_test_filepath.as_posix() if self.x_test_filepath else "None"
         y_test_str = self.y_test_filepath.as_posix() if self.y_test_filepath else "None"
+        x_preprocessor_str = self.x_preprocessor_filepath.as_posix() if self.x_preprocessor_filepath else "None"
+        y_preprocessor_str = self.y_preprocessor_filepath.as_posix() if self.y_preprocessor_filepath else "None"
 
         return (
             "\nData Transformation Artifact:\n"
@@ -61,4 +65,22 @@ class DataTransformationArtifact:
             f"  - Y-Val Data Path:      '{y_val_str}'\n"
             f"  - X-Test Data Path:     '{x_test_str}'\n"
             f"  - Y-Test Data Path:     '{y_test_str}'\n"
+            f"  - X-Processor Path:     '{x_preprocessor_str}'\n"
+            f"  - Y-Processor Path:     '{y_preprocessor_str}'\n"
+        )
+
+
+@dataclass(frozen=True)
+class ModelTrainerArtifact:
+    trained_model_filepath: Path
+    training_report_filepath: Path
+
+    def __repr__(self) -> str:
+        model_str  = self.trained_model_filepath.as_posix() if self.trained_model_filepath else "None"
+        report_str = self.training_report_filepath.as_posix() if self.training_report_filepath else "None"
+
+        return (
+            "\nModel Trainer Artifact:\n"
+            f"  - Trained Model Path:   '{model_str}'\n"
+            f"  - Training Report Path: '{report_str}'\n"
         )

@@ -12,7 +12,6 @@ from pathlib import Path
 from src.networksecurity.constants.constants import LOGS_ROOT
 from src.networksecurity.utils.timestamp import get_shared_utc_timestamp
 
-
 def setup_logger(name: str = "app_logger") -> logging.Logger:
     """
     Set up and return a logger instance with a consistent timestamped log directory and file.
@@ -28,6 +27,8 @@ def setup_logger(name: str = "app_logger") -> logging.Logger:
     Returns:
         logging.Logger: Configured logger with file and stream handlers.
     """
+    sys.stdout.reconfigure(encoding='utf-8')
+
     # Get shared timestamp for this run
     timestamp = get_shared_utc_timestamp()
 

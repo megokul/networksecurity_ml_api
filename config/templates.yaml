@@ -1,16 +1,47 @@
 validation_report:
-  validation_status: value
-  critical_passed: value
-  non_critical_passed: value
+  # UTC timestamp of the validation run
+  timestamp: ""
+  
+  # Overall validation pass/fail
+  validation_status: null
+  critical_passed: null
+  non_critical_passed: null
 
-  schema_check_type: 
-  drift_check_method: value
+  # Which schema‐check was used (“hash” or “structure”)
+  schema_check_type: ""
+  # Which drift‐detection method (if any)
+  drift_check_method: ""
 
   check_results:
-    critical_checks: 
-      schema_is_match: value
-      no_data_drift: value
+    critical_checks:
+      # True if the schema hash/structure matched
+      schema_is_match: null
+      # True if no data drift was detected
+      no_data_drift: null
 
     non_critical_checks:
-      no_missing_values: value
-      no_duplicate_rows: value
+      # True if no missing values were found
+      no_missing_values: null
+      # True if no duplicate rows were found
+      no_duplicate_rows: null
+
+
+# templates.yaml
+
+# … your existing templates …
+
+training_report:
+  timestamp: ""
+  best_model: ""
+  best_model_params: {}
+  train_metrics: {}
+  val_metrics: {}
+  optimization:
+    method: ""
+    best_trial: null
+    n_trials: null
+    direction: ""
+    cv:
+      folds: null
+      mean_score: null
+      std_score: null

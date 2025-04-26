@@ -9,3 +9,6 @@ dvc
 scipy==1.15.2
 joblib
 scikit-learn
+dagshub
+mlflow
+optuna

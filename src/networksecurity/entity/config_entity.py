@@ -1,5 +1,7 @@
 from pathlib import Path
 from dataclasses import dataclass
+from box import ConfigBox
+from typing import List
 
 
 @dataclass
@@ -171,3 +173,32 @@ class DataTransformationConfig:
     @property
     def y_test_dvc_filepath(self) -> Path:
         return self.test_dvc_dir / self.y_test_filename
+
+
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    trained_model_filename: str
+    training_report_filename: str
+    models: list[dict]
+    optimization: dict
+    tracking: dict
+    models: List[dict]
+    optimization: ConfigBox
+    tracking: ConfigBox
+    # where to load transformed arrays from (DVC-tracked)
+    train_dir: Path
+    val_dir:   Path
+    test_dir:  Path
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def trained_model_filepath(self) -> Path:
+        return self.root_dir / self.trained_model_filename
+
+    @property
+    def training_report_filepath(self) -> Path:
+        return self.root_dir / self.training_report_filename

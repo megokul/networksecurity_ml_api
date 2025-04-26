@@ -1,0 +1,266 @@
+[2025-04-23 20:48:17,426] - INFO - debug_pipeline - ========== Launching Data Ingestion Pipeline ==========
+[2025-04-23 20:48:17,429] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-23 20:48:17,437] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-23 20:48:17,439] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-23 20:48:17,442] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-04-23 20:48:17,442] - INFO - data_ingestion_pipeline - ========== Data Ingestion Stage Started ==========
+[2025-04-23 20:48:17,442] - INFO - data_ingestion - ========== Starting Data Ingestion ==========
+[2025-04-23 20:48:17,734] - INFO - mongodb_handler - MongoClient initialized.
+[2025-04-23 20:48:20,363] - INFO - mongodb_handler - Exported 22110 documents from network_security_db.phishing_records as DataFrame.
+[2025-04-23 20:48:20,427] - INFO - mongodb_handler - MongoClient connection closed.
+[2025-04-23 20:48:20,427] - INFO - data_ingestion - Fetched 22110 raw rows from data source.
+[2025-04-23 20:48:20,427] - INFO - core - Created directory for Raw Data: 'artifacts/2025_04_23T19_48_15Z/data_ingestion/featurestore'
+[2025-04-23 20:48:20,540] - INFO - core - Raw Data saved to: 'artifacts/2025_04_23T19_48_15Z/data_ingestion/featurestore/raw_data.csv'
+[2025-04-23 20:48:20,540] - INFO - core - Directory already exists for Raw Data: 'data/raw'
+[2025-04-23 20:48:20,630] - INFO - core - Raw Data saved to: 'data/raw/raw_data.csv'
+[2025-04-23 20:48:20,634] - INFO - data_ingestion - Raw DataFrame cleaned successfully.
+[2025-04-23 20:48:20,634] - INFO - core - Created directory for Cleaned (Ingested) Data: 'artifacts/2025_04_23T19_48_15Z/data_ingestion/ingested'
+[2025-04-23 20:48:20,706] - INFO - core - Cleaned (Ingested) Data saved to: 'artifacts/2025_04_23T19_48_15Z/data_ingestion/ingested/ingested_data.csv'
+[2025-04-23 20:48:20,706] - INFO - data_ingestion - ========== Data Ingestion Completed ==========
+[2025-04-23 20:48:20,710] - INFO - data_ingestion_pipeline - Data Ingestion Process Completed.
+
+Data Ingestion Artifact:
+  - Raw Artifact:         'artifacts/2025_04_23T19_48_15Z/data_ingestion/featurestore/raw_data.csv'
+  - Raw DVC Path:         'data/raw/raw_data.csv'
+  - Ingested Data Path:   'artifacts/2025_04_23T19_48_15Z/data_ingestion/ingested/ingested_data.csv'
+
+[2025-04-23 20:48:20,710] - INFO - data_ingestion_pipeline - ========== Data Ingestion Stage Completed ==========
+[2025-04-23 20:48:20,710] - INFO - debug_pipeline - ========== Data Ingestion Pipeline Finished ==========
+[2025-04-23 20:48:20,710] - INFO - debug_pipeline - ======================================================
+[2025-04-23 20:48:20,714] - INFO - debug_pipeline - ========== Launching Data Validation Pipeline ==========
+[2025-04-23 20:48:20,717] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-23 20:48:20,725] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-23 20:48:20,726] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-23 20:48:20,732] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-04-23 20:48:20,732] - INFO - data_validation_pipeline - ========= Data Validation Stage Started =========
+[2025-04-23 20:48:20,772] - INFO - core - Ingested Data loaded from: 'artifacts/2025_04_23T19_48_15Z/data_ingestion/ingested/ingested_data.csv'
+[2025-04-23 20:48:20,802] - INFO - core - Validated Base Data loaded from: 'data/validated/validated_data.csv'
+[2025-04-23 20:48:20,802] - INFO - data_validation - Running data validation...
+[2025-04-23 20:48:20,802] - INFO - data_validation - Schema hash check passed.
+[2025-04-23 20:48:20,802] - INFO - core - Created directory for Missing Value Report: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports'
+[2025-04-23 20:48:20,806] - INFO - core - Missing Value Report saved to: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports/missing_values_report.json'
+[2025-04-23 20:48:20,814] - INFO - core - Directory already exists for Duplicates Report: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports'
+[2025-04-23 20:48:20,814] - INFO - core - Duplicates Report saved to: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports/duplicates_report.yaml'
+[2025-04-23 20:48:20,839] - INFO - core - Directory already exists for Drift Result: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports'
+[2025-04-23 20:48:20,843] - INFO - core - Drift Result saved to: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports/drift_report.yaml'
+[2025-04-23 20:48:20,843] - INFO - core - Directory already exists for Validation Report: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports'
+[2025-04-23 20:48:20,843] - INFO - core - Validation Report saved to: 'artifacts/2025_04_23T19_48_15Z/data_validation/reports/validation_report.yaml'
+[2025-04-23 20:48:20,845] - INFO - core - Created directory for Validated Data: 'artifacts/2025_04_23T19_48_15Z/data_validation/validated'
+[2025-04-23 20:48:20,865] - INFO - core - Validated Data saved to: 'artifacts/2025_04_23T19_48_15Z/data_validation/validated/validated_data.csv'
+[2025-04-23 20:48:20,865] - INFO - core - Directory already exists for Validated Data: 'data/validated'
+[2025-04-23 20:48:20,887] - INFO - core - Validated Data saved to: 'data/validated/validated_data.csv'
+[2025-04-23 20:48:20,887] - INFO - data_validation_pipeline - Data Validation Process Completed.
+
+Data Validation Artifact:
+  - Validated Data Path: 'artifacts/2025_04_23T19_48_15Z/data_validation/validated/validated_data.csv'
+  - Validation Status:   'True'
+
+[2025-04-23 20:48:20,887] - INFO - data_validation_pipeline - ========= Data Validation Stage Completed =========
+[2025-04-23 20:48:20,887] - INFO - debug_pipeline - ========== Data Validation Pipeline Finished ==========
+[2025-04-23 20:48:20,887] - INFO - debug_pipeline - ======================================================
+[2025-04-23 20:48:20,887] - INFO - debug_pipeline - ========== Launching Data Transformation Pipeline ==========
+[2025-04-23 20:48:20,892] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-23 20:48:20,897] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-23 20:48:20,901] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-23 20:48:20,901] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-04-23 20:48:20,905] - INFO - data_transformation_pipeline - ========== Data Transformation Stage Started ==========
+[2025-04-23 20:48:20,926] - INFO - core - Validated Data loaded from: 'artifacts/2025_04_23T19_48_15Z/data_validation/validated/validated_data.csv'
+[2025-04-23 20:48:20,926] - INFO - data_transformation - ========== Starting Data Transformation ==========
+[2025-04-23 20:48:20,949] - INFO - core - Created directory for X Preprocessor Pipeline: 'artifacts/2025_04_23T19_48_15Z/data_transformation/preprocessor'
+[2025-04-23 20:48:20,950] - INFO - core - X Preprocessor Pipeline saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/preprocessor/x_preprocessor.joblib'
+[2025-04-23 20:48:20,950] - INFO - core - Directory already exists for Y Preprocessor Pipeline: 'artifacts/2025_04_23T19_48_15Z/data_transformation/preprocessor'
+[2025-04-23 20:48:20,951] - INFO - core - Y Preprocessor Pipeline saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/preprocessor/y_preprocessor.joblib'
+[2025-04-23 20:48:20,951] - INFO - core - Created directory for X_train: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train'
+[2025-04-23 20:48:20,951] - INFO - core - X_train saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train/x_train.npy'
+[2025-04-23 20:48:20,951] - INFO - core - Directory already exists for X_train: 'data/transformed/train'
+[2025-04-23 20:48:20,955] - INFO - core - X_train saved to: 'data/transformed/train/x_train.npy'
+[2025-04-23 20:48:20,955] - INFO - core - Directory already exists for y_train: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train'
+[2025-04-23 20:48:20,956] - INFO - core - y_train saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train/y_train.npy'
+[2025-04-23 20:48:20,956] - INFO - core - Directory already exists for y_train: 'data/transformed/train'
+[2025-04-23 20:48:20,956] - INFO - core - y_train saved to: 'data/transformed/train/y_train.npy'
+[2025-04-23 20:48:20,956] - INFO - core - Created directory for X_val: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val'
+[2025-04-23 20:48:20,956] - INFO - core - X_val saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val/x_val.npy'
+[2025-04-23 20:48:20,956] - INFO - core - Directory already exists for X_val: 'data/transformed/val'
+[2025-04-23 20:48:20,956] - INFO - core - X_val saved to: 'data/transformed/val/x_val.npy'
+[2025-04-23 20:48:20,956] - INFO - core - Directory already exists for y_val: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val'
+[2025-04-23 20:48:20,959] - INFO - core - y_val saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val/y_val.npy'
+[2025-04-23 20:48:20,959] - INFO - core - Directory already exists for y_val: 'data/transformed/val'
+[2025-04-23 20:48:20,960] - INFO - core - y_val saved to: 'data/transformed/val/y_val.npy'
+[2025-04-23 20:48:20,960] - INFO - core - Created directory for X_test: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test'
+[2025-04-23 20:48:20,960] - INFO - core - X_test saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test/x_test.npy'
+[2025-04-23 20:48:20,960] - INFO - core - Directory already exists for X_test: 'data/transformed/test'
+[2025-04-23 20:48:20,960] - INFO - core - X_test saved to: 'data/transformed/test/x_test.npy'
+[2025-04-23 20:48:20,960] - INFO - core - Directory already exists for y_test: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test'
+[2025-04-23 20:48:20,960] - INFO - core - y_test saved to: 'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test/y_test.npy'
+[2025-04-23 20:48:20,960] - INFO - core - Directory already exists for y_test: 'data/transformed/test'
+[2025-04-23 20:48:20,960] - INFO - core - y_test saved to: 'data/transformed/test/y_test.npy'
+[2025-04-23 20:48:20,960] - INFO - data_transformation - ========== Data Transformation Completed ==========
+[2025-04-23 20:48:20,964] - INFO - data_transformation_pipeline - Data Transformation Completed Successfully: 
+Data Transformation Artifact:
+  - X-Train Data Path:    'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train/x_train.npy'
+  - Y-Train Data Path:    'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/train/y_train.npy'
+  - X-Val Data Path:      'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val/x_val.npy'
+  - Y-Val Data Path:      'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/val/y_val.npy'
+  - X-Test Data Path:     'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test/x_test.npy'
+  - Y-Test Data Path:     'artifacts/2025_04_23T19_48_15Z/data_transformation/transformed/test/y_test.npy'
+
+[2025-04-23 20:48:20,965] - INFO - data_transformation_pipeline - ========== Data Transformation Stage Completed ==========
+[2025-04-23 20:48:20,965] - INFO - debug_pipeline - ========== Data Transformation Pipeline Finished ==========
+[2025-04-23 20:48:20,965] - INFO - debug_pipeline - ======================================================
+[2025-04-23 20:48:20,965] - INFO - debug_pipeline - ========== Launching Model Trainer Pipeline ==========
+[2025-04-23 20:48:20,968] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-04-23 20:48:20,975] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-04-23 20:48:20,977] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-04-23 20:48:20,981] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-04-23 20:48:20,981] - INFO - model_trainer_pipeline - ========== Model Training Stage Started ==========
+[2025-04-23 20:48:20,981] - INFO - model_trainer - Initializing ModelTrainer with root_dir=artifacts\2025_04_23T19_48_15Z\model_trainer
+[2025-04-23 20:48:20,981] - INFO - model_trainer - MLflow tracking is enabled. Initializing DagsHub + MLflow...
+[2025-04-23 20:48:22,247] - INFO - model_trainer - MLflow experiment set to 'NetworkSecurityExperiment' @ https://dagshub.com/megokul/networksecurity.mlflow
+[2025-04-23 20:48:22,247] - INFO - model_trainer - ========== Starting Model Training Pipeline ==========
+[2025-04-23 20:48:22,247] - INFO - model_trainer - Loading transformed data arrays from disk...
+[2025-04-23 20:48:22,274] - INFO - model_trainer - Loaded X_train (3509, 30), y_train (3509,); X_val (1170, 30), y_val (1170,)
+[2025-04-23 20:48:22,526] - INFO - model_trainer - Selecting best model among candidates...
+[2025-04-23 20:48:22,526] - INFO - model_trainer - Starting hyperparameter search for sklearn.ensemble.RandomForestClassifier: 30 trials, cv=5, direction=maximize
+[2025-04-23 20:48:22,526] - INFO - model_trainer - Search space: {'n_estimators': {'distribution': 'int', 'low': 50, 'high': 300, 'step': 10}, 'max_depth': {'distribution': 'int', 'low': 5, 'high': 50, 'step': 1}}
+[2025-04-23 20:48:22,536] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 160, 'max_depth': 40}
+[2025-04-23 20:48:22,536] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 160, 'max_depth': 40}
+[2025-04-23 20:48:24,139] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 190, 'max_depth': 45}
+[2025-04-23 20:48:24,139] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 190, 'max_depth': 45}
+[2025-04-23 20:48:25,309] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 80, 'max_depth': 19}
+[2025-04-23 20:48:25,311] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 80, 'max_depth': 19}
+[2025-04-23 20:48:26,295] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 190, 'max_depth': 41}
+[2025-04-23 20:48:26,295] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 190, 'max_depth': 41}
+[2025-04-23 20:48:27,482] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 210, 'max_depth': 11}
+[2025-04-23 20:48:27,482] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 210, 'max_depth': 11}
+[2025-04-23 20:48:28,649] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 110, 'max_depth': 30}
+[2025-04-23 20:48:28,649] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 110, 'max_depth': 30}
+[2025-04-23 20:48:28,851] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 80, 'max_depth': 8}
+[2025-04-23 20:48:28,851] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 80, 'max_depth': 8}
+[2025-04-23 20:48:28,987] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 170, 'max_depth': 32}
+[2025-04-23 20:48:28,987] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 170, 'max_depth': 32}
+[2025-04-23 20:48:29,289] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 180, 'max_depth': 14}
+[2025-04-23 20:48:29,289] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 180, 'max_depth': 14}
+[2025-04-23 20:48:29,603] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 160, 'max_depth': 23}
+[2025-04-23 20:48:29,603] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 160, 'max_depth': 23}
+[2025-04-23 20:48:29,870] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 300, 'max_depth': 15}
+[2025-04-23 20:48:29,870] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 300, 'max_depth': 15}
+[2025-04-23 20:48:30,363] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 300, 'max_depth': 14}
+[2025-04-23 20:48:30,363] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 300, 'max_depth': 14}
+[2025-04-23 20:48:30,844] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 300, 'max_depth': 5}
+[2025-04-23 20:48:30,844] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 300, 'max_depth': 5}
+[2025-04-23 20:48:31,222] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 250, 'max_depth': 18}
+[2025-04-23 20:48:31,222] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 250, 'max_depth': 18}
+[2025-04-23 20:48:31,646] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 240, 'max_depth': 23}
+[2025-04-23 20:48:31,646] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 240, 'max_depth': 23}
+[2025-04-23 20:48:32,057] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 120, 'max_depth': 14}
+[2025-04-23 20:48:32,057] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 120, 'max_depth': 14}
+[2025-04-23 20:48:32,259] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 250, 'max_depth': 26}
+[2025-04-23 20:48:32,259] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 250, 'max_depth': 26}
+[2025-04-23 20:48:32,681] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 270, 'max_depth': 16}
+[2025-04-23 20:48:32,681] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 270, 'max_depth': 16}
+[2025-04-23 20:48:33,124] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 50, 'max_depth': 5}
+[2025-04-23 20:48:33,124] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 50, 'max_depth': 5}
+[2025-04-23 20:48:33,211] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 140, 'max_depth': 10}
+[2025-04-23 20:48:33,211] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 140, 'max_depth': 10}
+[2025-04-23 20:48:33,431] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 210, 'max_depth': 21}
+[2025-04-23 20:48:33,431] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 210, 'max_depth': 21}
+[2025-04-23 20:48:33,795] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 290, 'max_depth': 13}
+[2025-04-23 20:48:33,795] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 290, 'max_depth': 13}
+[2025-04-23 20:48:34,258] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 280, 'max_depth': 14}
+[2025-04-23 20:48:34,258] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 280, 'max_depth': 14}
+[2025-04-23 20:48:34,702] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 270, 'max_depth': 34}
+[2025-04-23 20:48:34,702] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 270, 'max_depth': 34}
+[2025-04-23 20:48:35,161] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 230, 'max_depth': 27}
+[2025-04-23 20:48:35,161] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 230, 'max_depth': 27}
+[2025-04-23 20:48:35,569] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 270, 'max_depth': 9}
+[2025-04-23 20:48:35,569] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 270, 'max_depth': 9}
+[2025-04-23 20:48:35,962] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 280, 'max_depth': 16}
+[2025-04-23 20:48:35,962] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 280, 'max_depth': 16}
+[2025-04-23 20:48:36,464] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 230, 'max_depth': 20}
+[2025-04-23 20:48:36,464] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 230, 'max_depth': 20}
+[2025-04-23 20:48:36,922] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 210, 'max_depth': 24}
+[2025-04-23 20:48:36,922] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 210, 'max_depth': 24}
+[2025-04-23 20:48:37,312] - INFO - model_trainer - Trial params for sklearn.ensemble.RandomForestClassifier: {'n_estimators': 260, 'max_depth': 37}
+[2025-04-23 20:48:37,312] - INFO - model_trainer - Instantiating model sklearn.ensemble.RandomForestClassifier with params={'n_estimators': 260, 'max_depth': 37}
+[2025-04-23 20:48:37,785] - INFO - model_trainer - Completed search for sklearn.ensemble.RandomForestClassifier: best value=0.9453, params={'n_estimators': 180, 'max_depth': 14}
+[2025-04-23 20:48:37,785] - INFO - model_trainer - Starting hyperparameter search for sklearn.ensemble.GradientBoostingClassifier: 30 trials, cv=5, direction=maximize
+[2025-04-23 20:48:37,785] - INFO - model_trainer - Search space: {'n_estimators': {'distribution': 'int', 'low': 50, 'high': 200, 'step': 10}, 'learning_rate': {'distribution': 'float', 'low': 0.01, 'high': 1.0, 'log': True}, 'max_depth': {'distribution': 'int', 'low': 2, 'high': 10}}
+[2025-04-23 20:48:37,785] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 160, 'learning_rate': 0.3498985963447272, 'max_depth': 2}
+[2025-04-23 20:48:37,785] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 160, 'learning_rate': 0.3498985963447272, 'max_depth': 2}
+[2025-04-23 20:48:38,077] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 160, 'learning_rate': 0.40037957973519583, 'max_depth': 9}
+[2025-04-23 20:48:38,077] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 160, 'learning_rate': 0.40037957973519583, 'max_depth': 9}
+[2025-04-23 20:48:39,745] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 190, 'learning_rate': 0.4764676295817061, 'max_depth': 5}
+[2025-04-23 20:48:39,745] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 190, 'learning_rate': 0.4764676295817061, 'max_depth': 5}
+[2025-04-23 20:48:40,575] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 60, 'learning_rate': 0.02452373066728541, 'max_depth': 9}
+[2025-04-23 20:48:40,575] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 60, 'learning_rate': 0.02452373066728541, 'max_depth': 9}
+[2025-04-23 20:48:41,107] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 90, 'learning_rate': 0.19242163553525657, 'max_depth': 4}
+[2025-04-23 20:48:41,107] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 90, 'learning_rate': 0.19242163553525657, 'max_depth': 4}
+[2025-04-23 20:48:41,403] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 110, 'learning_rate': 0.02945814771796293, 'max_depth': 4}
+[2025-04-23 20:48:41,403] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.02945814771796293, 'max_depth': 4}
+[2025-04-23 20:48:41,769] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 90, 'learning_rate': 0.18010222871127907, 'max_depth': 9}
+[2025-04-23 20:48:41,769] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 90, 'learning_rate': 0.18010222871127907, 'max_depth': 9}
+[2025-04-23 20:48:43,040] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 180, 'learning_rate': 0.012686817802202415, 'max_depth': 3}
+[2025-04-23 20:48:43,040] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 180, 'learning_rate': 0.012686817802202415, 'max_depth': 3}
+[2025-04-23 20:48:43,489] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 80, 'learning_rate': 0.13252602018015516, 'max_depth': 6}
+[2025-04-23 20:48:43,489] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 80, 'learning_rate': 0.13252602018015516, 'max_depth': 6}
+[2025-04-23 20:48:43,937] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 70, 'learning_rate': 0.7253616044694426, 'max_depth': 10}
+[2025-04-23 20:48:43,937] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 70, 'learning_rate': 0.7253616044694426, 'max_depth': 10}
+[2025-04-23 20:48:44,904] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 130, 'learning_rate': 0.06598535396496946, 'max_depth': 7}
+[2025-04-23 20:48:44,904] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 130, 'learning_rate': 0.06598535396496946, 'max_depth': 7}
+[2025-04-23 20:48:45,798] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 130, 'learning_rate': 0.07569857292765084, 'max_depth': 7}
+[2025-04-23 20:48:45,798] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 130, 'learning_rate': 0.07569857292765084, 'max_depth': 7}
+[2025-04-23 20:48:46,703] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 130, 'learning_rate': 0.06969134674538163, 'max_depth': 7}
+[2025-04-23 20:48:46,703] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 130, 'learning_rate': 0.06969134674538163, 'max_depth': 7}
+[2025-04-23 20:48:47,581] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 110, 'learning_rate': 0.046932155588421245, 'max_depth': 6}
+[2025-04-23 20:48:47,581] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.046932155588421245, 'max_depth': 6}
+[2025-04-23 20:48:48,136] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 150, 'learning_rate': 0.162536879044425, 'max_depth': 7}
+[2025-04-23 20:48:48,136] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 150, 'learning_rate': 0.162536879044425, 'max_depth': 7}
+[2025-04-23 20:48:49,214] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 80, 'learning_rate': 0.09640171148346598, 'max_depth': 6}
+[2025-04-23 20:48:49,214] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 80, 'learning_rate': 0.09640171148346598, 'max_depth': 6}
+[2025-04-23 20:48:49,643] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 50, 'learning_rate': 0.04526360421594599, 'max_depth': 8}
+[2025-04-23 20:48:49,643] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 50, 'learning_rate': 0.04526360421594599, 'max_depth': 8}
+[2025-04-23 20:48:49,965] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 110, 'learning_rate': 0.15976773901567437, 'max_depth': 5}
+[2025-04-23 20:48:49,965] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.15976773901567437, 'max_depth': 5}
+[2025-04-23 20:48:50,390] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 110, 'learning_rate': 0.2521852636504321, 'max_depth': 5}
+[2025-04-23 20:48:50,390] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.2521852636504321, 'max_depth': 5}
+[2025-04-23 20:48:50,850] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 90, 'learning_rate': 0.9650949990927317, 'max_depth': 5}
+[2025-04-23 20:48:50,851] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 90, 'learning_rate': 0.9650949990927317, 'max_depth': 5}
+[2025-04-23 20:48:51,235] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 50, 'learning_rate': 0.2716750354369229, 'max_depth': 4}
+[2025-04-23 20:48:51,236] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 50, 'learning_rate': 0.2716750354369229, 'max_depth': 4}
+[2025-04-23 20:48:51,410] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 110, 'learning_rate': 0.1360949374761733, 'max_depth': 5}
+[2025-04-23 20:48:51,410] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.1360949374761733, 'max_depth': 5}
+[2025-04-23 20:48:51,840] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 100, 'learning_rate': 0.22959226304154812, 'max_depth': 5}
+[2025-04-23 20:48:51,840] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 100, 'learning_rate': 0.22959226304154812, 'max_depth': 5}
+[2025-04-23 20:48:52,306] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 70, 'learning_rate': 0.2497569098106026, 'max_depth': 3}
+[2025-04-23 20:48:52,306] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 70, 'learning_rate': 0.2497569098106026, 'max_depth': 3}
+[2025-04-23 20:48:52,529] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 100, 'learning_rate': 0.10720453138147336, 'max_depth': 6}
+[2025-04-23 20:48:52,529] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 100, 'learning_rate': 0.10720453138147336, 'max_depth': 6}
+[2025-04-23 20:48:53,036] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 80, 'learning_rate': 0.24826638221881264, 'max_depth': 6}
+[2025-04-23 20:48:53,036] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 80, 'learning_rate': 0.24826638221881264, 'max_depth': 6}
+[2025-04-23 20:48:53,522] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 140, 'learning_rate': 0.6361619496681553, 'max_depth': 4}
+[2025-04-23 20:48:53,522] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 140, 'learning_rate': 0.6361619496681553, 'max_depth': 4}
+[2025-04-23 20:48:53,977] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 120, 'learning_rate': 0.11343808697545574, 'max_depth': 3}
+[2025-04-23 20:48:53,977] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 120, 'learning_rate': 0.11343808697545574, 'max_depth': 3}
+[2025-04-23 20:48:54,266] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 100, 'learning_rate': 0.46365625986550446, 'max_depth': 5}
+[2025-04-23 20:48:54,266] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 100, 'learning_rate': 0.46365625986550446, 'max_depth': 5}
+[2025-04-23 20:48:54,678] - INFO - model_trainer - Trial params for sklearn.ensemble.GradientBoostingClassifier: {'n_estimators': 70, 'learning_rate': 0.29377443136756537, 'max_depth': 2}
+[2025-04-23 20:48:54,678] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 70, 'learning_rate': 0.29377443136756537, 'max_depth': 2}
+[2025-04-23 20:48:54,824] - INFO - model_trainer - Completed search for sklearn.ensemble.GradientBoostingClassifier: best value=0.9467, params={'n_estimators': 110, 'learning_rate': 0.2521852636504321, 'max_depth': 5}
+[2025-04-23 20:48:54,824] - INFO - model_trainer - Best model: sklearn.ensemble.GradientBoostingClassifier with score=0.9467
+[2025-04-23 20:48:54,824] - INFO - model_trainer - Training final model sklearn.ensemble.GradientBoostingClassifier on full training set...
+[2025-04-23 20:48:54,824] - INFO - model_trainer - Instantiating model sklearn.ensemble.GradientBoostingClassifier with params={'n_estimators': 110, 'learning_rate': 0.2521852636504321, 'max_depth': 5}
+[2025-04-23 20:48:55,359] - INFO - model_trainer - Final eval for sklearn.ensemble.GradientBoostingClassifier -> train: {'accuracy': 0.9903106298090624, 'f1': 0.9899941141848146, 'precision': 0.9894117647058823, 'recall': 0.9905771495877503}, val: {'accuracy': 0.9478632478632478, 'f1': 0.9469103568320278, 'precision': 0.9331046312178388, 'recall': 0.9611307420494699}
+[2025-04-23 20:49:04,599] - INFO - model_trainer - Registered model to MLflow registry 'NetworkSecurityModel'
+[2025-04-23 20:49:05,562] - INFO - model_trainer - Generated training report: {'timestamp': '2025-04-23T19:49:05.561711+00:00', 'best_model': 'GradientBoostingClassifier', 'best_model_params': {'n_estimators': 110, 'learning_rate': 0.2521852636504321, 'max_depth': 5}, 'train_metrics': {'accuracy': 0.9903106298090624, 'f1': 0.9899941141848146, 'precision': 0.9894117647058823, 'recall': 0.9905771495877503}, 'val_metrics': {'accuracy': 0.9478632478632478, 'f1': 0.9469103568320278, 'precision': 0.9331046312178388, 'recall': 0.9611307420494699}, 'optimization': {'method': 'optuna', 'best_trial': 18, 'n_trials': 30, 'direction': 'maximize', 'cv': {'folds': 5, 'mean_score': 0.9467151119076938, 'std_score': 0.0}}}
+[2025-04-23 20:49:05,563] - INFO - core - Directory already exists for Training Report: 'artifacts/2025_04_23T19_48_15Z/model_trainer'
+[2025-04-23 20:49:05,567] - INFO - core - Training Report saved to: 'artifacts/2025_04_23T19_48_15Z/model_trainer/training_report.yaml'
+[2025-04-23 20:49:05,578] - INFO - model_trainer - Saved model to artifacts\2025_04_23T19_48_15Z\model_trainer\model.joblib and report to artifacts\2025_04_23T19_48_15Z\model_trainer\training_report.yaml
+[2025-04-23 20:49:05,578] - INFO - model_trainer - ========== Model Training Pipeline Completed ==========
+[2025-04-23 20:49:05,578] - INFO - model_trainer_pipeline - Model Training Completed Successfully: 
+Model Trainer Artifact:
+  - Trained Model Path:   'artifacts/2025_04_23T19_48_15Z/model_trainer/model.joblib'
+  - Training Report Path: 'artifacts/2025_04_23T19_48_15Z/model_trainer/training_report.yaml'
+
+[2025-04-23 20:49:05,579] - INFO - model_trainer_pipeline - ========== Model Training Stage Completed ==========
+[2025-04-23 20:49:05,579] - INFO - debug_pipeline - ========== Model Trainer Pipeline Finished ==========
+[2025-04-23 20:49:05,579] - INFO - debug_pipeline - ======================================================

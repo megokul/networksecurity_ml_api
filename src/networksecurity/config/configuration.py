@@ -20,7 +20,8 @@ from src.networksecurity.constants.constants import (
     DATA_VAL_SUBDIR,
     DATA_TEST_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
-    LOGS_ROOT
+    LOGS_ROOT,
+    MODEL_TRAINER_SUBDIR
 )
 
 from src.networksecurity.entity.config_entity import (
@@ -28,6 +29,7 @@ from src.networksecurity.entity.config_entity import (
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
+    ModelTrainerConfig
 )
 
 from src.networksecurity.utils.core import (
@@ -175,4 +177,48 @@ class ConfigurationManager:
             train_dvc_dir=train_dvc_dir,
             val_dvc_dir=val_dvc_dir,
             test_dvc_dir=test_dvc_dir,
+        )
+
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        """
+        Assemble and return the ModelTrainerConfig dataclass, incorporating:
+        - artifact output paths under a timestamped MODEL_TRAINER_SUBDIR
+        - filenames & report names from config.yaml
+        - candidate models, optimization & tracking from params.yaml
+        - MLflow URI injected from environment
+        - DVC‐tracked input dirs & filenames for X/Y train/val/test
+        """
+        # static config.yaml entries
+        yaml_cfg = self.config.model_trainer
+        # dynamic params.yaml entries
+        params_cfg = self.params.model_trainer
+
+        # where to write models & reports
+        root_dir = self.artifacts_root / MODEL_TRAINER_SUBDIR
+
+        # DVC‐tracked data dirs (under /data/transformed)
+        train_dir = Path(self.config.data_paths.train_dvc_dir)
+        val_dir = Path(self.config.data_paths.val_dvc_dir)
+        test_dir = Path(self.config.data_paths.test_dvc_dir)
+
+        # pull MLflow sub‐box and inject the URI from env
+        mlflow_cfg = params_cfg.tracking
+        mlflow_cfg.tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+
+        return ModelTrainerConfig(
+            # where to write artifacts
+            root_dir=root_dir,
+            trained_model_filename=yaml_cfg.trained_model_filename,
+            training_report_filename=yaml_cfg.training_report_filename,
+
+            # what to train & how
+            models=params_cfg.models,
+            optimization=params_cfg.optimization,
+            tracking=mlflow_cfg,
+
+            # where to load transformed data from
+            train_dir=train_dir,
+            val_dir=val_dir,
+            test_dir=test_dir,
         )
