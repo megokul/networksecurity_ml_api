@@ -161,6 +161,31 @@ def save_array(array: np.ndarray | pd.Series, *paths: Path, label: str):
 
     except Exception as e:
         raise NetworkSecurityError(e, logger) from e
+    
+@ensure_annotations
+def load_array(path: Path, label: str) -> np.ndarray:
+    """
+    Loads a NumPy array from the specified `.npy` file path.
+
+    Args:
+        path (Path): Path to the `.npy` file.
+        label (str): Label for logging.
+
+    Returns:
+        np.ndarray: Loaded NumPy array.
+    """
+    try:
+        path = Path(path)
+
+        if not path.exists():
+            raise FileNotFoundError(f"{label} file not found at path: '{path.as_posix()}'")
+
+        array = np.load(path)
+        logger.info(f"{label} loaded successfully from: '{path.as_posix()}'")
+        return array
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger) from e
 
 @ensure_annotations
 def save_to_json(data: dict, *paths: Path, label: str):

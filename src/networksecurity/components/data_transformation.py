@@ -9,7 +9,7 @@ from src.networksecurity.entity.config_entity import DataTransformationConfig
 from src.networksecurity.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.utils.core import read_csv, save_to_csv, save_object, save_array
+from src.networksecurity.utils.core import read_csv, save_object, save_array
 from src.networksecurity.data_processors.preprocessor_builder import PreprocessorBuilder
 from src.networksecurity.constants.constants import (
     X_TRAIN_LABEL, Y_TRAIN_LABEL,

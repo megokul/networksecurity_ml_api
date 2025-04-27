@@ -6,6 +6,7 @@ import numpy as np
 import optuna
 import mlflow
 import dagshub
+import joblib
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import get_scorer
 from mlflow import sklearn as mlflow_sklearn
@@ -14,8 +15,9 @@ from src.networksecurity.entity.config_entity import ModelTrainerConfig
 from src.networksecurity.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
 from src.networksecurity.logging import logger
 from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.utils.core import save_to_yaml, save_object
+from src.networksecurity.utils.core import save_to_yaml, save_object, load_array
 from src.networksecurity.inference.estimator import NetworkModel
+
 
 class ModelTrainer:
     def __init__(self, config: ModelTrainerConfig, transformation_artifact: DataTransformationArtifact):
@@ -38,10 +40,10 @@ class ModelTrainer:
 
     def _load_data(self):
         try:
-            self.X_train = np.load(self.transformation_artifact.x_train_filepath)
-            self.y_train = np.load(self.transformation_artifact.y_train_filepath)
-            self.X_val = np.load(self.transformation_artifact.x_val_filepath)
-            self.y_val = np.load(self.transformation_artifact.y_val_filepath)
+            self.X_train = load_array(self.transformation_artifact.x_train_filepath, "X train")
+            self.y_train = load_array(self.transformation_artifact.y_train_filepath, "Y train")
+            self.X_val = load_array(self.transformation_artifact.x_val_filepath, "X val")
+            self.y_val = load_array(self.transformation_artifact.y_val_filepath, "Y val")
         except Exception as e:
             raise NetworkSecurityError(e, logger) from e
 
@@ -136,16 +138,16 @@ class ModelTrainer:
                 for k, v in val_m.items():
                     mlflow.log_metric(f"val_{k}", v)
 
-                # Save base model (raw sklearn model)
-                base_model_dir = self.config.root_dir / "base_model"
-                base_model_path = base_model_dir / "base_model.joblib"
-                save_object(model, base_model_path, "Base Model")
+                # Save raw trained model
+                trained_model_dir = self.config.root_dir / "trained_model"
+                trained_model_path = trained_model_dir / "model.joblib"
+                save_object(model, trained_model_path, "Trained Model")
 
-                # Save inference model (NetworkModel)
-                network_model = NetworkModel.from_artifacts(
-                    model_path=base_model_path,
-                    x_preprocessor_path=self.transformation_artifact.x_preprocessor_filepath,
-                    y_preprocessor_path=self.transformation_artifact.y_preprocessor_filepath,
+                # Save inference-ready model (NetworkModel)
+                network_model = NetworkModel.from_objects(
+                    model=model,
+                    x_preprocessor=joblib.load(self.transformation_artifact.x_preprocessor_filepath),
+                    y_preprocessor=joblib.load(self.transformation_artifact.y_preprocessor_filepath),
                 )
                 inference_model_dir = self.config.root_dir / "inference_model"
                 inference_model_path = inference_model_dir / "inference_model.joblib"
