@@ -202,3 +202,60 @@ class ModelTrainerConfig:
     @property
     def training_report_filepath(self) -> Path:
         return self.root_dir / self.training_report_filename
+
+
+@dataclass
+class ModelEvaluationConfig:
+    root_dir: Path
+    evaluation_report_filename: str
+    train_dir: Path
+    val_dir: Path
+    test_dir: Path
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+
+    @property
+    def evaluation_report_filepath(self) -> Path:
+        return self.root_dir / self.evaluation_report_filename
+
+
+@dataclass
+class ModelPusherConfig:
+    root_dir: Path
+    saved_model_dir: Path
+    pushed_model_filename: str
+    final_model_dir: Path
+    final_model_s3_bucket: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.saved_model_dir = Path(self.saved_model_dir)
+        self.final_model_dir = Path(self.final_model_dir)
+
+    @property
+    def pushed_model_filepath(self) -> Path:
+        return self.saved_model_dir / self.pushed_model_filename
+
+    @property
+    def final_model_local_path(self) -> Path:
+        return self.final_model_dir / self.pushed_model_filename
+
+
+@dataclass
+class ModelPusherConfig:
+    root_dir: Path
+    pushed_model_filename: str
+    pushed_model_filepath: Path
+    final_model_local_path: Path
+    final_model_s3_bucket: str
+    upload_to_s3: bool = True
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.pushed_model_filepath = Path(self.pushed_model_filepath)
+        self.final_model_local_path = Path(self.final_model_local_path)
+
+    @property
+    def pushed_model_dir(self) -> Path:
+        return self.root_dir

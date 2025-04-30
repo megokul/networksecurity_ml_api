@@ -81,3 +81,6 @@ X_VAL_LABEL = "X_val"
 Y_VAL_LABEL = "y_val"
 X_TEST_LABEL = "X_test"
 Y_TEST_LABEL = "y_test"
+
+MODEL_EVALUATION_SUBDIR = "model_evaluation"
+MODEL_PUSHER_SUBDIR = "final_model"

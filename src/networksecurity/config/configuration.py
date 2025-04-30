@@ -21,7 +21,9 @@ from src.networksecurity.constants.constants import (
     DATA_TEST_SUBDIR,
     TRANSFORMED_OBJECT_SUBDIR,
     LOGS_ROOT,
-    MODEL_TRAINER_SUBDIR
+    MODEL_TRAINER_SUBDIR,
+    MODEL_EVALUATION_SUBDIR,
+    MODEL_PUSHER_SUBDIR,
 )
 
 from src.networksecurity.entity.config_entity import (
@@ -29,7 +31,9 @@ from src.networksecurity.entity.config_entity import (
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
-    ModelTrainerConfig
+    ModelTrainerConfig,
+    ModelEvaluationConfig,
+    ModelPusherConfig,
 )
 
 from src.networksecurity.utils.core import (
@@ -72,9 +76,6 @@ class ConfigurationManager:
         self.artifacts_root = base_artifact_root / timestamp
 
         self.logs_root = Path(LOGS_ROOT) / timestamp
-
-        
-        
 
     def get_logs_dir(self) -> Path:
         return self.logs_root
@@ -221,4 +222,47 @@ class ConfigurationManager:
             train_dir=train_dir,
             val_dir=val_dir,
             test_dir=test_dir,
+        )
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        """
+        Assemble ModelEvaluationConfig for the model evaluation stage.
+        """
+        eval_cfg = self.config.model_evaluation
+        root_dir = self.artifacts_root / MODEL_EVALUATION_SUBDIR
+
+        train_dir = Path(self.config.data_paths.train_dvc_dir)
+        val_dir = Path(self.config.data_paths.val_dvc_dir)
+        test_dir = Path(self.config.data_paths.test_dvc_dir)
+
+        return ModelEvaluationConfig(
+            root_dir=root_dir,
+            evaluation_report_filename=eval_cfg.evaluation_report_filename,
+            train_dir=train_dir,
+            val_dir=val_dir,
+            test_dir=test_dir,
+        )
+    
+    def get_model_pusher_config(self) -> ModelPusherConfig:
+        """
+        Assemble ModelPusherConfig for the model deployment stage.
+        - Uses the same global timestamp directory for consistency.
+        - Gets final model filename and S3 bucket name from config.yaml.
+        """
+        pusher_cfg = self.config.model_pusher
+
+        # Local directory to save pushed model
+        root_dir = self.artifacts_root / MODEL_PUSHER_SUBDIR
+        root_dir.mkdir(parents=True, exist_ok=True)
+
+        pushed_model_filename = pusher_cfg.pushed_model_filename
+        pushed_model_filepath = root_dir / pushed_model_filename
+
+        return ModelPusherConfig(
+            root_dir=root_dir,
+            pushed_model_filename=pushed_model_filename,
+            pushed_model_filepath=pushed_model_filepath,
+            final_model_local_path=pushed_model_filepath,  # local file path for S3 key use
+            final_model_s3_bucket=pusher_cfg.final_model_s3_bucket,
+            upload_to_s3=pusher_cfg.get("upload_to_s3", True)
         )

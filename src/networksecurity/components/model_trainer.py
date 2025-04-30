@@ -162,6 +162,12 @@ class ModelTrainer:
             return ModelTrainerArtifact(
                 trained_model_filepath=inference_model_path,
                 training_report_filepath=report_path,
+                x_train_filepath=self.transformation_artifact.x_train_filepath,
+                y_train_filepath=self.transformation_artifact.y_train_filepath,
+                x_val_filepath=self.transformation_artifact.x_val_filepath,
+                y_val_filepath=self.transformation_artifact.y_val_filepath,
+                x_test_filepath=self.transformation_artifact.x_test_filepath,
+                y_test_filepath=self.transformation_artifact.y_test_filepath,
             )
 
         except Exception as e:
