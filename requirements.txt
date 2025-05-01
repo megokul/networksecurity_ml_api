@@ -12,3 +12,5 @@ scikit-learn
 dagshub
 mlflow
 optuna
+fastapi
+uvicorn
