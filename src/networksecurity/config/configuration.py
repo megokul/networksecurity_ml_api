@@ -23,7 +23,7 @@ from src.networksecurity.constants.constants import (
     LOGS_ROOT,
     MODEL_TRAINER_SUBDIR,
     MODEL_EVALUATION_SUBDIR,
-    MODEL_PUSHER_SUBDIR,
+    PUSHED_MODEL_SUBDIR,
 )
 
 from src.networksecurity.entity.config_entity import (
@@ -252,17 +252,14 @@ class ConfigurationManager:
         pusher_cfg = self.config.model_pusher
 
         # Local directory to save pushed model
-        root_dir = self.artifacts_root / MODEL_PUSHER_SUBDIR
-        root_dir.mkdir(parents=True, exist_ok=True)
-
-        pushed_model_filename = pusher_cfg.pushed_model_filename
-        pushed_model_filepath = root_dir / pushed_model_filename
+        pushed_model_dir = Path(PUSHED_MODEL_SUBDIR)
 
         return ModelPusherConfig(
-            root_dir=root_dir,
-            pushed_model_filename=pushed_model_filename,
-            pushed_model_filepath=pushed_model_filepath,
-            final_model_local_path=pushed_model_filepath,  # local file path for S3 key use
+            pushed_model_filename=pusher_cfg.final_model_filename,
+            pushed_model_dir=Path(PUSHED_MODEL_SUBDIR),
             final_model_s3_bucket=pusher_cfg.final_model_s3_bucket,
-            upload_to_s3=pusher_cfg.get("upload_to_s3", True)
+            upload_to_s3=pusher_cfg.get("upload_to_s3", True),
+            s3_final_model_folder=pusher_cfg.s3_final_model_folder,
+            s3_artifacts_folder=pusher_cfg.s3_artifacts_folder,
+            aws_region=pusher_cfg.aws_region  # <- NEW
         )

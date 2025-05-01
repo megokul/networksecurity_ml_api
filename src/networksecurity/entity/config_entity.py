@@ -222,40 +222,25 @@ class ModelEvaluationConfig:
 
 @dataclass
 class ModelPusherConfig:
-    root_dir: Path
-    saved_model_dir: Path
+    pushed_model_dir: Path
     pushed_model_filename: str
-    final_model_dir: Path
     final_model_s3_bucket: str
+    upload_to_s3: bool
+    s3_final_model_folder: str
+    s3_artifacts_folder: str
+    aws_region: str
 
     def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-        self.saved_model_dir = Path(self.saved_model_dir)
-        self.final_model_dir = Path(self.final_model_dir)
+        self.pushed_model_dir = Path(self.pushed_model_dir)
 
     @property
     def pushed_model_filepath(self) -> Path:
-        return self.saved_model_dir / self.pushed_model_filename
+        return self.pushed_model_dir / self.pushed_model_filename
 
     @property
-    def final_model_local_path(self) -> Path:
-        return self.final_model_dir / self.pushed_model_filename
-
-
-@dataclass
-class ModelPusherConfig:
-    root_dir: Path
-    pushed_model_filename: str
-    pushed_model_filepath: Path
-    final_model_local_path: Path
-    final_model_s3_bucket: str
-    upload_to_s3: bool = True
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-        self.pushed_model_filepath = Path(self.pushed_model_filepath)
-        self.final_model_local_path = Path(self.final_model_local_path)
+    def s3_key_final_model(self) -> str:
+        return f"{self.s3_final_model_folder}/{self.pushed_model_filename}"
 
     @property
-    def pushed_model_dir(self) -> Path:
-        return self.root_dir
+    def s3_key_artifacts(self) -> str:
+        return f"{self.s3_artifacts_folder}/{self.pushed_model_filename}"

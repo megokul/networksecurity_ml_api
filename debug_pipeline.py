@@ -78,7 +78,7 @@ if __name__ == "__main__":
             model_trainer_artifact=trainer_artifact
         )
         pusher_artifact = pusher_pipeline.run()
-        logger.info(f"========== Model Pusher Pipeline Finished: {pusher_artifact} ==========")
+        logger.info(f"========== Model Pusher Pipeline Finished ==========")
         logger.info("======================================================")
 
     except NetworkSecurityError:

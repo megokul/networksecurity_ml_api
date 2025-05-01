@@ -35,7 +35,7 @@ class S3Syncer:
                 Bucket=self.bucket_name,
                 Key=s3_key
             )
-            logger.info(f"File uploaded to S3: {local_path} → s3://{self.bucket_name}/{s3_key}")
+            logger.info(f"File uploaded to S3: {local_path.as_posix()} -> s3://{self.bucket_name}/{s3_key}")
 
         except ClientError as e:
             logger.error(f"AWS ClientError while uploading to S3: {e}")
@@ -53,15 +53,18 @@ class S3Syncer:
             if not local_dir.is_dir():
                 raise NotADirectoryError(f"Local directory not found: {local_dir.as_posix()}")
 
+            logger.info(f"Walking through directory: {local_dir.resolve().as_posix()}")
+            logger.info(f"Target S3 prefix: {s3_prefix}")
+
             for root, _, files in os.walk(local_dir):
                 for file in files:
                     local_file_path = Path(root) / file
                     relative_path = local_file_path.relative_to(local_dir)
                     s3_key = (Path(s3_prefix) / relative_path).as_posix()
-
+                    logger.info(f"Uploading file: {local_file_path.as_posix()} -> s3://{self.bucket_name}/{s3_key}")
                     self.upload_file(local_file_path, s3_key)
 
-            logger.info(f"Directory synced to S3: {local_dir} → s3://{self.bucket_name}/{s3_prefix}")
+            logger.info(f"Directory synced to S3: {local_dir.as_posix()} -> s3://{self.bucket_name}/{s3_prefix}")
 
         except Exception as e:
             logger.error("Failed to sync directory to S3")

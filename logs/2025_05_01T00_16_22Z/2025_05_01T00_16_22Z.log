@@ -1,0 +1,278 @@
+[2025-05-01 01:16:24,810] - INFO - debug_pipeline - ========== Launching Data Ingestion Pipeline ==========
+[2025-05-01 01:16:24,823] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:16:24,832] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:16:24,834] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:16:24,837] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:16:24,837] - INFO - data_ingestion_pipeline - ========== Data Ingestion Stage Started ==========
+[2025-05-01 01:16:24,838] - INFO - data_ingestion - ========== Starting Data Ingestion ==========
+[2025-05-01 01:16:25,122] - INFO - mongodb_handler - MongoClient initialized.
+[2025-05-01 01:16:30,412] - INFO - mongodb_handler - Exported 22110 documents from network_security_db.phishing_records as DataFrame.
+[2025-05-01 01:16:30,480] - INFO - mongodb_handler - MongoClient connection closed.
+[2025-05-01 01:16:30,480] - INFO - data_ingestion - Fetched 22110 raw rows from data source.
+[2025-05-01 01:16:30,482] - INFO - core - Created directory for Raw Data: 'artifacts/2025_05_01T00_16_22Z/data_ingestion/featurestore'
+[2025-05-01 01:16:30,580] - INFO - core - Raw Data saved to: 'artifacts/2025_05_01T00_16_22Z/data_ingestion/featurestore/raw_data.csv'
+[2025-05-01 01:16:30,580] - INFO - core - Directory already exists for Raw Data: 'data/raw'
+[2025-05-01 01:16:30,674] - INFO - core - Raw Data saved to: 'data/raw/raw_data.csv'
+[2025-05-01 01:16:30,680] - INFO - data_ingestion - Raw DataFrame cleaned successfully.
+[2025-05-01 01:16:30,680] - INFO - core - Created directory for Cleaned (Ingested) Data: 'artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested'
+[2025-05-01 01:16:30,753] - INFO - core - Cleaned (Ingested) Data saved to: 'artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested/ingested_data.csv'
+[2025-05-01 01:16:30,753] - INFO - data_ingestion - ========== Data Ingestion Completed ==========
+[2025-05-01 01:16:30,758] - INFO - data_ingestion_pipeline - Data Ingestion Process Completed.
+
+Data Ingestion Artifact:
+  - Raw Artifact:         'artifacts/2025_05_01T00_16_22Z/data_ingestion/featurestore/raw_data.csv'
+  - Raw DVC Path:         'data/raw/raw_data.csv'
+  - Ingested Data Path:   'artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested/ingested_data.csv'
+
+[2025-05-01 01:16:30,758] - INFO - data_ingestion_pipeline - ========== Data Ingestion Stage Completed ==========
+[2025-05-01 01:16:30,758] - INFO - debug_pipeline - ========== Data Ingestion Pipeline Finished ==========
+[2025-05-01 01:16:30,758] - INFO - debug_pipeline - ======================================================
+[2025-05-01 01:16:30,758] - INFO - debug_pipeline - ========== Launching Data Validation Pipeline ==========
+[2025-05-01 01:16:30,765] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:16:30,770] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:16:30,776] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:16:30,780] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:16:30,780] - INFO - data_validation_pipeline - ========= Data Validation Stage Started =========
+[2025-05-01 01:16:30,824] - INFO - core - Ingested Data loaded from: 'artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested/ingested_data.csv'
+[2025-05-01 01:16:30,850] - INFO - core - Validated Base Data loaded from: 'data/validated/validated_data.csv'
+[2025-05-01 01:16:30,850] - INFO - data_validation - Running data validation...
+[2025-05-01 01:16:30,853] - INFO - data_validation - Schema hash check passed.
+[2025-05-01 01:16:30,854] - INFO - core - Created directory for Missing Value Report: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports'
+[2025-05-01 01:16:30,854] - INFO - core - Missing Value Report saved to: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports/missing_values_report.json'
+[2025-05-01 01:16:30,864] - INFO - core - Directory already exists for Duplicates Report: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports'
+[2025-05-01 01:16:30,864] - INFO - core - Duplicates Report saved to: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports/duplicates_report.yaml'
+[2025-05-01 01:16:30,886] - INFO - core - Directory already exists for Drift Result: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports'
+[2025-05-01 01:16:30,891] - INFO - core - Drift Result saved to: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports/drift_report.yaml'
+[2025-05-01 01:16:30,891] - INFO - core - Directory already exists for Validation Report: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports'
+[2025-05-01 01:16:30,895] - INFO - core - Validation Report saved to: 'artifacts/2025_05_01T00_16_22Z/data_validation/reports/validation_report.yaml'
+[2025-05-01 01:16:30,896] - INFO - core - Created directory for Validated Data: 'artifacts/2025_05_01T00_16_22Z/data_validation/validated'
+[2025-05-01 01:16:30,916] - INFO - core - Validated Data saved to: 'artifacts/2025_05_01T00_16_22Z/data_validation/validated/validated_data.csv'
+[2025-05-01 01:16:30,916] - INFO - core - Directory already exists for Validated Data: 'data/validated'
+[2025-05-01 01:16:30,938] - INFO - core - Validated Data saved to: 'data/validated/validated_data.csv'
+[2025-05-01 01:16:30,938] - INFO - data_validation_pipeline - Data Validation Process Completed.
+
+Data Validation Artifact:
+  - Validated Data Path: 'artifacts/2025_05_01T00_16_22Z/data_validation/validated/validated_data.csv'
+  - Validation Status:   'True'
+
+[2025-05-01 01:16:30,939] - INFO - data_validation_pipeline - ========= Data Validation Stage Completed =========
+[2025-05-01 01:16:30,939] - INFO - debug_pipeline - ========== Data Validation Pipeline Finished ==========
+[2025-05-01 01:16:30,939] - INFO - debug_pipeline - ======================================================
+[2025-05-01 01:16:30,939] - INFO - debug_pipeline - ========== Launching Data Transformation Pipeline ==========
+[2025-05-01 01:16:30,943] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:16:30,951] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:16:30,953] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:16:30,957] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:16:30,958] - INFO - data_transformation_pipeline - ========== Data Transformation Stage Started ==========
+[2025-05-01 01:16:30,982] - INFO - core - Validated Data loaded from: 'artifacts/2025_05_01T00_16_22Z/data_validation/validated/validated_data.csv'
+[2025-05-01 01:16:30,982] - INFO - data_transformation - ========== Starting Data Transformation ==========
+[2025-05-01 01:16:31,003] - INFO - core - Created directory for X Preprocessor Pipeline: 'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor'
+[2025-05-01 01:16:31,004] - INFO - core - X Preprocessor Pipeline saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/x_preprocessor.joblib'
+[2025-05-01 01:16:31,005] - INFO - core - Directory already exists for Y Preprocessor Pipeline: 'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor'
+[2025-05-01 01:16:31,006] - INFO - core - Y Preprocessor Pipeline saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/y_preprocessor.joblib'
+[2025-05-01 01:16:31,006] - INFO - core - Created directory for X_train: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train'
+[2025-05-01 01:16:31,008] - INFO - core - X_train saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy'
+[2025-05-01 01:16:31,008] - INFO - core - Directory already exists for X_train: 'data/transformed/train'
+[2025-05-01 01:16:31,009] - INFO - core - X_train saved to: 'data/transformed/train/x_train.npy'
+[2025-05-01 01:16:31,010] - INFO - core - Directory already exists for y_train: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train'
+[2025-05-01 01:16:31,010] - INFO - core - y_train saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy'
+[2025-05-01 01:16:31,011] - INFO - core - Directory already exists for y_train: 'data/transformed/train'
+[2025-05-01 01:16:31,012] - INFO - core - y_train saved to: 'data/transformed/train/y_train.npy'
+[2025-05-01 01:16:31,012] - INFO - core - Created directory for X_val: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val'
+[2025-05-01 01:16:31,012] - INFO - core - X_val saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy'
+[2025-05-01 01:16:31,012] - INFO - core - Directory already exists for X_val: 'data/transformed/val'
+[2025-05-01 01:16:31,012] - INFO - core - X_val saved to: 'data/transformed/val/x_val.npy'
+[2025-05-01 01:16:31,012] - INFO - core - Directory already exists for y_val: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val'
+[2025-05-01 01:16:31,015] - INFO - core - y_val saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy'
+[2025-05-01 01:16:31,015] - INFO - core - Directory already exists for y_val: 'data/transformed/val'
+[2025-05-01 01:16:31,015] - INFO - core - y_val saved to: 'data/transformed/val/y_val.npy'
+[2025-05-01 01:16:31,016] - INFO - core - Created directory for X_test: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test'
+[2025-05-01 01:16:31,016] - INFO - core - X_test saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy'
+[2025-05-01 01:16:31,016] - INFO - core - Directory already exists for X_test: 'data/transformed/test'
+[2025-05-01 01:16:31,016] - INFO - core - X_test saved to: 'data/transformed/test/x_test.npy'
+[2025-05-01 01:16:31,017] - INFO - core - Directory already exists for y_test: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test'
+[2025-05-01 01:16:31,017] - INFO - core - y_test saved to: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy'
+[2025-05-01 01:16:31,017] - INFO - core - Directory already exists for y_test: 'data/transformed/test'
+[2025-05-01 01:16:31,017] - INFO - core - y_test saved to: 'data/transformed/test/y_test.npy'
+[2025-05-01 01:16:31,018] - INFO - data_transformation - ========== Data Transformation Completed ==========
+[2025-05-01 01:16:31,018] - INFO - data_transformation_pipeline - Data Transformation Completed Successfully: 
+Data Transformation Artifact:
+  - X-Train Data Path:    'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy'
+  - Y-Train Data Path:    'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy'
+  - X-Val Data Path:      'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy'
+  - Y-Val Data Path:      'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy'
+  - X-Test Data Path:     'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy'
+  - Y-Test Data Path:     'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy'
+  - X-Processor Path:     'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/x_preprocessor.joblib'
+  - Y-Processor Path:     'artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/y_preprocessor.joblib'
+
+[2025-05-01 01:16:31,018] - INFO - data_transformation_pipeline - ========== Data Transformation Stage Completed ==========
+[2025-05-01 01:16:31,018] - INFO - debug_pipeline - ========== Data Transformation Pipeline Finished ==========
+[2025-05-01 01:16:31,018] - INFO - debug_pipeline - ======================================================
+[2025-05-01 01:16:31,018] - INFO - debug_pipeline - ========== Launching Model Trainer Pipeline ==========
+[2025-05-01 01:16:31,020] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:16:31,030] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:16:31,032] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:16:31,036] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:16:31,038] - INFO - model_trainer_pipeline - ========== Model Training Stage Started ==========
+[2025-05-01 01:16:31,038] - INFO - model_trainer - Initializing ModelTrainer with root_dir=artifacts\2025_05_01T00_16_22Z\model_trainer
+[2025-05-01 01:16:32,245] - INFO - model_trainer - ========== Starting Model Training ==========
+[2025-05-01 01:16:32,250] - INFO - core - X train loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy'
+[2025-05-01 01:16:32,258] - INFO - core - Y train loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy'
+[2025-05-01 01:16:32,268] - INFO - core - X val loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy'
+[2025-05-01 01:16:32,274] - INFO - core - Y val loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy'
+[2025-05-01 01:17:02,100] - INFO - core - Created directory for Trained Model: 'artifacts/2025_05_01T00_16_22Z/model_trainer/trained_model'
+[2025-05-01 01:17:02,126] - INFO - core - Trained Model saved to: 'artifacts/2025_05_01T00_16_22Z/model_trainer/trained_model/model.joblib'
+[2025-05-01 01:17:02,132] - INFO - core - Created directory for Inference Model: 'artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model'
+[2025-05-01 01:17:02,145] - INFO - core - Inference Model saved to: 'artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib'
+[2025-05-01 01:17:02,145] - INFO - core - Created directory for Training Report: 'artifacts/2025_05_01T00_16_22Z/model_trainer/reports'
+[2025-05-01 01:17:02,147] - INFO - core - Training Report saved to: 'artifacts/2025_05_01T00_16_22Z/model_trainer/reports/training_report.yaml'
+[2025-05-01 01:17:02,530] - INFO - model_trainer - ========== Model Training Completed ==========
+[2025-05-01 01:17:02,530] - INFO - model_trainer_pipeline - Model Training Completed Successfully: 
+Model Trainer Artifact:
+  - Trained Model Path:   'artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib'
+  - Training Report Path: 'artifacts/2025_05_01T00_16_22Z/model_trainer/reports/training_report.yaml'
+  - X Train Path: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy'
+  - Y Train Path: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy'
+  - X Val Path:   'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy'
+  - Y Val Path:   'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy'
+  - X Test Path:  'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy'
+  - Y Test Path:  'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy'
+[2025-05-01 01:17:02,530] - INFO - model_trainer_pipeline - ========== Model Training Stage Completed ==========
+[2025-05-01 01:17:02,530] - INFO - debug_pipeline - ========== Model Trainer Pipeline Finished ==========
+[2025-05-01 01:17:02,530] - INFO - debug_pipeline - ======================================================
+[2025-05-01 01:17:02,532] - INFO - debug_pipeline - ========== Launching Model Evaluation Pipeline ==========
+[2025-05-01 01:17:02,532] - INFO - model_evaluation_pipeline - Initializing ModelEvaluationPipeline...
+[2025-05-01 01:17:02,532] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:17:02,543] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:17:02,545] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:17:02,547] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:17:02,547] - INFO - model_evaluation_pipeline - ========== Model Evaluation Stage Started ==========
+[2025-05-01 01:17:02,549] - INFO - model_evaluation - Initializing ModelEvaluator with root_dir=artifacts\2025_05_01T00_16_22Z\model_evaluation
+[2025-05-01 01:17:02,549] - INFO - model_evaluation - ========== Starting Model Evaluation ==========
+[2025-05-01 01:17:02,549] - INFO - core - X Train loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy'
+[2025-05-01 01:17:02,549] - INFO - core - Y Train loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy'
+[2025-05-01 01:17:02,550] - INFO - core - X Val loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy'
+[2025-05-01 01:17:02,550] - INFO - core - Y Val loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy'
+[2025-05-01 01:17:02,562] - INFO - core - X Test loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy'
+[2025-05-01 01:17:02,566] - INFO - core - Y Test loaded successfully from: 'artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy'
+[2025-05-01 01:17:02,566] - INFO - core - Loading object from: 'artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib'
+[2025-05-01 01:17:02,579] - INFO - model_evaluation - Inference Model loaded successfully for evaluation.
+[2025-05-01 01:17:02,614] - INFO - core - Directory already exists for Evaluation Report: 'artifacts/2025_05_01T00_16_22Z/model_evaluation'
+[2025-05-01 01:17:02,615] - INFO - core - Evaluation Report saved to: 'artifacts/2025_05_01T00_16_22Z/model_evaluation/evaluation_report.yaml'
+[2025-05-01 01:17:02,615] - INFO - model_evaluation - ========== Model Evaluation Completed ==========
+[2025-05-01 01:17:02,615] - INFO - model_evaluation_pipeline - Model Evaluation Completed Successfully: 
+Model Evaluation Artifact:
+  - Evaluation Report Path: 'artifacts/2025_05_01T00_16_22Z/model_evaluation/evaluation_report.yaml'
+
+[2025-05-01 01:17:02,615] - INFO - model_evaluation_pipeline - ========== Model Evaluation Stage Completed ==========
+[2025-05-01 01:17:02,616] - INFO - debug_pipeline - ========== Model Evaluation Pipeline Finished ==========
+[2025-05-01 01:17:02,616] - INFO - debug_pipeline - ======================================================
+[2025-05-01 01:17:02,616] - INFO - debug_pipeline - ========== Launching Model Pusher Pipeline ==========
+[2025-05-01 01:17:02,617] - INFO - model_pusher_pipeline - Initializing ModelPusherPipeline...
+[2025-05-01 01:17:02,620] - INFO - core - YAML loaded successfully from: 'config/config.yaml'
+[2025-05-01 01:17:02,626] - INFO - core - YAML loaded successfully from: 'config/params.yaml'
+[2025-05-01 01:17:02,629] - INFO - core - YAML loaded successfully from: 'config/schema.yaml'
+[2025-05-01 01:17:02,632] - INFO - core - YAML loaded successfully from: 'config/templates.yaml'
+[2025-05-01 01:17:02,633] - INFO - model_pusher_pipeline - ========== Model Pusher Stage Started ==========
+[2025-05-01 01:17:02,633] - INFO - model_pusher - Starting model push process...
+[2025-05-01 01:17:02,633] - INFO - core - Loading object from: 'artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib'
+[2025-05-01 01:17:02,637] - INFO - core - Directory already exists for Final Model: 'final_model'
+[2025-05-01 01:17:02,643] - INFO - core - Final Model saved to: 'final_model/final_inference_model.joblib'
+[2025-05-01 01:17:02,810] - INFO - s3_syncer - S3Syncer initialized for bucket 'networksecurity-dev-artifacts' in region 'us-east-1'
+[2025-05-01 01:17:04,052] - INFO - s3_syncer - File uploaded to S3: final_model\final_inference_model.joblib -> s3://networksecurity-dev-artifacts/final_model/final_inference_model.joblib
+[2025-05-01 01:17:04,053] - INFO - s3_syncer - Walking through directory: E:\MyProjects\networksecurity\artifacts
+[2025-05-01 01:17:04,053] - INFO - s3_syncer - Target S3 prefix: artifacts/artifacts
+[2025-05-01 01:17:04,053] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_ingestion\featurestore\raw_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_ingestion/featurestore/raw_data.csv
+[2025-05-01 01:17:04,740] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_ingestion\featurestore\raw_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_ingestion/featurestore/raw_data.csv
+[2025-05-01 01:17:04,741] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_ingestion\ingested\ingested_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_ingestion/ingested/ingested_data.csv
+[2025-05-01 01:17:05,310] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_ingestion\ingested\ingested_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_ingestion/ingested/ingested_data.csv
+[2025-05-01 01:17:05,312] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\preprocessor\x_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/preprocessor/x_preprocessor.joblib
+[2025-05-01 01:17:05,892] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\preprocessor\x_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/preprocessor/x_preprocessor.joblib
+[2025-05-01 01:17:05,892] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\preprocessor\y_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/preprocessor/y_preprocessor.joblib
+[2025-05-01 01:17:06,176] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\preprocessor\y_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/preprocessor/y_preprocessor.joblib
+[2025-05-01 01:17:06,178] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\test\x_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/test/x_test.npy
+[2025-05-01 01:17:06,698] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\test\x_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/test/x_test.npy
+[2025-05-01 01:17:06,698] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\test\y_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/test/y_test.npy
+[2025-05-01 01:17:07,010] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\test\y_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/test/y_test.npy
+[2025-05-01 01:17:07,010] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\train\x_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/train/x_train.npy
+[2025-05-01 01:17:07,480] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\train\x_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/train/x_train.npy
+[2025-05-01 01:17:07,480] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\train\y_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/train/y_train.npy
+[2025-05-01 01:17:07,835] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\train\y_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/train/y_train.npy
+[2025-05-01 01:17:07,835] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\val\x_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/val/x_val.npy
+[2025-05-01 01:17:08,440] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\val\x_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/val/x_val.npy
+[2025-05-01 01:17:08,440] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\val\y_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/val/y_val.npy
+[2025-05-01 01:17:08,765] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_transformation\transformed\val\y_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_transformation/transformed/val/y_val.npy
+[2025-05-01 01:17:08,767] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_validation\reports\drift_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/drift_report.yaml
+[2025-05-01 01:17:09,084] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_validation\reports\drift_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/drift_report.yaml
+[2025-05-01 01:17:09,084] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_validation\reports\duplicates_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/duplicates_report.yaml
+[2025-05-01 01:17:09,354] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_validation\reports\duplicates_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/duplicates_report.yaml
+[2025-05-01 01:17:09,359] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_validation\reports\missing_values_report.json -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/missing_values_report.json
+[2025-05-01 01:17:09,697] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_validation\reports\missing_values_report.json -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/missing_values_report.json
+[2025-05-01 01:17:09,697] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_validation\reports\validation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/validation_report.yaml
+[2025-05-01 01:17:09,976] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_validation\reports\validation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/reports/validation_report.yaml
+[2025-05-01 01:17:09,976] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\data_validation\validated\validated_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/validated/validated_data.csv
+[2025-05-01 01:17:10,392] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\data_validation\validated\validated_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/data_validation/validated/validated_data.csv
+[2025-05-01 01:17:10,396] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\model_evaluation\evaluation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_evaluation/evaluation_report.yaml
+[2025-05-01 01:17:10,680] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\model_evaluation\evaluation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_evaluation/evaluation_report.yaml
+[2025-05-01 01:17:10,685] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\model_trainer\inference_model\inference_model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/inference_model/inference_model.joblib
+[2025-05-01 01:17:11,381] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\model_trainer\inference_model\inference_model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/inference_model/inference_model.joblib
+[2025-05-01 01:17:11,383] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\model_trainer\reports\training_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/reports/training_report.yaml
+[2025-05-01 01:17:11,675] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\model_trainer\reports\training_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/reports/training_report.yaml
+[2025-05-01 01:17:11,678] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_14_27Z\model_trainer\trained_model\model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/trained_model/model.joblib
+[2025-05-01 01:17:12,154] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_14_27Z\model_trainer\trained_model\model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_14_27Z/model_trainer/trained_model/model.joblib
+[2025-05-01 01:17:12,156] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_ingestion\featurestore\raw_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_ingestion/featurestore/raw_data.csv
+[2025-05-01 01:17:12,860] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_ingestion\featurestore\raw_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_ingestion/featurestore/raw_data.csv
+[2025-05-01 01:17:12,860] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_ingestion\ingested\ingested_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested/ingested_data.csv
+[2025-05-01 01:17:13,523] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_ingestion\ingested\ingested_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_ingestion/ingested/ingested_data.csv
+[2025-05-01 01:17:13,523] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\preprocessor\x_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/x_preprocessor.joblib
+[2025-05-01 01:17:14,049] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\preprocessor\x_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/x_preprocessor.joblib
+[2025-05-01 01:17:14,050] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\preprocessor\y_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/y_preprocessor.joblib
+[2025-05-01 01:17:14,410] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\preprocessor\y_preprocessor.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/preprocessor/y_preprocessor.joblib
+[2025-05-01 01:17:14,418] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\test\x_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy
+[2025-05-01 01:17:14,800] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\test\x_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/x_test.npy
+[2025-05-01 01:17:14,802] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\test\y_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy
+[2025-05-01 01:17:15,098] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\test\y_test.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/test/y_test.npy
+[2025-05-01 01:17:15,102] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\train\x_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy
+[2025-05-01 01:17:15,585] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\train\x_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/x_train.npy
+[2025-05-01 01:17:15,587] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\train\y_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy
+[2025-05-01 01:17:15,916] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\train\y_train.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/train/y_train.npy
+[2025-05-01 01:17:15,916] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\val\x_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy
+[2025-05-01 01:17:16,373] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\val\x_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/x_val.npy
+[2025-05-01 01:17:16,373] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\val\y_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy
+[2025-05-01 01:17:16,672] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_transformation\transformed\val\y_val.npy -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_transformation/transformed/val/y_val.npy
+[2025-05-01 01:17:16,674] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_validation\reports\drift_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/drift_report.yaml
+[2025-05-01 01:17:16,980] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_validation\reports\drift_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/drift_report.yaml
+[2025-05-01 01:17:16,980] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_validation\reports\duplicates_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/duplicates_report.yaml
+[2025-05-01 01:17:17,270] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_validation\reports\duplicates_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/duplicates_report.yaml
+[2025-05-01 01:17:17,270] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_validation\reports\missing_values_report.json -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/missing_values_report.json
+[2025-05-01 01:17:17,571] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_validation\reports\missing_values_report.json -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/missing_values_report.json
+[2025-05-01 01:17:17,571] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_validation\reports\validation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/validation_report.yaml
+[2025-05-01 01:17:17,867] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_validation\reports\validation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/reports/validation_report.yaml
+[2025-05-01 01:17:17,870] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\data_validation\validated\validated_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/validated/validated_data.csv
+[2025-05-01 01:17:18,360] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\data_validation\validated\validated_data.csv -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/data_validation/validated/validated_data.csv
+[2025-05-01 01:17:18,369] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\model_evaluation\evaluation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_evaluation/evaluation_report.yaml
+[2025-05-01 01:17:18,653] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\model_evaluation\evaluation_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_evaluation/evaluation_report.yaml
+[2025-05-01 01:17:18,653] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\model_trainer\inference_model\inference_model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib
+[2025-05-01 01:17:19,304] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\model_trainer\inference_model\inference_model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/inference_model/inference_model.joblib
+[2025-05-01 01:17:19,304] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\model_trainer\reports\training_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/reports/training_report.yaml
+[2025-05-01 01:17:19,594] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\model_trainer\reports\training_report.yaml -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/reports/training_report.yaml
+[2025-05-01 01:17:19,594] - INFO - s3_syncer - Uploading file: artifacts\2025_05_01T00_16_22Z\model_trainer\trained_model\model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/trained_model/model.joblib
+[2025-05-01 01:17:20,130] - INFO - s3_syncer - File uploaded to S3: artifacts\2025_05_01T00_16_22Z\model_trainer\trained_model\model.joblib -> s3://networksecurity-dev-artifacts/artifacts/artifacts/2025_05_01T00_16_22Z/model_trainer/trained_model/model.joblib
+[2025-05-01 01:17:20,130] - INFO - s3_syncer - Directory synced to S3: artifacts -> s3://networksecurity-dev-artifacts/artifacts/artifacts
+[2025-05-01 01:17:20,130] - INFO - s3_syncer - Walking through directory: E:\MyProjects\networksecurity\logs
+[2025-05-01 01:17:20,130] - INFO - s3_syncer - Target S3 prefix: artifacts/logs
+[2025-05-01 01:17:20,130] - INFO - s3_syncer - Uploading file: logs\2025_05_01T00_14_27Z\2025_05_01T00_14_27Z.log -> s3://networksecurity-dev-artifacts/artifacts/logs/2025_05_01T00_14_27Z/2025_05_01T00_14_27Z.log
+[2025-05-01 01:17:20,441] - INFO - s3_syncer - File uploaded to S3: logs\2025_05_01T00_14_27Z\2025_05_01T00_14_27Z.log -> s3://networksecurity-dev-artifacts/artifacts/logs/2025_05_01T00_14_27Z/2025_05_01T00_14_27Z.log
+[2025-05-01 01:17:20,442] - INFO - s3_syncer - Uploading file: logs\2025_05_01T00_16_22Z\2025_05_01T00_16_22Z.log -> s3://networksecurity-dev-artifacts/artifacts/logs/2025_05_01T00_16_22Z/2025_05_01T00_16_22Z.log
+[2025-05-01 01:17:20,818] - INFO - s3_syncer - File uploaded to S3: logs\2025_05_01T00_16_22Z\2025_05_01T00_16_22Z.log -> s3://networksecurity-dev-artifacts/artifacts/logs/2025_05_01T00_16_22Z/2025_05_01T00_16_22Z.log
+[2025-05-01 01:17:20,818] - INFO - s3_syncer - Directory synced to S3: logs -> s3://networksecurity-dev-artifacts/artifacts/logs
+[2025-05-01 01:17:20,818] - INFO - model_pusher - Model push process completed successfully.
+[2025-05-01 01:17:20,818] - INFO - model_pusher_pipeline - Model Pusher Stage Completed Successfully: 
+Model Pusher Artifact:
+  - Local Model Path: final_model/final_inference_model.joblib
+  - S3 Model Path:    s3://networksecurity-dev-artifacts/final_model/final_inference_model.joblib
+
+[2025-05-01 01:17:20,820] - INFO - model_pusher_pipeline - ========== Model Pusher Stage Completed ==========
+[2025-05-01 01:17:20,820] - INFO - debug_pipeline - ========== Model Pusher Pipeline Finished ==========
+[2025-05-01 01:17:20,820] - INFO - debug_pipeline - ======================================================
