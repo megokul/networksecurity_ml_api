@@ -1,0 +1,22 @@
+timestamp: '2025-05-11T21:27:20.647708+00:00'
+best_model: GradientBoostingClassifier
+best_model_params:
+  n_estimators: 130
+  learning_rate: 0.1849471096332345
+  max_depth: 3
+train_metrics:
+  accuracy: 0.9680820746651467
+  f1: 0.9671939074399531
+  precision: 0.9621212121212122
+  recall: 0.9723203769140165
+val_metrics:
+  accuracy: 0.9521367521367521
+  f1: 0.951048951048951
+  precision: 0.9411764705882353
+  recall: 0.9611307420494699
+optimization:
+  enabled: true
+  best_trial: 19
+  cv_folds: 5
+  direction: maximize
+  mean_score: 0.9487065689633448

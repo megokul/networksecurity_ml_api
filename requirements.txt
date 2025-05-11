@@ -4,7 +4,7 @@ pymongo[srv]==4.11.3
 pandas==2.2.3
 ensure==1.0.4
 python-box==7.3.2
-PyYAML==7.3.2
+PyYAML
 dvc
 scipy==1.15.2
 joblib
@@ -14,3 +14,7 @@ mlflow
 optuna
 fastapi
 uvicorn
+fastapi
+fastapi
+celery
+redis
