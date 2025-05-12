@@ -224,11 +224,7 @@ class ModelEvaluationConfig:
 class ModelPusherConfig:
     pushed_model_dir: Path
     pushed_model_filename: str
-    final_model_s3_bucket: str
     upload_to_s3: bool
-    s3_final_model_folder: str
-    s3_artifacts_folder: str
-    aws_region: str
 
     def __post_init__(self):
         self.pushed_model_dir = Path(self.pushed_model_dir)
@@ -237,10 +233,16 @@ class ModelPusherConfig:
     def pushed_model_filepath(self) -> Path:
         return self.pushed_model_dir / self.pushed_model_filename
 
-    @property
-    def s3_key_final_model(self) -> str:
-        return f"{self.s3_final_model_folder}/{self.pushed_model_filename}"
 
-    @property
-    def s3_key_artifacts(self) -> str:
-        return f"{self.s3_artifacts_folder}/{self.pushed_model_filename}"
+@dataclass
+class S3HandlerConfig:
+    root_dir: Path
+    bucket_name: str
+    aws_region: str
+    local_dir_to_sync: Path
+    s3_artifacts_prefix: str
+    s3_final_model_prefix: str
+
+    def __post_init__(self):
+        self.root_dir = Path(self.root_dir)
+        self.local_dir_to_sync = Path(self.local_dir_to_sync)

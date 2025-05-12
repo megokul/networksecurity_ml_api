@@ -34,6 +34,7 @@ from src.networksecurity.entity.config_entity import (
     ModelTrainerConfig,
     ModelEvaluationConfig,
     ModelPusherConfig,
+    S3HandlerConfig,
 )
 
 from src.networksecurity.utils.core import (
@@ -182,14 +183,6 @@ class ConfigurationManager:
 
 
     def get_model_trainer_config(self) -> ModelTrainerConfig:
-        """
-        Assemble and return the ModelTrainerConfig dataclass, incorporating:
-        - artifact output paths under a timestamped MODEL_TRAINER_SUBDIR
-        - filenames & report names from config.yaml
-        - candidate models, optimization & tracking from params.yaml
-        - MLflow URI injected from environment
-        - DVC‐tracked input dirs & filenames for X/Y train/val/test
-        """
         # static config.yaml entries
         yaml_cfg = self.config.model_trainer
         # dynamic params.yaml entries
@@ -225,9 +218,6 @@ class ConfigurationManager:
         )
 
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
-        """
-        Assemble ModelEvaluationConfig for the model evaluation stage.
-        """
         eval_cfg = self.config.model_evaluation
         root_dir = self.artifacts_root / MODEL_EVALUATION_SUBDIR
 
@@ -242,24 +232,30 @@ class ConfigurationManager:
             val_dir=val_dir,
             test_dir=test_dir,
         )
-    
+
     def get_model_pusher_config(self) -> ModelPusherConfig:
-        """
-        Assemble ModelPusherConfig for the model deployment stage.
-        - Uses the same global timestamp directory for consistency.
-        - Gets final model filename and S3 bucket name from config.yaml.
-        """
         pusher_cfg = self.config.model_pusher
+        pusher_params = self.params.model_pusher
 
         # Local directory to save pushed model
         pushed_model_dir = Path(PUSHED_MODEL_SUBDIR)
 
         return ModelPusherConfig(
             pushed_model_filename=pusher_cfg.final_model_filename,
-            pushed_model_dir=Path(PUSHED_MODEL_SUBDIR),
-            final_model_s3_bucket=pusher_cfg.final_model_s3_bucket,
-            upload_to_s3=pusher_cfg.get("upload_to_s3", True),
-            s3_final_model_folder=pusher_cfg.s3_final_model_folder,
-            s3_artifacts_folder=pusher_cfg.s3_artifacts_folder,
-            aws_region=pusher_cfg.aws_region  # <- NEW
+            pushed_model_dir=pushed_model_dir,
+            upload_to_s3=pusher_params.upload_to_s3,
+        )
+
+    def get_s3_handler_config(self) -> S3HandlerConfig:
+        s3_cfg = self.config.s3_handler  # your config.yaml has these under model_pusher
+        root_dir = self.artifacts_root / "s3_handler"
+        aws_region = os.getenv("AWS_REGION")
+
+        return S3HandlerConfig(
+            root_dir=root_dir,
+            bucket_name=s3_cfg.final_model_s3_bucket,
+            aws_region=aws_region,
+            local_dir_to_sync=self.artifacts_root,  # assuming you want to sync entire artifacts dir
+            s3_artifacts_prefix=s3_cfg.s3_artifacts_prefix,
+            s3_final_model_prefix=s3_cfg.s3_final_model_prefix,
         )

@@ -62,8 +62,8 @@ model_evaluation:
 
 model_pusher:
   final_model_filename: final_inference_model.joblib
+
+s3_handler:
   final_model_s3_bucket: networksecurity-dev-artifacts
-  s3_final_model_folder: final_model
-  s3_artifacts_folder: artifacts
-  upload_to_s3: true
-  aws_region: us-east-1
+  s3_final_model_prefix: final_model
+  s3_artifacts_prefix: artifacts

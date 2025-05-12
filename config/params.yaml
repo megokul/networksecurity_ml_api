@@ -37,16 +37,11 @@ transformation_params:
         from: -1
         to: 0
 
-
-
-
 # ───────────────────────────────────────────────────────────────────────────────
 # Parameters for model training
 # ───────────────────────────────────────────────────────────────────────────────
 # Parameters for model training
 model_trainer:
-
-
   # candidate estimators (importable by sklearn convention)
   models:
     - name: sklearn.ensemble.RandomForestClassifier
@@ -112,3 +107,6 @@ model_trainer:
         - recall
       # new switch: whether to log each Optuna trial as its own MLflow run
       log_trials: false
+
+model_pusher:
+   upload_to_s3: true

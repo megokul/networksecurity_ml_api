@@ -12,6 +12,7 @@ from src.networksecurity.components.model_pusher import ModelPusher
 
 from src.networksecurity.config.configuration import ConfigurationManager
 from src.networksecurity.dbhandler.mongodb_handler import MongoDBHandler
+from src.networksecurity.dbhandler.s3_handler import S3Handler
 
 from src.networksecurity.entity.artifact_entity import (
     DataIngestionArtifact,
@@ -93,7 +94,14 @@ class TrainingPipeline:
             # Model Pusher
             # ───────────────
             pusher_config = self.config_manager.get_model_pusher_config()
-            pusher = ModelPusher(model_pusher_config=pusher_config, model_trainer_artifact=trainer_artifact)
+            s3_handler_config = self.config_manager.get_s3_handler_config()
+            s3_handler = S3Handler(config=s3_handler_config)
+
+            pusher = ModelPusher(
+                model_pusher_config=pusher_config,
+                s3_handler=s3_handler,
+                model_trainer_artifact=trainer_artifact
+            )
             pusher_artifact: ModelPusherArtifact = pusher.push_model()
 
             logger.info("========== Training Pipeline Completed Successfully ==========")

@@ -1,5 +1,3 @@
-# FILE: debug_pipeline.py
-
 import sys
 from src.networksecurity.pipeline.training_pipeline import TrainingPipeline
 from src.networksecurity.exception.exception import NetworkSecurityError
