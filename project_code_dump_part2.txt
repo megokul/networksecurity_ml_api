@@ -30,6 +30,8 @@
             📁 cache/
                 📁 08/
                     📄 ba3af380fc7743bb7784b0b99b9e84b597659c
+                📁 29/
+                    📄 dfeb7151d1e0fc143507ecdecb1bedd2b5cc4d
                 📁 2e/
                     📄 d0f21b70c06ff15b188bb69f6ce389a869af78
                 📁 32/
@@ -54,6 +56,8 @@
                     📄 9033287ca54d77ad6ab9c7603c06825bbac4e6
                 📁 c7/
                     📄 31a093cb23b7a2bef65922d39d9d20ac56e6f3
+                📁 dc/
+                    📄 fff6f4ba5cf77e9a0eaf75c0830d9795bb58cf
                 📁 e3/
                     📄 5de325a2125360b5ae289c080fc748a0140cdc
                 📁 eb/
@@ -74,16 +78,10 @@
 📄 .gitignore
 📄 Dockerfile
 📄 LICENSE
-📁 NetworkSecurity.egg-info/
-    📄 PKG-INFO
-    📄 SOURCES.txt
-    📄 dependency_links.txt
-    📄 requires.txt
-    📄 top_level.txt
 📄 README.md
 📄 app.py
 📁 artifacts/
-    📁 2025_05_01T19_59_20Z/
+    📁 2025_05_12T15_42_41Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
@@ -120,7 +118,81 @@
                 📄 training_report.yaml
             📁 trained_model/
                 📄 model.joblib
-    📁 2025_05_01T20_31_11Z/
+    📁 2025_05_12T15_45_02Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+        📁 model_evaluation/
+            📄 evaluation_report.yaml
+        📁 model_trainer/
+            📁 inference_model/
+                📄 inference_model.joblib
+            📁 reports/
+                📄 training_report.yaml
+            📁 trained_model/
+                📄 model.joblib
+    📁 2025_05_12T15_47_32Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+        📁 model_evaluation/
+            📄 evaluation_report.yaml
+        📁 model_trainer/
+            📁 inference_model/
+                📄 inference_model.joblib
+            📁 reports/
+                📄 training_report.yaml
+            📁 trained_model/
+                📄 model.joblib
+    📁 2025_05_12T15_52_23Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
@@ -190,16 +262,27 @@
 📁 final_model/
     📄 final_inference_model.joblib
 📁 logs/
-    📁 2025_05_01T19_59_20Z/
-        📄 2025_05_01T19_59_20Z.log
-    📁 2025_05_01T20_31_11Z/
-        📄 2025_05_01T20_31_11Z.log
+    📁 2025_05_12T15_42_41Z/
+        📄 2025_05_12T15_42_41Z.log
+    📁 2025_05_12T15_45_02Z/
+        📄 2025_05_12T15_45_02Z.log
+    📁 2025_05_12T15_47_32Z/
+        📄 2025_05_12T15_47_32Z.log
+    📁 2025_05_12T15_52_23Z/
+        📄 2025_05_12T15_52_23Z.log
 📄 main.py
 📁 network_data/
     📁 input_csv/
         📄 phisingData.csv
+        📄 phisingData_check.csv
 📄 notes.txt
+📁 prediction_output/
+    📄 output.csv
 📄 print_structure.py
+📄 project_code_dump_index.txt
+📄 project_code_dump_part1.txt
+📄 project_code_dump_part2.txt
+📄 project_code_dump_part3.txt
 📄 project_dump.py
 📄 project_template.py
 📄 prompt.txt
@@ -220,9 +303,6 @@
 📁 src/
     📁 networksecurity/
         📄 __init__.py
-        📁 cloud/
-            📄 __init__.py
-            📄 s3_syncer.py
         📁 components/
             📄 __init__.py
             📄 data_ingestion.py
@@ -247,6 +327,7 @@
             📄 __init__.py
             📄 base_handler.py
             📄 mongodb_handler.py
+            📄 s3_handler.py
         📁 entity/
             📄 __init__.py
             📄 artifact_entity.py
@@ -277,8 +358,267 @@
 📁 templates/
     📄 table.html
 
---- CODE DUMP | PART 2 of 3 ---
+--- CODE DUMP | PART 2 of 4 ---
 
+
+================================================================================
+# PY FILE: src\networksecurity\components\model_pusher.py
+================================================================================
+
+from src.networksecurity.entity.config_entity import ModelPusherConfig
+from src.networksecurity.entity.artifact_entity import ModelTrainerArtifact, ModelPusherArtifact
+from src.networksecurity.dbhandler.s3_handler import S3Handler
+from src.networksecurity.utils.core import save_object, load_object
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.logging import logger
+from pathlib import Path
+
+
+class ModelPusher:
+    """
+    Pushes the final trained model to local storage and optionally to S3.
+    """
+
+    def __init__(
+        self,
+        model_pusher_config: ModelPusherConfig,
+        model_trainer_artifact: ModelTrainerArtifact,
+        s3_handler: S3Handler,
+    ) -> None:
+        try:
+            self.config = model_pusher_config
+            self.trainer_artifact = model_trainer_artifact
+            self.s3_handler = s3_handler
+        except Exception as e:
+            logger.exception("Failed to initialize ModelPusher")
+            raise NetworkSecurityError(e, logger) from e
+
+    def push_model(self) -> ModelPusherArtifact:
+        try:
+            logger.info("Starting model push process...")
+
+            final_model = load_object(self.trainer_artifact.trained_model_filepath)
+
+            # Save model locally
+            save_object(
+                obj=final_model,
+                path=self.config.pushed_model_filepath,
+                label="Final Model",
+            )
+
+            if self.config.upload_to_s3:
+                with self.s3_handler as handler:
+
+                    s3_key_final_model = handler.config.s3_final_model_prefix + "/" + self.config.pushed_model_filename
+
+                    # Upload only the final model file
+                    handler.upload_file(
+                        local_path=self.config.pushed_model_filepath,
+                        s3_key=s3_key_final_model,
+                    )
+
+                    s3_key_artifacts = handler.config.s3_artifacts_prefix + "/artifacts"
+
+                    # Upload entire artifacts folder
+                    handler.sync_directory(
+                        local_dir=Path("artifacts"),
+                        s3_prefix=s3_key_artifacts,
+                    )
+
+                    # Upload entire logs folder
+                    handler.sync_directory(
+                        local_dir=Path("logs"),
+                        s3_prefix=handler.config.s3_artifacts_prefix + "/logs"
+                    )
+
+            logger.info("Model push process completed successfully.")
+            return ModelPusherArtifact(
+                pushed_model_local_path=self.config.pushed_model_filepath,
+                pushed_model_s3_path=f"s3://{self.s3_handler.config.bucket_name}/{s3_key_final_model}",
+            )
+
+        except Exception as e:
+            logger.exception("Model push failed")
+            raise NetworkSecurityError(e, logger) from e
+
+================================================================================
+# PY FILE: src\networksecurity\components\model_trainer.py
+================================================================================
+
+from pathlib import Path
+from datetime import datetime, timezone
+import os
+import importlib
+import numpy as np
+import optuna
+import mlflow
+import dagshub
+import joblib
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import get_scorer
+from mlflow import sklearn as mlflow_sklearn
+
+from src.networksecurity.entity.config_entity import ModelTrainerConfig
+from src.networksecurity.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.utils.core import save_to_yaml, save_object, load_array
+from src.networksecurity.inference.estimator import NetworkModel
+
+
+class ModelTrainer:
+    def __init__(self, config: ModelTrainerConfig, transformation_artifact: DataTransformationArtifact):
+        try:
+            self.config = config
+            self.transformation_artifact = transformation_artifact
+            logger.info(f"Initializing ModelTrainer with root_dir={config.root_dir}")
+            config.root_dir.mkdir(parents=True, exist_ok=True)
+
+            if config.tracking.mlflow.enabled:
+                dagshub.init(
+                    repo_owner=os.getenv("DAGSHUB_REPO_OWNER"),
+                    repo_name=os.getenv("DAGSHUB_REPO_NAME"),
+                    mlflow=True,
+                )
+                mlflow.set_tracking_uri(config.tracking.tracking_uri)
+                mlflow.set_experiment(config.tracking.mlflow.experiment_name)
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _load_data(self):
+        try:
+            self.X_train = load_array(self.transformation_artifact.x_train_filepath, "X train")
+            self.y_train = load_array(self.transformation_artifact.y_train_filepath, "Y train")
+            self.X_val = load_array(self.transformation_artifact.x_val_filepath, "X val")
+            self.y_val = load_array(self.transformation_artifact.y_val_filepath, "Y val")
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
+
+    def _instantiate(self, full_class_string: str, params: dict):
+        module_path, class_name = full_class_string.rsplit(".", 1)
+        module = importlib.import_module(module_path)
+        return getattr(module, class_name)(**(params or {}))
+
+    def _optimize_one(self, model_spec: dict):
+        model_name = model_spec["name"]
+        search_space = model_spec.get("search_space", {})
+
+        def objective(trial):
+            sampled = {}
+            for name, space in search_space.items():
+                if "choices" in space:
+                    sampled[name] = trial.suggest_categorical(name, space["choices"])
+                else:
+                    low, high = space["low"], space["high"]
+                    step = space.get("step", 1)
+                    log = space.get("log", False)
+                    if isinstance(low, int) and isinstance(high, int):
+                        sampled[name] = trial.suggest_int(name, low, high, step=step)
+                    else:
+                        sampled[name] = trial.suggest_float(name, float(low), float(high), log=log)
+            clf = self._instantiate(model_name, sampled)
+            scores = cross_val_score(clf, self.X_train, self.y_train, cv=self.config.optimization.cv_folds,
+                                     scoring=self.config.optimization.scoring, n_jobs=-1)
+            return scores.mean()
+
+        study = optuna.create_study(direction=self.config.optimization.direction)
+        study.optimize(objective, n_trials=self.config.optimization.n_trials)
+        return study.best_trial, study
+
+    def _select_and_tune(self):
+        best_result = {"score": -np.inf, "spec": None, "trial": None, "study": None}
+
+        for model_spec in self.config.models:
+            if self.config.optimization.enabled:
+                trial, study = self._optimize_one(model_spec)
+                score = trial.value
+            else:
+                model = self._instantiate(model_spec["name"], model_spec.get("params", {}))
+                score = cross_val_score(model, self.X_train, self.y_train, cv=self.config.optimization.cv_folds,
+                                        scoring=self.config.optimization.scoring).mean()
+                trial, study = None, None
+
+            if score > best_result["score"]:
+                best_result.update(score=score, spec=model_spec, trial=trial, study=study)
+
+        return best_result
+
+    def _train_and_eval(self, model_spec: dict, params: dict):
+        clf = self._instantiate(model_spec["name"], params)
+        clf.fit(self.X_train, self.y_train)
+
+        train_metrics = {m: get_scorer(m)(clf, self.X_train, self.y_train)
+                         for m in self.config.tracking.mlflow.metrics_to_log}
+        val_metrics = {m: get_scorer(m)(clf, self.X_val, self.y_val)
+                       for m in self.config.tracking.mlflow.metrics_to_log}
+        return clf, train_metrics, val_metrics
+
+    def _generate_report(self, best, train_metrics, val_metrics):
+        return {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "best_model": best["spec"]["name"].split(".")[-1],
+            "best_model_params": best["trial"].params if best["trial"] else best["spec"].get("params", {}),
+            "train_metrics": train_metrics,
+            "val_metrics": val_metrics,
+            "optimization": {
+                "enabled": self.config.optimization.enabled,
+                "best_trial": best["trial"].number if best["trial"] else None,
+                "cv_folds": self.config.optimization.cv_folds,
+                "direction": self.config.optimization.direction,
+                "mean_score": best["score"]
+            }
+        }
+
+    def run_training(self) -> ModelTrainerArtifact:
+        try:
+            logger.info("========== Starting Model Training ==========")
+            self._load_data()
+
+            with mlflow.start_run():
+                best = self._select_and_tune()
+                params = best["trial"].params if best["trial"] else best["spec"].get("params", {})
+                model, train_m, val_m = self._train_and_eval(best["spec"], params)
+
+                mlflow.log_params(params)
+                for k, v in train_m.items():
+                    mlflow.log_metric(f"train_{k}", v)
+                for k, v in val_m.items():
+                    mlflow.log_metric(f"val_{k}", v)
+
+                # Save raw trained model
+                trained_model_dir = self.config.root_dir / "trained_model"
+                trained_model_path = trained_model_dir / "model.joblib"
+                save_object(model, trained_model_path, "Trained Model")
+
+                # Save inference-ready model (NetworkModel)
+                network_model = NetworkModel.from_objects(
+                    model=model,
+                    x_preprocessor=joblib.load(self.transformation_artifact.x_preprocessor_filepath),
+                    y_preprocessor=joblib.load(self.transformation_artifact.y_preprocessor_filepath),
+                )
+                inference_model_dir = self.config.root_dir / "inference_model"
+                inference_model_path = inference_model_dir / "inference_model.joblib"
+                save_object(network_model, inference_model_path, "Inference Model")
+
+                # Save training report
+                report_dir = self.config.root_dir / "reports"
+                report_path = report_dir / "training_report.yaml"
+                save_to_yaml(self._generate_report(best, train_m, val_m), report_path, label="Training Report")
+
+            logger.info("========== Model Training Completed ==========")
+            return ModelTrainerArtifact(
+                trained_model_filepath=inference_model_path,
+                training_report_filepath=report_path,
+                x_train_filepath=self.transformation_artifact.x_train_filepath,
+                y_train_filepath=self.transformation_artifact.y_train_filepath,
+                x_val_filepath=self.transformation_artifact.x_val_filepath,
+                y_val_filepath=self.transformation_artifact.y_val_filepath,
+                x_test_filepath=self.transformation_artifact.x_test_filepath,
+                y_test_filepath=self.transformation_artifact.y_test_filepath,
+            )
+
+        except Exception as e:
+            raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
 # PY FILE: src\networksecurity\config\__init__.py
@@ -326,6 +666,7 @@ from src.networksecurity.entity.config_entity import (
     ModelTrainerConfig,
     ModelEvaluationConfig,
     ModelPusherConfig,
+    S3HandlerConfig,
 )
 
 from src.networksecurity.utils.core import (
@@ -474,14 +815,6 @@ class ConfigurationManager:
 
 
     def get_model_trainer_config(self) -> ModelTrainerConfig:
-        """
-        Assemble and return the ModelTrainerConfig dataclass, incorporating:
-        - artifact output paths under a timestamped MODEL_TRAINER_SUBDIR
-        - filenames & report names from config.yaml
-        - candidate models, optimization & tracking from params.yaml
-        - MLflow URI injected from environment
-        - DVC‐tracked input dirs & filenames for X/Y train/val/test
-        """
         # static config.yaml entries
         yaml_cfg = self.config.model_trainer
         # dynamic params.yaml entries
@@ -517,9 +850,6 @@ class ConfigurationManager:
         )
 
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
-        """
-        Assemble ModelEvaluationConfig for the model evaluation stage.
-        """
         eval_cfg = self.config.model_evaluation
         root_dir = self.artifacts_root / MODEL_EVALUATION_SUBDIR
 
@@ -534,26 +864,32 @@ class ConfigurationManager:
             val_dir=val_dir,
             test_dir=test_dir,
         )
-    
+
     def get_model_pusher_config(self) -> ModelPusherConfig:
-        """
-        Assemble ModelPusherConfig for the model deployment stage.
-        - Uses the same global timestamp directory for consistency.
-        - Gets final model filename and S3 bucket name from config.yaml.
-        """
         pusher_cfg = self.config.model_pusher
+        pusher_params = self.params.model_pusher
 
         # Local directory to save pushed model
         pushed_model_dir = Path(PUSHED_MODEL_SUBDIR)
 
         return ModelPusherConfig(
             pushed_model_filename=pusher_cfg.final_model_filename,
-            pushed_model_dir=Path(PUSHED_MODEL_SUBDIR),
-            final_model_s3_bucket=pusher_cfg.final_model_s3_bucket,
-            upload_to_s3=pusher_cfg.get("upload_to_s3", True),
-            s3_final_model_folder=pusher_cfg.s3_final_model_folder,
-            s3_artifacts_folder=pusher_cfg.s3_artifacts_folder,
-            aws_region=pusher_cfg.aws_region  # <- NEW
+            pushed_model_dir=pushed_model_dir,
+            upload_to_s3=pusher_params.upload_to_s3,
+        )
+
+    def get_s3_handler_config(self) -> S3HandlerConfig:
+        s3_cfg = self.config.s3_handler  # your config.yaml has these under model_pusher
+        root_dir = self.artifacts_root / "s3_handler"
+        aws_region = os.getenv("AWS_REGION")
+
+        return S3HandlerConfig(
+            root_dir=root_dir,
+            bucket_name=s3_cfg.final_model_s3_bucket,
+            aws_region=aws_region,
+            local_dir_to_sync=self.artifacts_root,  # assuming you want to sync entire artifacts dir
+            s3_artifacts_prefix=s3_cfg.s3_artifacts_prefix,
+            s3_final_model_prefix=s3_cfg.s3_final_model_prefix,
         )
 
 ================================================================================
@@ -1014,513 +1350,3 @@ class MongoDBHandler(DBHandler):
         except Exception as e:
             logger.error("Failed to export data from MongoDB.")
             raise NetworkSecurityError(e, logger) from e
-
-================================================================================
-# PY FILE: src\networksecurity\entity\__init__.py
-================================================================================
-
-
-
-================================================================================
-# PY FILE: src\networksecurity\entity\artifact_entity.py
-================================================================================
-
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Optional
-
-
-@dataclass(frozen=True)
-class DataIngestionArtifact:
-    raw_artifact_path: Path
-    ingested_data_filepath: Path
-    raw_dvc_path: Path
-
-    def __repr__(self) -> str:
-        raw_artifact_str = self.raw_artifact_path.as_posix() if self.raw_artifact_path else "None"
-        raw_dvc_str = self.raw_dvc_path.as_posix() if self.raw_dvc_path else "None"
-        ingested_data_str = self.ingested_data_filepath.as_posix() if self.ingested_data_filepath else "None"
-
-        return (
-            "\nData Ingestion Artifact:\n"
-            f"  - Raw Artifact:         '{raw_artifact_str}'\n"
-            f"  - Raw DVC Path:         '{raw_dvc_str}'\n"
-            f"  - Ingested Data Path:   '{ingested_data_str}'\n"
-        )
-
-
-@dataclass(frozen=True)
-class DataValidationArtifact:
-    validated_filepath: Path
-    validation_status: bool
-
-    def __repr__(self) -> str:
-        validated_str = self.validated_filepath.as_posix() if self.validated_filepath else "None"
-
-        return (
-            "\nData Validation Artifact:\n"
-            f"  - Validated Data Path: '{validated_str}'\n"
-            f"  - Validation Status:   '{self.validation_status}'\n"
-        )
-
-@dataclass(frozen=True)
-class DataTransformationArtifact:
-    x_train_filepath: Path
-    y_train_filepath: Path
-    x_val_filepath: Path
-    y_val_filepath: Path
-    x_test_filepath: Path
-    y_test_filepath: Path
-    x_preprocessor_filepath: Path
-    y_preprocessor_filepath: Path
-
-    def __repr__(self) -> str:
-        x_train_str = self.x_train_filepath.as_posix() if self.x_train_filepath else "None"
-        y_train_str = self.y_train_filepath.as_posix() if self.y_train_filepath else "None"
-        x_val_str = self.x_val_filepath.as_posix() if self.x_val_filepath else "None"
-        y_val_str = self.y_val_filepath.as_posix() if self.y_val_filepath else "None"
-        x_test_str = self.x_test_filepath.as_posix() if self.x_test_filepath else "None"
-        y_test_str = self.y_test_filepath.as_posix() if self.y_test_filepath else "None"
-        x_preprocessor_str = self.x_preprocessor_filepath.as_posix() if self.x_preprocessor_filepath else "None"
-        y_preprocessor_str = self.y_preprocessor_filepath.as_posix() if self.y_preprocessor_filepath else "None"
-
-        return (
-            "\nData Transformation Artifact:\n"
-            f"  - X-Train Data Path:    '{x_train_str}'\n"
-            f"  - Y-Train Data Path:    '{y_train_str}'\n"
-            f"  - X-Val Data Path:      '{x_val_str}'\n"
-            f"  - Y-Val Data Path:      '{y_val_str}'\n"
-            f"  - X-Test Data Path:     '{x_test_str}'\n"
-            f"  - Y-Test Data Path:     '{y_test_str}'\n"
-            f"  - X-Processor Path:     '{x_preprocessor_str}'\n"
-            f"  - Y-Processor Path:     '{y_preprocessor_str}'\n"
-        )
-
-
-@dataclass(frozen=True)
-class ModelTrainerArtifact:
-    trained_model_filepath: Path
-    training_report_filepath: Path
-    x_train_filepath: Path
-    y_train_filepath: Path
-    x_val_filepath: Path
-    y_val_filepath: Path
-    x_test_filepath: Path
-    y_test_filepath: Path
-
-    def __repr__(self) -> str:
-        return (
-            "\nModel Trainer Artifact:\n"
-            f"  - Trained Model Path:   '{self.trained_model_filepath.as_posix()}'\n"
-            f"  - Training Report Path: '{self.training_report_filepath.as_posix()}'\n"
-            f"  - X Train Path: '{self.x_train_filepath.as_posix()}'\n"
-            f"  - Y Train Path: '{self.y_train_filepath.as_posix()}'\n"
-            f"  - X Val Path:   '{self.x_val_filepath.as_posix()}'\n"
-            f"  - Y Val Path:   '{self.y_val_filepath.as_posix()}'\n"
-            f"  - X Test Path:  '{self.x_test_filepath.as_posix()}'\n"
-            f"  - Y Test Path:  '{self.y_test_filepath.as_posix()}'"
-        )
-
-
-@dataclass(frozen=True)
-class ModelEvaluationArtifact:
-    evaluation_report_filepath: Path
-
-    def __repr__(self) -> str:
-        report_str = self.evaluation_report_filepath.as_posix() if self.evaluation_report_filepath else "None"
-
-        return (
-            "\nModel Evaluation Artifact:\n"
-            f"  - Evaluation Report Path: '{report_str}'\n"
-        )
-
-@dataclass(frozen=True)
-class ModelPusherArtifact:
-    pushed_model_local_path: Path
-    pushed_model_s3_path: str
-
-    def __repr__(self) -> str:
-        local_str = self.pushed_model_local_path.as_posix() if self.pushed_model_local_path else "None"
-        s3_str = self.pushed_model_s3_path if self.pushed_model_s3_path else "None"
-        return (
-            "\nModel Pusher Artifact:\n"
-            f"  - Local Path: '{local_str}'\n"
-            f"  - S3 Path:    '{s3_str}'\n"
-        )
-
-
-@dataclass(frozen=True)
-class ModelPusherArtifact:
-    pushed_model_local_path: Path
-    pushed_model_s3_path: str | None = None  # Optional if S3 upload is disabled
-
-    def __repr__(self) -> str:
-        return (
-            "\nModel Pusher Artifact:\n"
-            f"  - Local Model Path: {self.pushed_model_local_path.as_posix()}\n"
-            f"  - S3 Model Path:    {self.pushed_model_s3_path or 'Not uploaded'}\n"
-        )
-
-================================================================================
-# PY FILE: src\networksecurity\entity\config_entity.py
-================================================================================
-
-from pathlib import Path
-from dataclasses import dataclass
-from box import ConfigBox
-from typing import List
-
-
-@dataclass
-class MongoHandlerConfig:
-    root_dir: Path
-    input_data_path: Path
-    json_data_filename: str
-    json_data_dir: Path
-    mongodb_uri: str
-    database_name: str
-    collection_name: str
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-        self.input_data_path = Path(self.input_data_path)
-        self.json_data_dir = Path(self.json_data_dir)
-
-    @property
-    def json_data_filepath(self) -> Path:
-        return self.json_data_dir / self.json_data_filename
-
-
-@dataclass
-class DataIngestionConfig:
-    root_dir: Path
-    featurestore_dir: Path
-    raw_data_filename: str
-    ingested_data_dir: Path
-    ingested_data_filename: str
-    raw_dvc_path: Path
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-        self.featurestore_dir = Path(self.featurestore_dir)
-        self.ingested_data_dir = Path(self.ingested_data_dir)
-        self.raw_dvc_path = Path(self.raw_dvc_path)
-
-    @property
-    def raw_data_filepath(self) -> Path:
-        return self.featurestore_dir / self.raw_data_filename
-
-    @property
-    def ingested_data_filepath(self) -> Path:
-        return self.ingested_data_dir / self.ingested_data_filename
-
-
-@dataclass
-class DataValidationConfig:
-    root_dir: Path
-    validated_dir: Path
-    validated_filename: str
-    report_dir: Path
-    missing_report_filename: str
-    duplicates_report_filename: str
-    drift_report_filename: str
-    validation_report_filename: str
-    schema: dict
-    validation_params: dict
-    validated_dvc_path: Path
-    val_report_template: dict
-
-    def __post_init__(self) -> Path:
-        self.root_dir = Path(self.root_dir)
-        self.validated_dir = Path(self.validated_dir)
-        self.report_dir = Path(self.report_dir)
-        self.validated_dvc_path = Path(self.validated_dvc_path)
-
-    @property
-    def validated_filepath(self) -> Path:
-        return self.validated_dir / self.validated_filename
-
-    @property
-    def missing_report_filepath(self) -> Path:
-        return self.report_dir / self.missing_report_filename
-
-    @property
-    def duplicates_report_filepath(self) -> Path:
-        return self.report_dir / self.duplicates_report_filename
-
-    @property
-    def drift_report_filepath(self) -> Path:
-        return self.report_dir / self.drift_report_filename
-
-    @property
-    def validation_report_filepath(self) -> Path:
-        return self.report_dir / self.validation_report_filename
-
-
-@dataclass
-class DataTransformationConfig:
-    root_dir: Path
-    transformation_params: dict
-    train_dir: Path
-    val_dir: Path
-    test_dir: Path
-    x_train_filename: str
-    y_train_filename: str
-    x_val_filename: str
-    y_val_filename: str
-    x_test_filename: str
-    y_test_filename: str
-    preprocessor_dir: Path
-    x_preprocessor_filename: str
-    y_preprocessor_filename: str
-    target_column: str
-    train_dvc_dir: Path
-    val_dvc_dir: Path
-    test_dvc_dir: Path
-
-    def __post_init__(self) -> Path:
-        self.root_dir = Path(self.root_dir)
-        self.train_dir = Path(self.train_dir)
-        self.val_dir = Path(self.val_dir)
-        self.test_dir = Path(self.test_dir)
-        self.preprocessor_dir = Path(self.preprocessor_dir)
-
-    @property
-    def x_train_filepath(self) -> Path:
-        return self.train_dir / self.x_train_filename
-
-    @property
-    def y_train_filepath(self) -> Path:
-        return self.train_dir / self.y_train_filename
-
-    @property
-    def x_val_filepath(self) -> Path:
-        return self.val_dir / self.x_val_filename
-
-    @property
-    def y_val_filepath(self) -> Path:
-        return self.val_dir / self.y_val_filename
-
-    @property
-    def x_test_filepath(self) -> Path:
-        return self.test_dir / self.x_test_filename
-
-    @property
-    def y_test_filepath(self) -> Path:
-        return self.test_dir / self.y_test_filename
-
-    @property
-    def x_preprocessor_filepath(self) -> Path:
-        return self.preprocessor_dir / self.x_preprocessor_filename
-
-    @property
-    def y_preprocessor_filepath(self) -> Path:
-        return self.preprocessor_dir / self.y_preprocessor_filename
-
-    @property
-    def x_train_dvc_filepath(self) -> Path:
-        return self.train_dvc_dir / self.x_train_filename
-
-    @property
-    def y_train_dvc_filepath(self) -> Path:
-        return self.train_dvc_dir / self.y_train_filename
-
-    @property
-    def x_val_dvc_filepath(self) -> Path:
-        return self.val_dvc_dir / self.x_val_filename
-
-    @property
-    def y_val_dvc_filepath(self) -> Path:
-        return self.val_dvc_dir / self.y_val_filename
-
-    @property
-    def x_test_dvc_filepath(self) -> Path:
-        return self.test_dvc_dir / self.x_test_filename
-
-    @property
-    def y_test_dvc_filepath(self) -> Path:
-        return self.test_dvc_dir / self.y_test_filename
-
-
-
-@dataclass
-class ModelTrainerConfig:
-    root_dir: Path
-    trained_model_filename: str
-    training_report_filename: str
-    models: list[dict]
-    optimization: dict
-    tracking: dict
-    models: List[dict]
-    optimization: ConfigBox
-    tracking: ConfigBox
-    # where to load transformed arrays from (DVC-tracked)
-    train_dir: Path
-    val_dir:   Path
-    test_dir:  Path
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-
-    @property
-    def trained_model_filepath(self) -> Path:
-        return self.root_dir / self.trained_model_filename
-
-    @property
-    def training_report_filepath(self) -> Path:
-        return self.root_dir / self.training_report_filename
-
-
-@dataclass
-class ModelEvaluationConfig:
-    root_dir: Path
-    evaluation_report_filename: str
-    train_dir: Path
-    val_dir: Path
-    test_dir: Path
-
-    def __post_init__(self):
-        self.root_dir = Path(self.root_dir)
-
-    @property
-    def evaluation_report_filepath(self) -> Path:
-        return self.root_dir / self.evaluation_report_filename
-
-
-@dataclass
-class ModelPusherConfig:
-    pushed_model_dir: Path
-    pushed_model_filename: str
-    final_model_s3_bucket: str
-    upload_to_s3: bool
-    s3_final_model_folder: str
-    s3_artifacts_folder: str
-    aws_region: str
-
-    def __post_init__(self):
-        self.pushed_model_dir = Path(self.pushed_model_dir)
-
-    @property
-    def pushed_model_filepath(self) -> Path:
-        return self.pushed_model_dir / self.pushed_model_filename
-
-    @property
-    def s3_key_final_model(self) -> str:
-        return f"{self.s3_final_model_folder}/{self.pushed_model_filename}"
-
-    @property
-    def s3_key_artifacts(self) -> str:
-        return f"{self.s3_artifacts_folder}/{self.pushed_model_filename}"
-
-================================================================================
-# PY FILE: src\networksecurity\exception\__init__.py
-================================================================================
-
-
-
-================================================================================
-# PY FILE: src\networksecurity\exception\exception.py
-================================================================================
-
-"""Custom exception and logger interface for the phishing detection web app.
-
-This module defines:
-- LoggerInterface: a structural protocol for logging
-- NetworkSecurityError: a traceback-aware exception with logging support
-"""
-
-
-import sys
-from typing import Protocol
-
-
-class LoggerInterface(Protocol):
-    """A structural interface that defines the logger's required methods.
-
-    Any logger passed to NetworkSecurityException must implement this interface.
-    """
-
-    def error(self, message: str) -> None:
-        """Log an error-level message."""
-        ...
-
-
-class NetworkSecurityError(Exception):
-    """Custom exception class for the phishing detection web application.
-
-    Captures traceback details and logs the error using the provided logger.
-    """
-
-    def __init__(self, error_message: Exception, logger: LoggerInterface) -> None:
-        """Initialize the exception and log it using the injected logger.
-
-        Args:
-            error_message (Exception): The original caught exception.
-            logger (LoggerInterface): A logger that supports an `error(str)` method.
-
-        """
-        super().__init__(str(error_message))
-        self.error_message: str = str(error_message)
-
-        # Get traceback info from sys
-        _, _, exc_tb = sys.exc_info()
-        self.lineno: int | None = exc_tb.tb_lineno if exc_tb else None
-        self.file_name: str | None = (
-            exc_tb.tb_frame.f_code.co_filename if exc_tb else "Unknown"
-        )
-
-        # Log the formatted error
-        logger.error(str(self))
-
-    def __str__(self) -> str:
-        """Return a formatted error message with file name and line number."""
-        return (
-            f"Error occurred in file [{self.file_name}], "
-            f"line [{self.lineno}], "
-            f"message: [{self.error_message}]"
-        )
-
-================================================================================
-# PY FILE: src\networksecurity\inference\estimator.py
-================================================================================
-
-import joblib
-from dataclasses import dataclass
-from typing import Any
-from src.networksecurity.logging import logger
-from src.networksecurity.exception.exception import NetworkSecurityError
-
-
-@dataclass
-class NetworkModel:
-    model: Any
-    x_preprocessor: Any = None
-    y_preprocessor: Any = None
-
-    def predict(self, X):
-        try:
-            if self.x_preprocessor:
-                X = self.x_preprocessor.transform(X)
-            return self.model.predict(X)
-        except Exception as e:
-            raise NetworkSecurityError(e, logger)
-
-    @classmethod
-    def from_artifacts(cls, model_path, x_preprocessor_path=None, y_preprocessor_path=None):
-        try:
-            model = joblib.load(model_path)
-
-            x_preprocessor = joblib.load(x_preprocessor_path) if x_preprocessor_path else None
-            y_preprocessor = joblib.load(y_preprocessor_path) if y_preprocessor_path else None
-
-            return cls(model=model, x_preprocessor=x_preprocessor, y_preprocessor=y_preprocessor)
-
-        except Exception as e:
-            raise NetworkSecurityError(e, logger)
-
-    @classmethod
-    def from_objects(cls, model, x_preprocessor=None, y_preprocessor=None):
-        try:
-            return cls(model=model, x_preprocessor=x_preprocessor, y_preprocessor=y_preprocessor)
-        except Exception as e:
-            raise NetworkSecurityError(e, logger)

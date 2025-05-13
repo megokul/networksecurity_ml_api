@@ -30,6 +30,8 @@
             📁 cache/
                 📁 08/
                     📄 ba3af380fc7743bb7784b0b99b9e84b597659c
+                📁 29/
+                    📄 dfeb7151d1e0fc143507ecdecb1bedd2b5cc4d
                 📁 2e/
                     📄 d0f21b70c06ff15b188bb69f6ce389a869af78
                 📁 32/
@@ -54,6 +56,8 @@
                     📄 9033287ca54d77ad6ab9c7603c06825bbac4e6
                 📁 c7/
                     📄 31a093cb23b7a2bef65922d39d9d20ac56e6f3
+                📁 dc/
+                    📄 fff6f4ba5cf77e9a0eaf75c0830d9795bb58cf
                 📁 e3/
                     📄 5de325a2125360b5ae289c080fc748a0140cdc
                 📁 eb/
@@ -74,16 +78,10 @@
 📄 .gitignore
 📄 Dockerfile
 📄 LICENSE
-📁 NetworkSecurity.egg-info/
-    📄 PKG-INFO
-    📄 SOURCES.txt
-    📄 dependency_links.txt
-    📄 requires.txt
-    📄 top_level.txt
 📄 README.md
 📄 app.py
 📁 artifacts/
-    📁 2025_05_01T19_59_20Z/
+    📁 2025_05_12T15_42_41Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
@@ -120,7 +118,81 @@
                 📄 training_report.yaml
             📁 trained_model/
                 📄 model.joblib
-    📁 2025_05_01T20_31_11Z/
+    📁 2025_05_12T15_45_02Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+        📁 model_evaluation/
+            📄 evaluation_report.yaml
+        📁 model_trainer/
+            📁 inference_model/
+                📄 inference_model.joblib
+            📁 reports/
+                📄 training_report.yaml
+            📁 trained_model/
+                📄 model.joblib
+    📁 2025_05_12T15_47_32Z/
+        📁 data_ingestion/
+            📁 featurestore/
+                📄 raw_data.csv
+            📁 ingested/
+                📄 ingested_data.csv
+        📁 data_transformation/
+            📁 preprocessor/
+                📄 x_preprocessor.joblib
+                📄 y_preprocessor.joblib
+            📁 transformed/
+                📁 test/
+                    📄 x_test.npy
+                    📄 y_test.npy
+                📁 train/
+                    📄 x_train.npy
+                    📄 y_train.npy
+                📁 val/
+                    📄 x_val.npy
+                    📄 y_val.npy
+        📁 data_validation/
+            📁 reports/
+                📄 drift_report.yaml
+                📄 duplicates_report.yaml
+                📄 missing_values_report.json
+                📄 validation_report.yaml
+            📁 validated/
+                📄 validated_data.csv
+        📁 model_evaluation/
+            📄 evaluation_report.yaml
+        📁 model_trainer/
+            📁 inference_model/
+                📄 inference_model.joblib
+            📁 reports/
+                📄 training_report.yaml
+            📁 trained_model/
+                📄 model.joblib
+    📁 2025_05_12T15_52_23Z/
         📁 data_ingestion/
             📁 featurestore/
                 📄 raw_data.csv
@@ -190,16 +262,27 @@
 📁 final_model/
     📄 final_inference_model.joblib
 📁 logs/
-    📁 2025_05_01T19_59_20Z/
-        📄 2025_05_01T19_59_20Z.log
-    📁 2025_05_01T20_31_11Z/
-        📄 2025_05_01T20_31_11Z.log
+    📁 2025_05_12T15_42_41Z/
+        📄 2025_05_12T15_42_41Z.log
+    📁 2025_05_12T15_45_02Z/
+        📄 2025_05_12T15_45_02Z.log
+    📁 2025_05_12T15_47_32Z/
+        📄 2025_05_12T15_47_32Z.log
+    📁 2025_05_12T15_52_23Z/
+        📄 2025_05_12T15_52_23Z.log
 📄 main.py
 📁 network_data/
     📁 input_csv/
         📄 phisingData.csv
+        📄 phisingData_check.csv
 📄 notes.txt
+📁 prediction_output/
+    📄 output.csv
 📄 print_structure.py
+📄 project_code_dump_index.txt
+📄 project_code_dump_part1.txt
+📄 project_code_dump_part2.txt
+📄 project_code_dump_part3.txt
 📄 project_dump.py
 📄 project_template.py
 📄 prompt.txt
@@ -220,9 +303,6 @@
 📁 src/
     📁 networksecurity/
         📄 __init__.py
-        📁 cloud/
-            📄 __init__.py
-            📄 s3_syncer.py
         📁 components/
             📄 __init__.py
             📄 data_ingestion.py
@@ -247,6 +327,7 @@
             📄 __init__.py
             📄 base_handler.py
             📄 mongodb_handler.py
+            📄 s3_handler.py
         📁 entity/
             📄 __init__.py
             📄 artifact_entity.py
@@ -277,101 +358,82 @@
 📁 templates/
     📄 table.html
 
---- CODE DUMP | PART 1 of 3 ---
+--- CODE DUMP | PART 1 of 4 ---
 
 
 ================================================================================
 # PY FILE: app.py
 ================================================================================
 
-import sys
-import os
-
-import certifi
-ca = certifi.where()
-
-from dotenv import load_dotenv
-load_dotenv()
-mongo_db_url = os.getenv("MONGODB_URL_KEY")
-print(mongo_db_url)
-import pymongo
-from networksecurity.exception.exception import NetworkSecurityException
-from networksecurity.logging.logger import logging
-from networksecurity.pipeline.training_pipeline import TrainingPipeline
-
+from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, File, UploadFile,Request
+from fastapi.responses import RedirectResponse, Response
+from fastapi.templating import Jinja2Templates
 from uvicorn import run as app_run
-from fastapi.responses import Response
-from starlette.responses import RedirectResponse
 import pandas as pd
+from pathlib import Path
 
-from networksecurity.utils.main_utils.utils import load_object
+from src.networksecurity.logging import logger
+from src.networksecurity.exception.exception import NetworkSecurityError
+from src.networksecurity.pipeline.training_pipeline import TrainingPipeline
+from src.networksecurity.utils.core import load_object
+from src.networksecurity.inference.estimator import NetworkModel
 
-from networksecurity.utils.ml_utils.model.estimator import NetworkModel
+# Initialize FastAPI app
+app = FastAPI(title="NetworkSecurity ML API", version="1.0")
 
+templates = Jinja2Templates(directory="./templates")
 
-client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
-
-from networksecurity.constant.training_pipeline import DATA_INGESTION_COLLECTION_NAME
-from networksecurity.constant.training_pipeline import DATA_INGESTION_DATABASE_NAME
-
-database = client[DATA_INGESTION_DATABASE_NAME]
-collection = database[DATA_INGESTION_COLLECTION_NAME]
-
-app = FastAPI()
-origins = ["*"]
-
+# Allow CORS for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-from fastapi.templating import Jinja2Templates
-templates = Jinja2Templates(directory="./templates")
+# === ROUTES ===
 
 @app.get("/", tags=["authentication"])
 async def index():
     return RedirectResponse(url="/docs")
 
-@app.get("/train")
+
+@app.get("/train", tags=["pipeline"])
 async def train_route():
     try:
-        train_pipeline=TrainingPipeline()
-        train_pipeline.run_pipeline()
-        return Response("Training is successful")
+        pipeline = TrainingPipeline()
+        pipeline.run_pipeline()
+        return Response(content="Training completed successfully.", media_type="text/plain")
     except Exception as e:
-        raise NetworkSecurityException(e,sys)
-    
-@app.post("/predict")
-async def predict_route(request: Request,file: UploadFile = File(...)):
-    try:
-        df=pd.read_csv(file.file)
-        #print(df)
-        preprocesor=load_object("final_model/preprocessor.pkl")
-        final_model=load_object("final_model/model.pkl")
-        network_model = NetworkModel(preprocessor=preprocesor,model=final_model)
-        print(df.iloc[0])
-        y_pred = network_model.predict(df)
-        print(y_pred)
-        df['predicted_column'] = y_pred
-        print(df['predicted_column'])
-        #df['predicted_column'].replace(-1, 0)
-        #return df.to_json()
-        df.to_csv('prediction_output/output.csv')
-        table_html = df.to_html(classes='table table-striped')
-        #print(table_html)
-        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
-        
-    except Exception as e:
-            raise NetworkSecurityException(e,sys)
+        raise NetworkSecurityError(e, logger)
 
-    
-if __name__=="__main__":
-    app_run(app,host="0.0.0.0",port=8000)
+
+@app.post("/predict", tags=["inference"])
+async def predict_route(request: Request, file: UploadFile = File(...)):
+    try:
+        df = pd.read_csv(file.file)
+
+        # Load final model and preprocessors
+        model = load_object(Path("final_model/final_inference_model.joblib"))
+        if not isinstance(model, NetworkModel):
+            raise TypeError("Loaded object is not a NetworkModel instance.")
+
+        # Perform prediction
+        y_pred = model.predict(df)
+        df["predicted_column"] = y_pred
+
+        # Save output and return as HTML table
+        output_path = Path("prediction_output/output.csv")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        df.to_csv(output_path, index=False)
+
+        html_table = df.to_html(classes="table table-striped")
+        return templates.TemplateResponse("table.html", {"request": request, "table": html_table})
+
+    except Exception as e:
+        raise NetworkSecurityError(e, logger)
 
 ================================================================================
 # PY FILE: debug.py
@@ -396,8 +458,6 @@ with mongohandler:
 ================================================================================
 # PY FILE: debug_pipeline.py
 ================================================================================
-
-# FILE: debug_pipeline.py
 
 import sys
 from src.networksecurity.pipeline.training_pipeline import TrainingPipeline
@@ -487,7 +547,7 @@ import os
 import math
 
 EXCLUDE_DIRS = {'.venv', 'venv', '__pycache__', '.github', '.git', '.idea', '.vscode', 'build', 'dist', '.mypy_cache'}
-INCLUDE_YAML_FILES = {'config.yaml', 'params.yaml', 'schema.yaml'}
+INCLUDE_YAML_FILES = {'config.yaml', 'params.yaml', 'schema.yaml', 'templates.yaml'}
 BASE_OUTPUT_FILE = "project_code_dump_part"
 SUMMARY_FILE = "project_code_dump_index.txt"
 
@@ -781,88 +841,6 @@ setup(
 ================================================================================
 
 
-
-================================================================================
-# PY FILE: src\networksecurity\cloud\__init__.py
-================================================================================
-
-
-
-================================================================================
-# PY FILE: src\networksecurity\cloud\s3_syncer.py
-================================================================================
-
-from pathlib import Path
-import os
-import boto3
-from botocore.exceptions import ClientError
-
-from src.networksecurity.logging import logger
-from src.networksecurity.exception.exception import NetworkSecurityError
-
-
-class S3Syncer:
-    """
-    Handles syncing of files and directories to AWS S3 with logging and error handling.
-    """
-
-    def __init__(self, bucket_name: str, region: str = "us-east-1") -> None:
-        try:
-            self.bucket_name = bucket_name
-            self.s3_client = boto3.client("s3", region_name=region)
-            logger.info(f"S3Syncer initialized for bucket '{bucket_name}' in region '{region}'")
-        except Exception as e:
-            logger.exception("S3 client initialization failed")
-            raise NetworkSecurityError(e, logger) from e
-
-    def upload_file(self, local_path: Path, s3_key: str) -> None:
-        """
-        Upload a single file to S3.
-        """
-        try:
-            local_path = Path(local_path)
-            if not local_path.is_file():
-                raise FileNotFoundError(f"Local file not found: {local_path.as_posix()}")
-
-            self.s3_client.upload_file(
-                Filename=str(local_path),
-                Bucket=self.bucket_name,
-                Key=s3_key
-            )
-            logger.info(f"File uploaded to S3: {local_path.as_posix()} -> s3://{self.bucket_name}/{s3_key}")
-
-        except ClientError as e:
-            logger.error(f"AWS ClientError while uploading to S3: {e}")
-            raise NetworkSecurityError(e, logger) from e
-        except Exception as e:
-            logger.error(f"Unexpected error while uploading file to S3: {e}")
-            raise NetworkSecurityError(e, logger) from e
-
-    def sync_directory(self, local_dir: Path, s3_prefix: str = "") -> None:
-        """
-        Recursively upload a local directory to the specified S3 prefix.
-        """
-        try:
-            local_dir = Path(local_dir)
-            if not local_dir.is_dir():
-                raise NotADirectoryError(f"Local directory not found: {local_dir.as_posix()}")
-
-            logger.info(f"Walking through directory: {local_dir.resolve().as_posix()}")
-            logger.info(f"Target S3 prefix: {s3_prefix}")
-
-            for root, _, files in os.walk(local_dir):
-                for file in files:
-                    local_file_path = Path(root) / file
-                    relative_path = local_file_path.relative_to(local_dir)
-                    s3_key = (Path(s3_prefix) / relative_path).as_posix()
-                    logger.info(f"Uploading file: {local_file_path.as_posix()} -> s3://{self.bucket_name}/{s3_key}")
-                    self.upload_file(local_file_path, s3_key)
-
-            logger.info(f"Directory synced to S3: {local_dir.as_posix()} -> s3://{self.bucket_name}/{s3_prefix}")
-
-        except Exception as e:
-            logger.error("Failed to sync directory to S3")
-            raise NetworkSecurityError(e, logger) from e
 
 ================================================================================
 # PY FILE: src\networksecurity\components\__init__.py
@@ -1347,258 +1325,6 @@ class ModelEvaluation:
 
             return ModelEvaluationArtifact(
                 evaluation_report_filepath=self.config.evaluation_report_filepath
-            )
-
-        except Exception as e:
-            raise NetworkSecurityError(e, logger) from e
-
-================================================================================
-# PY FILE: src\networksecurity\components\model_pusher.py
-================================================================================
-
-from src.networksecurity.entity.config_entity import ModelPusherConfig
-from src.networksecurity.entity.artifact_entity import ModelTrainerArtifact, ModelPusherArtifact
-from src.networksecurity.cloud.s3_syncer import S3Syncer
-from src.networksecurity.utils.core import save_object, load_object
-from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.logging import logger
-from pathlib import Path
-
-
-class ModelPusher:
-    """
-    Pushes the final trained model to local storage and optionally to S3.
-    """
-
-    def __init__(self, model_pusher_config: ModelPusherConfig, model_trainer_artifact: ModelTrainerArtifact) -> None:
-        try:
-            self.config = model_pusher_config
-            self.trainer_artifact = model_trainer_artifact
-        except Exception as e:
-            logger.exception("Failed to initialize ModelPusher")
-            raise NetworkSecurityError(e, logger) from e
-
-    def push_model(self) -> ModelPusherArtifact:
-        try:
-            logger.info("Starting model push process...")
-
-            final_model = load_object(self.trainer_artifact.trained_model_filepath)
-
-            # Save model locally
-            save_object(
-                obj=final_model,
-                path=self.config.pushed_model_filepath,
-                label="Final Model"
-            )
-
-            s3_syncer = S3Syncer(
-                bucket_name=self.config.final_model_s3_bucket,
-                region=self.config.aws_region
-            )
-
-            if self.config.upload_to_s3:
-                # Upload only the final model file
-                s3_syncer.upload_file(
-                    local_path=self.config.pushed_model_filepath,
-                    s3_key=self.config.s3_key_final_model,
-                )
-
-                # Upload entire artifacts folder
-                s3_syncer.sync_directory(
-                    local_dir=Path("artifacts"),
-                    s3_prefix=f"{self.config.s3_artifacts_folder}/artifacts"
-                )
-
-                # Upload entire logs folder
-                s3_syncer.sync_directory(
-                    local_dir=Path("logs"),
-                    s3_prefix=f"{self.config.s3_artifacts_folder}/logs"
-                )
-
-            logger.info("Model push process completed successfully.")
-            return ModelPusherArtifact(
-                pushed_model_local_path=self.config.pushed_model_filepath,
-                pushed_model_s3_path=f"s3://{self.config.final_model_s3_bucket}/{self.config.s3_key_final_model}",
-            )
-
-        except Exception as e:
-            logger.exception("Model push failed")
-            raise NetworkSecurityError(e, logger) from e
-
-================================================================================
-# PY FILE: src\networksecurity\components\model_trainer.py
-================================================================================
-
-from pathlib import Path
-from datetime import datetime, timezone
-import os
-import importlib
-import numpy as np
-import optuna
-import mlflow
-import dagshub
-import joblib
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import get_scorer
-from mlflow import sklearn as mlflow_sklearn
-
-from src.networksecurity.entity.config_entity import ModelTrainerConfig
-from src.networksecurity.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
-from src.networksecurity.logging import logger
-from src.networksecurity.exception.exception import NetworkSecurityError
-from src.networksecurity.utils.core import save_to_yaml, save_object, load_array
-from src.networksecurity.inference.estimator import NetworkModel
-
-
-class ModelTrainer:
-    def __init__(self, config: ModelTrainerConfig, transformation_artifact: DataTransformationArtifact):
-        try:
-            self.config = config
-            self.transformation_artifact = transformation_artifact
-            logger.info(f"Initializing ModelTrainer with root_dir={config.root_dir}")
-            config.root_dir.mkdir(parents=True, exist_ok=True)
-
-            if config.tracking.mlflow.enabled:
-                dagshub.init(
-                    repo_owner=os.getenv("DAGSHUB_REPO_OWNER"),
-                    repo_name=os.getenv("DAGSHUB_REPO_NAME"),
-                    mlflow=True,
-                )
-                mlflow.set_tracking_uri(config.tracking.tracking_uri)
-                mlflow.set_experiment(config.tracking.mlflow.experiment_name)
-        except Exception as e:
-            raise NetworkSecurityError(e, logger) from e
-
-    def _load_data(self):
-        try:
-            self.X_train = load_array(self.transformation_artifact.x_train_filepath, "X train")
-            self.y_train = load_array(self.transformation_artifact.y_train_filepath, "Y train")
-            self.X_val = load_array(self.transformation_artifact.x_val_filepath, "X val")
-            self.y_val = load_array(self.transformation_artifact.y_val_filepath, "Y val")
-        except Exception as e:
-            raise NetworkSecurityError(e, logger) from e
-
-    def _instantiate(self, full_class_string: str, params: dict):
-        module_path, class_name = full_class_string.rsplit(".", 1)
-        module = importlib.import_module(module_path)
-        return getattr(module, class_name)(**(params or {}))
-
-    def _optimize_one(self, model_spec: dict):
-        model_name = model_spec["name"]
-        search_space = model_spec.get("search_space", {})
-
-        def objective(trial):
-            sampled = {}
-            for name, space in search_space.items():
-                if "choices" in space:
-                    sampled[name] = trial.suggest_categorical(name, space["choices"])
-                else:
-                    low, high = space["low"], space["high"]
-                    step = space.get("step", 1)
-                    log = space.get("log", False)
-                    if isinstance(low, int) and isinstance(high, int):
-                        sampled[name] = trial.suggest_int(name, low, high, step=step)
-                    else:
-                        sampled[name] = trial.suggest_float(name, float(low), float(high), log=log)
-            clf = self._instantiate(model_name, sampled)
-            scores = cross_val_score(clf, self.X_train, self.y_train, cv=self.config.optimization.cv_folds,
-                                     scoring=self.config.optimization.scoring, n_jobs=-1)
-            return scores.mean()
-
-        study = optuna.create_study(direction=self.config.optimization.direction)
-        study.optimize(objective, n_trials=self.config.optimization.n_trials)
-        return study.best_trial, study
-
-    def _select_and_tune(self):
-        best_result = {"score": -np.inf, "spec": None, "trial": None, "study": None}
-
-        for model_spec in self.config.models:
-            if self.config.optimization.enabled:
-                trial, study = self._optimize_one(model_spec)
-                score = trial.value
-            else:
-                model = self._instantiate(model_spec["name"], model_spec.get("params", {}))
-                score = cross_val_score(model, self.X_train, self.y_train, cv=self.config.optimization.cv_folds,
-                                        scoring=self.config.optimization.scoring).mean()
-                trial, study = None, None
-
-            if score > best_result["score"]:
-                best_result.update(score=score, spec=model_spec, trial=trial, study=study)
-
-        return best_result
-
-    def _train_and_eval(self, model_spec: dict, params: dict):
-        clf = self._instantiate(model_spec["name"], params)
-        clf.fit(self.X_train, self.y_train)
-
-        train_metrics = {m: get_scorer(m)(clf, self.X_train, self.y_train)
-                         for m in self.config.tracking.mlflow.metrics_to_log}
-        val_metrics = {m: get_scorer(m)(clf, self.X_val, self.y_val)
-                       for m in self.config.tracking.mlflow.metrics_to_log}
-        return clf, train_metrics, val_metrics
-
-    def _generate_report(self, best, train_metrics, val_metrics):
-        return {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "best_model": best["spec"]["name"].split(".")[-1],
-            "best_model_params": best["trial"].params if best["trial"] else best["spec"].get("params", {}),
-            "train_metrics": train_metrics,
-            "val_metrics": val_metrics,
-            "optimization": {
-                "enabled": self.config.optimization.enabled,
-                "best_trial": best["trial"].number if best["trial"] else None,
-                "cv_folds": self.config.optimization.cv_folds,
-                "direction": self.config.optimization.direction,
-                "mean_score": best["score"]
-            }
-        }
-
-    def run_training(self) -> ModelTrainerArtifact:
-        try:
-            logger.info("========== Starting Model Training ==========")
-            self._load_data()
-
-            with mlflow.start_run():
-                best = self._select_and_tune()
-                params = best["trial"].params if best["trial"] else best["spec"].get("params", {})
-                model, train_m, val_m = self._train_and_eval(best["spec"], params)
-
-                mlflow.log_params(params)
-                for k, v in train_m.items():
-                    mlflow.log_metric(f"train_{k}", v)
-                for k, v in val_m.items():
-                    mlflow.log_metric(f"val_{k}", v)
-
-                # Save raw trained model
-                trained_model_dir = self.config.root_dir / "trained_model"
-                trained_model_path = trained_model_dir / "model.joblib"
-                save_object(model, trained_model_path, "Trained Model")
-
-                # Save inference-ready model (NetworkModel)
-                network_model = NetworkModel.from_objects(
-                    model=model,
-                    x_preprocessor=joblib.load(self.transformation_artifact.x_preprocessor_filepath),
-                    y_preprocessor=joblib.load(self.transformation_artifact.y_preprocessor_filepath),
-                )
-                inference_model_dir = self.config.root_dir / "inference_model"
-                inference_model_path = inference_model_dir / "inference_model.joblib"
-                save_object(network_model, inference_model_path, "Inference Model")
-
-                # Save training report
-                report_dir = self.config.root_dir / "reports"
-                report_path = report_dir / "training_report.yaml"
-                save_to_yaml(self._generate_report(best, train_m, val_m), report_path, label="Training Report")
-
-            logger.info("========== Model Training Completed ==========")
-            return ModelTrainerArtifact(
-                trained_model_filepath=inference_model_path,
-                training_report_filepath=report_path,
-                x_train_filepath=self.transformation_artifact.x_train_filepath,
-                y_train_filepath=self.transformation_artifact.y_train_filepath,
-                x_val_filepath=self.transformation_artifact.x_val_filepath,
-                y_val_filepath=self.transformation_artifact.y_val_filepath,
-                x_test_filepath=self.transformation_artifact.x_test_filepath,
-                y_test_filepath=self.transformation_artifact.y_test_filepath,
             )
 
         except Exception as e:
