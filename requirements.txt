@@ -12,7 +12,7 @@ scikit-learn
 dagshub
 mlflow
 optuna
-fastapi
+fastapi[all]
 uvicorn
 fastapi
 fastapi
