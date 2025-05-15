@@ -12,7 +12,8 @@ scikit-learn
 dagshub
 mlflow
 optuna
-fastapi[all]
+fastapi
+python-multipart
 uvicorn
 fastapi
 fastapi
