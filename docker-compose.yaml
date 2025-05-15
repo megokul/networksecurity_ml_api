@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    build: .
+    image: ${ECR_IMAGE_URI}
     container_name: networksecurity_app
     ports:
       - "8000:8000"
@@ -14,7 +14,7 @@ services:
     command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
 
   worker:
-    build: .
+    image: ${ECR_IMAGE_URI}
     container_name: networksecurity_worker
     depends_on:
       - redis
