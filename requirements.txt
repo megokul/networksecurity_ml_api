@@ -17,4 +17,4 @@ uvicorn
 fastapi
 fastapi
 celery
-redis|z
+redis
