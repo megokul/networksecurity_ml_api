@@ -1,6 +1,5 @@
 -e .
 
-
 pymongo[srv]==4.11.3
 pandas==2.2.3
 ensure==1.0.4
@@ -13,9 +12,8 @@ scikit-learn
 dagshub
 mlflow
 optuna
-fastapi[all]
+fastapi
+python-multipart
 uvicorn
-fastapi
-fastapi
 celery
 redis
