@@ -12,10 +12,9 @@ scikit-learn
 dagshub
 mlflow
 optuna
-fastapi
-python-multipart
+fastapi[all]
 uvicorn
 fastapi
 fastapi
 celery
-redis
+redis|z
