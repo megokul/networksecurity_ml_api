@@ -4,7 +4,7 @@ from src.networksecurity.exception.exception import NetworkSecurityError
 from src.networksecurity.logging import logger
 
 
-def run_debug_pipeline() -> None:
+def run_debug_pipeline():
     """
     Trigger the full training pipeline in debug mode.
     Logs structured output and final artifact summary.
