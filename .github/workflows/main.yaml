@@ -86,7 +86,7 @@ jobs:
       - name: Start services using Docker Compose
         env:
           ECR_IMAGE_URI: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Clean unused images and containers
         run: docker system prune -f
