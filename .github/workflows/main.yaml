@@ -37,6 +37,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -81,9 +82,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Stop previous Docker Compose deployment (if any)
+        working-directory: ${{ github.workspace }}
         run: docker compose down || true
 
       - name: Start services using Docker Compose
+        working-directory: ${{ github.workspace }}
         env:
           ECR_IMAGE_URI: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
         run: docker compose up -d
