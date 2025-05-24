@@ -82,15 +82,28 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Stop previous Docker Compose deployment (if any)
-        working-directory: ${{ github.workspace }}
         run: docker compose down || true
 
+      - name: Generate .env file from GitHub Secrets
+        run: |
+          echo "MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}" >> .env
+          echo "MLFLOW_TRACKING_USERNAME=${{ secrets.MLFLOW_TRACKING_USERNAME }}" >> .env
+          echo "MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }}" >> .env
+          echo "MLFLOW_REPO_NAME=${{ secrets.MLFLOW_REPO_NAME }}" >> .env
+          echo "MLFLOW_REPO_OWNER=${{ secrets.MLFLOW_REPO_OWNER }}" >> .env
+          echo "MONGODB_URI_BASE=${{ secrets.MONGODB_URI_BASE }}" >> .env
+          echo "MONGODB_USERNAME=${{ secrets.MONGODB_USERNAME }}" >> .env
+          echo "MONGODB_PASSWORD=${{ secrets.MONGODB_PASSWORD }}" >> .env
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> .env
+          echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" >> .env
+          echo "ECR_REPOSITORY_NAME=${{ secrets.ECR_REPOSITORY_NAME }}" >> .env
+
       - name: Start services using Docker Compose
-        working-directory: ${{ github.workspace }}
         env:
           ECR_IMAGE_URI: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
         run: docker compose up -d
 
       - name: Clean unused images and containers
         run: docker system prune -f
-

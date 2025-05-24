@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: NetworkSecurity
+Version: 0.0.1
+Author: Gokul Krishna
+Author-email: iamgokul93@gmail.com
+License-File: LICENSE
+Requires-Dist: pymongo[srv]==4.11.3
+Requires-Dist: pandas==2.2.3
+Requires-Dist: ensure==1.0.4
+Requires-Dist: python-box==7.3.2
+Requires-Dist: PyYAML
+Requires-Dist: dvc
+Requires-Dist: scipy==1.15.2
+Requires-Dist: joblib
+Requires-Dist: scikit-learn
+Requires-Dist: dagshub
+Requires-Dist: mlflow
+Requires-Dist: optuna
+Requires-Dist: fastapi
+Requires-Dist: python-multipart
+Requires-Dist: uvicorn
+Requires-Dist: celery
+Requires-Dist: redis
