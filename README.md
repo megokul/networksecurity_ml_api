@@ -73,11 +73,6 @@ Each stage outputs artifacts, logs, and metrics using a standardized structure.
 
 ---
 
-## 📊 ML Pipeline Flowchart
-
-![ML Pipeline Flowchart](assets/network_pipeline_flowchart.png)
-
----
 
 ## ⚙️ Configuration
 
