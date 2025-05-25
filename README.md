@@ -34,7 +34,7 @@
 
 ---
 
-## 🗂️ Project Structure (Simplified)
+## 📂 Project Structure (Simplified)
 
 ```text
 networksecurity/
@@ -100,122 +100,120 @@ AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
 AWS_ECR_LOGIN_URI=
 ECR_REPOSITORY_NAME=
+
 ```
 
 These values are accessed securely and not hardcoded in source code.
 
 ---
 
-## 🔄 Pipeline Flow
+## 🚀 How to Run Locally
 
-```text
-MongoDB → Ingestion → Validation → Transformation → Training → Evaluation → Push (S3)
-```
-
-Each stage saves a structured artifact and logs results:
-
-* **Data Ingestion**: Pulls from MongoDB and stores raw/ingested data
-* **Validation**: Performs schema check, null/duplicate checks, drift check
-* **Transformation**: Preprocesses data using factories, splits into DVC-tracked sets
-* **Model Trainer**: Runs Optuna HPO, trains multiple models, logs to MLflow
-* **Model Evaluator**: Evaluates trained model on all splits
-* **Model Pusher**: Saves final model locally + optionally uploads to S3
-
----
-
-## 🌐 FastAPI Endpoints
-
-* `/train`: Triggers full training pipeline (via Celery)
-* `/predict`: Accepts CSV upload or manual entry, returns prediction
-
----
-
-## 🧪 How to Run Locally
-
-### 🔧 Install Requirements
+### ▶️ Run FastAPI app locally without Docker
 
 ```bash
-pip install -r requirements.txt
+uvicorn app:app --reload
 ```
 
-### 📦 Run FastAPI App with Celery
+### 🐳 Run locally using Docker Compose
 
 ```bash
-docker-compose up --build
+docker compose up --build -d
 ```
 
-* FastAPI UI: [http://localhost:8000](http://localhost:8000)
-* Swagger Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+### ☁️ Host on AWS EC2
 
-### 🧠 Run Training Manually (Optional)
+1. Launch an EC2 instance (Ubuntu 22.04)
+2. Add your `.env` file manually or via SCP
+3. Paste the following **User Data** script under Advanced → User Data during EC2 launch:
 
 ```bash
-python main.py
+#!/bin/bash
+
+set -e
+export DEBIAN_FRONTEND=noninteractive
+
+# === 1. Update system and install base packages ===
+apt-get update -y && apt-get upgrade -y
+apt-get install -y git curl nginx openssl ufw
+
+# === 1.1 Install Docker (official script from get.docker.com) ===
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+
+# === 1.2 Add ubuntu user to docker group ===
+usermod -aG docker ubuntu
+newgrp docker
+
+# === 2. Enable UFW and open required ports ===
+ufw allow OpenSSH
+ufw allow 80
+ufw allow 443
+ufw --force enable
+
+# === 3. Generate self-signed SSL cert for Nginx ===
+mkdir -p /etc/ssl/self-signed
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600" \
+  --silent)
+CN=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/public-ipv4 \
+  --silent)
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/self-signed/self.key \
+  -out /etc/ssl/self-signed/self.crt \
+  -subj "/C=UK/ST=Scotland/L=Glasgow/O=Self/OU=Dev/CN=$CN"
+
+# === 4. Configure Nginx for HTTPS reverse proxy ===
+cat <<EOF > /etc/nginx/sites-available/fastapi
+server {
+    listen 443 ssl;
+    server_name _;
+
+    ssl_certificate /etc/ssl/self-signed/self.crt;
+    ssl_certificate_key /etc/ssl/self-signed/self.key;
+
+    location / {
+        proxy_pass http://localhost:8000;  # App will be deployed later by CI/CD
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+}
+
+server {
+    listen 80;
+    return 301 https://\$host\$request_uri;
+}
+EOF
+
+ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/
+rm -f /etc/nginx/sites-enabled/default
+nginx -t
+systemctl reload nginx
+systemctl enable nginx
+
+# === 5. GitHub Actions runner ===
+mkdir -p /home/ubuntu/actions-runner
+cd /home/ubuntu/actions-runner
+
+curl -o actions-runner-linux-x64-2.324.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.324.0/actions-runner-linux-x64-2.324.0.tar.gz
+echo "e8e24a3477da17040b4d6fa6d34c6ecb9a2879e800aa532518ec21e49e21d7b4  actions-runner-linux-x64-2.324.0.tar.gz" | shasum -a 256 -c
+tar xzf ./actions-runner-linux-x64-2.324.0.tar.gz
+chown -R ubuntu:ubuntu /home/ubuntu/actions-runner
+
+# Configure runner
+sudo -u ubuntu ./config.sh --url <YOUR_REPO> \
+                           --token <YOUR_REGISTRATION_TOKEN> \
+                           --unattended \
+                           --name self-hosted \
+                           --labels self-hosted,linux,x64 \
+                           --work _work
+
+# Register runner as a persistent service
+sudo ./svc.sh install
+sudo ./svc.sh start
 ```
 
----
-
-## ☁️ AWS S3 Integration
-
-* Final model and artifacts are pushed to:
-
-  * `networksecurity-dev-artifacts/final_model/`
-  * `networksecurity-dev-artifacts/artifacts/`
-
-AWS credentials should be stored as GitHub Secrets or in `.env` (not committed).
+✅ That’s it! FastAPI will be served at `https://<your-ec2-public-ip>` with HTTPS and CI/CD ready.
 
 ---
-
-## 📊 MLflow Tracking
-
-* Experiment: `NetworkSecurityExperiment`
-* Metrics: accuracy, f1, precision, recall
-* Registry: `NetworkSecurityModel`
-
-Run locally:
-
-```bash
-mlflow ui
-```
-
-Visit: [http://localhost:5000](http://localhost:5000)
-
----
-
-## 🐳 Docker & DVC
-
-* Full pipeline is Docker-compatible
-* Data files tracked using `.dvc` and stored externally
-* Use `dvc repro` to re-run pipelines if needed
-
----
-
-## 🚀 Tech Stack
-
-* **Backend**: FastAPI, Celery, Redis
-* **ML Ops**: DVC, Optuna, MLflow
-* **Cloud**: AWS S3, GitHub Actions (CI/CD-ready)
-* **Data**: MongoDB, Pandas, NumPy
-* **Models**: RandomForest, GradientBoosting (via Sklearn)
-* **Pipeline**: Modular classes, dataclasses, factory pattern
-
----
-
-## 👤 Author
-
-**Gokul Krishna N V**
-Machine Learning Engineer | UK 🇬🇧
-[GitHub](https://github.com/megokul) • [LinkedIn](https://linkedin.com/in/nv-gokul-krishna)
-
----
-
-## 📄 License
-
-Licensed under **GPLv3**
-
----
-
-## 🙌 Acknowledgements
-
-* Dataset: Custom phishing dataset
-* Project Structure inspired by industry-grade ML pipelines
