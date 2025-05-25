@@ -3,6 +3,9 @@ venv/
 .env
 pyproject.toml
 test.py
+print_structure.py
+project_template.py
+project_dump.py
 
 # Ignore all data files but keep DVC pointers
 data/**
