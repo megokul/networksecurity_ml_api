@@ -133,21 +133,96 @@ docker compose up --build
 ### ☁️ On EC2 (with Nginx + GitHub Runner)
 
 1. Create `.env` and push to instance
-2. Use EC2 launch script (see below)
-3. Access app at `https://<your-ec2-ip>`
-
----
-
-## 🛠️ EC2 User Data Script
-
-Add this during launch:
+2. Add this user data script when launching EC2:
 
 ```bash
 #!/bin/bash
-# (full script omitted for brevity — see repo)
+
+set -e
+export DEBIAN_FRONTEND=noninteractive
+
+# === 1. Update system and install base packages ===
+apt-get update -y && apt-get upgrade -y
+apt-get install -y git curl nginx openssl ufw
+
+# === 1.1 Install Docker ===
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+
+# === 1.2 Add ubuntu user to docker group ===
+usermod -aG docker ubuntu
+newgrp docker
+
+# === 2. Enable UFW and open required ports ===
+ufw allow OpenSSH
+ufw allow 80
+ufw allow 443
+ufw --force enable
+
+# === 3. Generate self-signed SSL cert for Nginx ===
+mkdir -p /etc/ssl/self-signed
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600" \
+  --silent)
+CN=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/public-ipv4 \
+  --silent)
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/self-signed/self.key \
+  -out /etc/ssl/self-signed/self.crt \
+  -subj "/C=UK/ST=Scotland/L=Glasgow/O=Self/OU=Dev/CN=$CN"
+
+# === 4. Configure Nginx ===
+cat <<EOF > /etc/nginx/sites-available/fastapi
+server {
+    listen 443 ssl;
+    server_name _;
+
+    ssl_certificate /etc/ssl/self-signed/self.crt;
+    ssl_certificate_key /etc/ssl/self-signed/self.key;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+}
+
+server {
+    listen 80;
+    return 301 https://\$host\$request_uri;
+}
+EOF
+
+ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/
+rm -f /etc/nginx/sites-enabled/default
+nginx -t
+systemctl reload nginx
+systemctl enable nginx
+
+# === 5. GitHub Actions runner ===
+mkdir -p /home/ubuntu/actions-runner
+cd /home/ubuntu/actions-runner
+
+curl -o actions-runner-linux-x64-2.324.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.324.0/actions-runner-linux-x64-2.324.0.tar.gz
+echo "e8e24a3477da17040b4d6fa6d34c6ecb9a2879e800aa532518ec21e49e21d7b4  actions-runner-linux-x64-2.324.0.tar.gz" | shasum -a 256 -c
+tar xzf ./actions-runner-linux-x64-2.324.0.tar.gz
+chown -R ubuntu:ubuntu /home/ubuntu/actions-runner
+
+# Configure runner
+sudo -u ubuntu ./config.sh --url <your_repo_here> \
+                           --token <your_token_here> \
+                           --unattended \
+                           --name self-hosted \
+                           --labels self-hosted,linux,x64 \
+                           --work _work
+
+# Register runner as service
+sudo ./svc.sh install
+sudo ./svc.sh start
 ```
 
-Full script installs Docker, Nginx, SSL, and GitHub runner.
+Then access the app at: `https://<your-ec2-ip>`
 
 ---
 
