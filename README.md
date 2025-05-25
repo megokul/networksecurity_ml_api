@@ -263,5 +263,5 @@ Machine Learning Engineer — UK 🇬🇧
 
 ## 🙌 Acknowledgements
 
-* Dataset: Custom phishing dataset
 * Project structure: Inspired by industry ML standards
+* Based on data hosted by [Krishnaik06’s GitHub](https://github.com/krishnaik06/datasets)
