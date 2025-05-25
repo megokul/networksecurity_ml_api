@@ -15,5 +15,5 @@ optuna
 fastapi
 python-multipart
 uvicorn
-celery
 redis
+celery
