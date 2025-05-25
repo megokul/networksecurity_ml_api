@@ -77,13 +77,32 @@ All configs are YAML-driven and parsed via `ConfigBox` for dot-access.
 * `schema.yaml`: Feature column types and target label mapping
 * `templates.yaml`: Predefined templates for reports (validation, training)
 
-MLflow secrets are handled via `.env`:
+### 📁 Required `.env` variables
+
+Ensure the following are set in your `.env` file:
 
 ```env
-MLFLOW_TRACKING_URI=...
-MLFLOW_TRACKING_USERNAME=...
-MLFLOW_TRACKING_PASSWORD=...
+# MongoDB
+MONGODB_URI_BASE=
+MONGODB_USERNAME=
+MONGODB_PASSWORD=
+
+# MLflow/DagsHub
+MLFLOW_TRACKING_URI=
+MLFLOW_TRACKING_USERNAME=
+MLFLOW_TRACKING_PASSWORD=
+DAGSHUB_REPO_NAME=
+DAGSHUB_REPO_OWNER=
+
+# AWS Credentials
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_ECR_LOGIN_URI=
+ECR_REPOSITORY_NAME=
 ```
+
+These values are accessed securely and not hardcoded in source code.
 
 ---
 
