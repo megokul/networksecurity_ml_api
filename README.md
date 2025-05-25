@@ -1,6 +1,6 @@
 # 🛡️ NetworkSecurity: Phishing Detection ML Pipeline
 
-> A god-tier, production-grade ML pipeline for phishing URL detection — powered by FastAPI, DVC, Optuna, MLflow, Celery, and Docker. Built with modular components, cloud integration, and scalable architecture.
+> 🚀 A modular, production-grade ML pipeline for phishing detection — powered by FastAPI, DVC, Optuna, MLflow, Celery, and Docker. Designed with cloud-native architecture, YAML-based configuration, and reusable components.
 
 ---
 
@@ -22,181 +22,246 @@
 
 ## ✅ Features
 
-* ✅ Modular ML pipeline with reusable components
-* ✅ MongoDB ingestion and schema-driven validation
-* ✅ Preprocessing via custom `data_processors`
-* ✅ Optuna-based hyperparameter optimization
-* ✅ MLflow tracking and model registry
-* ✅ Full FastAPI backend with `/train` and `/predict`
-* ✅ Celery + Redis async task queue
-* ✅ DVC integration for data versioning
-* ✅ Auto-push models to AWS S3
+* ✅ End-to-end ML pipeline: Ingestion ➜ Validation ➜ Transformation ➜ Training ➜ Evaluation ➜ Deployment
+* ✅ YAML-driven configuration system
+* ✅ Optuna hyperparameter tuning with MLflow tracking
+* ✅ Real-time FastAPI inference + Celery async training
+* ✅ AWS S3 model upload + GitHub Actions CI/CD
+* ✅ DVC for dataset versioning
 
 ---
 
-## 🗂️ Project Structure (Simplified)
+## 📂 Project Structure
 
 ```text
 networksecurity/
-├── app.py                   # FastAPI app
-├── main.py                  # Full training pipeline entrypoint
-├── Dockerfile               # Container build file
-├── docker-compose.yaml      # FastAPI + Redis + Celery setup
-├── config/                  # YAML configs (params, schema, etc.)
-├── data/                    # DVC-tracked data (raw, validated, transformed)
-├── artifacts/               # Timestamped debug artifacts from runs
-├── final_model/             # Final pushed model
-├── logs/                    # Timestamped logs per pipeline run
-├── prediction_output/       # Output of /predict endpoint
-├── templates/               # HTML templates for FastAPI rendering
+├── app.py                   # FastAPI application
+├── main.py                  # Manual training pipeline trigger
+├── Dockerfile               # Container build instructions
+├── docker-compose.yaml      # Multi-container stack (FastAPI, Redis, Celery)
+├── config/                  # YAML configs: schema, params, etc.
+├── data/                    # DVC-tracked dataset (raw, transformed, validated)
+├── artifacts/               # Timestamped artifacts per pipeline run
+├── final_model/             # Final production model
+├── logs/                    # Pipeline run logs
+├── templates/               # Jinja2 templates for UI
 ├── requirements.txt         # Python dependencies
-├── setup.py                 # Package metadata
-└── src/networksecurity/     # All core logic
-    ├── components/          # Data ingestion, validation, training, etc.
-    ├── config/              # Configuration manager
+└── src/networksecurity/     # Source package
+    ├── components/          # Core pipeline stages
+    ├── config/              # Config manager
     ├── constants/           # Path constants
     ├── data_processors/     # Encoders, scalers, imputers
     ├── dbhandler/           # MongoDB + S3 interfaces
-    ├── entity/              # Artifact/config dataclasses
-    ├── exception/           # Custom exception handling
-    ├── inference/           # `NetworkModel` class for prediction
+    ├── entity/              # Dataclass definitions
+    ├── exception/           # Custom error handling
+    ├── inference/           # Prediction logic
     ├── logging/             # Centralized logger
-    ├── pipeline/            # Orchestration logic for each pipeline stage
-    ├── utils/               # Common helpers
+    ├── pipeline/            # Pipeline orchestration modules
+    ├── utils/               # Helpers (save/load/transform)
     └── worker/              # Celery worker entrypoint
 ```
 
 ---
 
-## ⚙️ Configuration System
-
-All configs are YAML-driven and parsed via `ConfigBox` for dot-access.
-
-* `config.yaml`: All file paths, directory names, and model filenames
-* `params.yaml`: All tunable parameters (Optuna, preprocessing, validation)
-* `schema.yaml`: Feature column types and target label mapping
-* `templates.yaml`: Predefined templates for reports (validation, training)
-
-MLflow secrets are handled via `.env`:
-
-```env
-MLFLOW_TRACKING_URI=...
-MLFLOW_TRACKING_USERNAME=...
-MLFLOW_TRACKING_PASSWORD=...
-```
-
----
-
-## 🔄 Pipeline Flow
+## 🔁 Pipeline Flow
 
 ```text
-MongoDB → Ingestion → Validation → Transformation → Training → Evaluation → Push (S3)
+MongoDB → Data Ingestion → Validation → Transformation → Training → Evaluation → Push to S3
 ```
 
-Each stage saves a structured artifact and logs results:
-
-* **Data Ingestion**: Pulls from MongoDB and stores raw/ingested data
-* **Validation**: Performs schema check, null/duplicate checks, drift check
-* **Transformation**: Preprocesses data using factories, splits into DVC-tracked sets
-* **Model Trainer**: Runs Optuna HPO, trains multiple models, logs to MLflow
-* **Model Evaluator**: Evaluates trained model on all splits
-* **Model Pusher**: Saves final model locally + optionally uploads to S3
+Each stage outputs artifacts, logs, and metrics using a standardized structure.
 
 ---
 
-## 🌐 FastAPI Endpoints
+## 📊 ML Pipeline Flowchart
 
-* `/train`: Triggers full training pipeline (via Celery)
-* `/predict`: Accepts CSV upload or manual entry, returns prediction
+![ML Pipeline Flowchart](assets/network_pipeline_flowchart.png)
 
 ---
 
-## 🧪 How to Run Locally
+## ⚙️ Configuration
 
-### 🔧 Install Requirements
+Project is fully parameterized via YAML configs and `.env` secrets.
+
+**YAML Configs:**
+
+* `config.yaml`: Paths, filenames, artifact roots
+* `params.yaml`: Tuning ranges, preprocessing methods
+* `schema.yaml`: Column dtypes and target
+* `templates.yaml`: Templates for YAML-based reports
+
+**Environment Variables (.env):**
+
+```dotenv
+# MongoDB
+MONGODB_URI_BASE=
+MONGODB_USERNAME=
+MONGODB_PASSWORD=
+
+# MLflow/DagsHub
+MLFLOW_TRACKING_URI=
+MLFLOW_TRACKING_USERNAME=
+MLFLOW_TRACKING_PASSWORD=
+DAGSHUB_REPO_NAME=
+DAGSHUB_REPO_OWNER=
+
+# AWS
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_ECR_LOGIN_URI=
+ECR_REPOSITORY_NAME=
+
+```
+
+---
+
+## 🧪 How to Run
+
+### ⚙️ Local (No Docker)
 
 ```bash
-pip install -r requirements.txt
+uvicorn app:app --reload
 ```
 
-### 📦 Run FastAPI App with Celery
+### 🐳 Local (With Docker Compose)
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
-* FastAPI UI: [http://localhost:8000](http://localhost:8000)
-* Swagger Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+### ☁️ On EC2 (with Nginx + GitHub Runner)
 
-### 🧠 Run Training Manually (Optional)
+1. Create `.env` and push to instance
+2. Add this user data script when launching EC2:
 
 ```bash
-python main.py
+#!/bin/bash
+
+set -e
+export DEBIAN_FRONTEND=noninteractive
+
+# === 1. Update system and install base packages ===
+apt-get update -y && apt-get upgrade -y
+apt-get install -y git curl nginx openssl ufw
+
+# === 1.1 Install Docker ===
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+
+# === 1.2 Add ubuntu user to docker group ===
+usermod -aG docker ubuntu
+newgrp docker
+
+# === 2. Enable UFW and open required ports ===
+ufw allow OpenSSH
+ufw allow 80
+ufw allow 443
+ufw --force enable
+
+# === 3. Generate self-signed SSL cert for Nginx ===
+mkdir -p /etc/ssl/self-signed
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600" \
+  --silent)
+CN=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/public-ipv4 \
+  --silent)
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/self-signed/self.key \
+  -out /etc/ssl/self-signed/self.crt \
+  -subj "/C=UK/ST=Scotland/L=Glasgow/O=Self/OU=Dev/CN=$CN"
+
+# === 4. Configure Nginx ===
+cat <<EOF > /etc/nginx/sites-available/fastapi
+server {
+    listen 443 ssl;
+    server_name _;
+
+    ssl_certificate /etc/ssl/self-signed/self.crt;
+    ssl_certificate_key /etc/ssl/self-signed/self.key;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+}
+
+server {
+    listen 80;
+    return 301 https://\$host\$request_uri;
+}
+EOF
+
+ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/
+rm -f /etc/nginx/sites-enabled/default
+nginx -t
+systemctl reload nginx
+systemctl enable nginx
+
+# === 5. GitHub Actions runner ===
+mkdir -p /home/ubuntu/actions-runner
+cd /home/ubuntu/actions-runner
+
+curl -o actions-runner-linux-x64-2.324.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.324.0/actions-runner-linux-x64-2.324.0.tar.gz
+echo "e8e24a3477da17040b4d6fa6d34c6ecb9a2879e800aa532518ec21e49e21d7b4  actions-runner-linux-x64-2.324.0.tar.gz" | shasum -a 256 -c
+tar xzf ./actions-runner-linux-x64-2.324.0.tar.gz
+chown -R ubuntu:ubuntu /home/ubuntu/actions-runner
+
+# Configure runner
+sudo -u ubuntu ./config.sh --url <your_repo_here> \
+                           --token <your_token_here> \
+                           --unattended \
+                           --name self-hosted \
+                           --labels self-hosted,linux,x64 \
+                           --work _work
+
+# Register runner as service
+sudo ./svc.sh install
+sudo ./svc.sh start
 ```
+
+Then access the app at: `https://<your-ec2-ip>`
 
 ---
 
-## ☁️ AWS S3 Integration
-
-* Final model and artifacts are pushed to:
-
-  * `networksecurity-dev-artifacts/final_model/`
-  * `networksecurity-dev-artifacts/artifacts/`
-
-AWS credentials should be stored as GitHub Secrets or in `.env` (not committed).
-
----
-
-## 📊 MLflow Tracking
+## 📈 MLflow Tracking
 
 * Experiment: `NetworkSecurityExperiment`
-* Metrics: accuracy, f1, precision, recall
 * Registry: `NetworkSecurityModel`
-
-Run locally:
+* Metrics: accuracy, f1, precision, recall
 
 ```bash
 mlflow ui
 ```
 
-Visit: [http://localhost:5000](http://localhost:5000)
+Access: [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 🐳 Docker & DVC
+## 🧪 FastAPI Endpoints
 
-* Full pipeline is Docker-compatible
-* Data files tracked using `.dvc` and stored externally
-* Use `dvc repro` to re-run pipelines if needed
-
----
-
-## 🚀 Tech Stack
-
-* **Backend**: FastAPI, Celery, Redis
-* **ML Ops**: DVC, Optuna, MLflow
-* **Cloud**: AWS S3, GitHub Actions (CI/CD-ready)
-* **Data**: MongoDB, Pandas, NumPy
-* **Models**: RandomForest, GradientBoosting (via Sklearn)
-* **Pipeline**: Modular classes, dataclasses, factory pattern
+* `POST /train` → triggers training via Celery
+* `POST /predict` → accepts CSV or input JSON
 
 ---
 
-## 👤 Author
+## 🔐 Licensing
+
+This project is licensed under **GPLv3**.
+
+---
+
+## 👨‍💻 Author
 
 **Gokul Krishna N V**
-Machine Learning Engineer | UK 🇬🇧
-[GitHub](https://github.com/megokul) • [LinkedIn](https://linkedin.com/in/nv-gokul-krishna)
-
----
-
-## 📄 License
-
-Licensed under **GPLv3**
+Machine Learning Engineer — UK 🇬🇧
+[GitHub](https://github.com/megokul) • [LinkedIn](https://www.linkedin.com/in/nv-gokul-krishna)
 
 ---
 
 ## 🙌 Acknowledgements
 
-* Dataset: Custom phishing dataset
-* Project Structure inspired by industry-grade ML pipelines
+* Project structure: Inspired by industry ML standards
+* Based on data hosted by [Krishnaik06’s GitHub](https://github.com/krishnaik06/datasets)
