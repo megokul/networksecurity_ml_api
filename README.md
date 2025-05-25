@@ -1,6 +1,6 @@
 # 🛡️ NetworkSecurity: Phishing Detection ML Pipeline
 
-> A god-tier, production-grade ML pipeline for phishing URL detection — powered by FastAPI, DVC, Optuna, MLflow, Celery, and Docker. Built with modular components, cloud integration, and scalable architecture.
+> A production-grade ML pipeline for phishing URL detection — powered by FastAPI, DVC, Optuna, MLflow, Celery, and Docker. Built with modular components, cloud integration, and scalable architecture.
 
 ---
 
